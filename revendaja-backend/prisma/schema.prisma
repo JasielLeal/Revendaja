@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(uuid())
+  name             String
+  secondName       String
+  email            String    @unique
+  emailVerified    DateTime?
+  verificationCode String?
+  expoToken        String?
+  image            String?
+  password         String
+  status           String    @default("Check")
+  role             String    @default("Member")
+  plan             String    @default("Free")
+  stripeCustomerId String
+  lastPayment      DateTime?
+  stores           Store[]
+}
+
+model Store {
+  id             String          @id @default(uuid())
+  name           String          @unique
+  subdomain      String          @unique
+  status         String          @default("Disabled")
+  description    String
+  numberPhone    String
+  userId         String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  BankSlip       BankSlip[]
+  customProducts CustomProduct[]
+  Expenses       Expenses[]
+  Sale           Sale[]
+  stock          Stock[]
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Stock {
+  id              String         @id @default(uuid())
+  quantity        Int            @default(0)
+  customPrice     Int?
+  suggestedPrice  Int?
+  normalPrice     Int?
+  category        String
+  status          String         @default("Available")
+  discountValue   Int?
+  storeId         String
+  productId       String?
+  customProductId String?
+  updatedAt       DateTime       @updatedAt
+  SaleItem        SaleItem[]
+  customProduct   CustomProduct? @relation(fields: [customProductId], references: [id], onDelete: Cascade)
+  product         Product?       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  store           Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, customProductId])
+  @@unique([storeId, productId])
+}
+
+model Product {
+  id             String   @id @default(uuid())
+  name           String
+  normalPrice    Int
+  suggestedPrice Int
+  category       String
+  barcode        String   @unique
+  imgUrl         String
+  brand          String
+  company        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  stock          Stock[]
+}
+
+model CustomProduct {
+  id             String   @id @default(uuid())
+  name           String   @unique
+  normalPrice    Int
+  suggestedPrice Int
+  quantity       Int
+  barcode        String   @unique
+  category       String   @default("Personalizado")
+  imgUrl         String
+  company        String
+  brand          String   @default("Personalizado")
+  storeId        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  store          Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  stock          Stock[]
+}
+
+model Sale {
+  id              String     @id @default(uuid())
+  customer        String
+  numberPhone     String?
+  transactionType String
+  totalPrice      Int
+  status          String     @default("Pending")
+  createdAt       DateTime   @default(now())
+  storeId         String
+  store           Store      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  saleItems       SaleItem[]
+}
+
+model SaleItem {
+  id       String  @id @default(uuid())
+  quantity Int
+  price    Int
+  saleId   String
+  stockId  String?
+  sale     Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  stock    Stock?  @relation(fields: [stockId], references: [id])
+}
+
+model BankSlip {
+  id          String   @id @default(uuid())
+  storeId     String
+  companyName String
+  barcode     String   @unique
+  value       Int      @default(0)
+  dueDate     DateTime
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+}
+
+model Expenses {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  value       Int
+  createdAt   DateTime @default(now())
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+}
+
+model RoleLimit {
+  id                 String   @id @default(uuid())
+  role               String   @unique
+  customProductLimit Int
+  stockLimit         Int
+  saleLimit          Int
+  bankSlipLimit      Int
+  storeLimit         Int
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
