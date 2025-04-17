@@ -36,6 +36,8 @@ export class StockController {
         quantity,
       }: AddProductToStoreStockDTO = request.body;
 
+      console.log(barcode, customPrice, normalPrice, suggestedPrice, quantity);
+
       const { id } = request.user;
 
       const prismaStockRepository = new PrismaStockRepository();
@@ -441,8 +443,6 @@ export class StockController {
     try {
       const { productId, quantity } = request.body;
       const userId = request.user.id;
-
-      console.log(productId, quantity);
 
       const prismaStockRepository = new PrismaStockRepository();
       const prismaStoreRepository = new PrismaStoreRepository();

@@ -11,8 +11,6 @@ export class AddPromotionInProductUseCase {
 
   async execute({ productId, userId, discountValue }) {
 
-    console.log(productId, userId, discountValue);
-
     const storeExist = await this.storeRepository.findStoreByUserId(userId);
 
     if (!storeExist) {

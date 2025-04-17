@@ -10,7 +10,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_DEV": "https://revendaja-backend.onrender.com"
+        "EXPO_PUBLIC_BACKEND_DEV": "http://192.168.100.153:9999"
       }
     },
     "preview": {
@@ -19,7 +19,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_DEV": "https://revendaja-backend.onrender.com"
+        "EXPO_PUBLIC_BACKEND_DEV": "http://192.168.100.153:9999"
       }
     },
     "production": {
@@ -27,7 +27,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_BACKEND_DEV": "https://revendaja-backend.onrender.com"
+        "EXPO_PUBLIC_BACKEND_DEV": "http://192.168.100.153:9999"
       }
     }
   },

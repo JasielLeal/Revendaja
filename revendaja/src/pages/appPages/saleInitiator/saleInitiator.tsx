@@ -45,6 +45,8 @@ export function SaleInitiator() {
     const queryClient = useQueryClient();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const [barcode, setBarcode] = useState('')
+    const suggestedPrice = '0'
+    const normalPrice = '0'
 
     const { mutateAsync: fetchProductByBarcode } = useMutation({
         mutationFn: FindProductsByBarcode,
@@ -109,7 +111,7 @@ export function SaleInitiator() {
             setBarcodeInput('');
         },
         onError: (error) => {
-
+            
             if (axios.isAxiosError(error)) {
                 const status = error.response?.status;
                 setStatusCode(Number(status))
@@ -195,8 +197,8 @@ export function SaleInitiator() {
         }, 500);
     }
 
-    async function handleAddPrice(barcode: string, value: string) {
-        InsertProductToStockFn({ barcode, customPrice: value, quantity: 1 })
+    async function handleAddPrice(barcode: string, value: string, suggestedPrice: string, normalPrice: string) {
+        InsertProductToStockFn({ barcode, customPrice: value, quantity: 1, normalPrice, suggestedPrice })
         setAddPriceProductModal(false)
     }
 
@@ -299,7 +301,7 @@ export function SaleInitiator() {
                         visible={addPriceProductModal}
                         onClose={() => setAddPriceProductModal(false)}
                         title="Adicionar preço ao produto"
-                        onConfirm={() => handleAddPrice(barcode, value)}
+                        onConfirm={() => handleAddPrice(barcode, value, suggestedPrice, normalPrice)}
                         confirmText="Adicionar"
                     >
                         <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-sm`}>

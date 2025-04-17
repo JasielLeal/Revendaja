@@ -77,14 +77,17 @@ export function DetailsProduct({ open, onClose, product }: FilterModalProps) {
     };
 
     async function onSubmit(data: any) {
-
         const barcode = product.barcode
-
-        const newData = { ...data, barcode }
-
+    
+        const customPrice = data.customPrice?.toString().replace(',', '')
+        const newData = {
+            ...data,
+            customPrice,
+            barcode,
+            suggestedPrice: product.suggestedPrice,
+            normalPrice: product.normalPrice,
+        }
         await InsertProductToStockFn(newData)
-        // Aqui você pode enviar os dados para a API
-
     }
 
     return (

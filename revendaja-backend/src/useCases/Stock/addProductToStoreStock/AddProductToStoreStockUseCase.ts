@@ -24,7 +24,7 @@ export class AddProductToStoreStockUseCase {
     userId,
   }: AddProductToStoreStockDTO) {
     const storeExist = await this.storeRepository.findStoreByUserId(userId);
-    console.log(barcode, customPrice, normalPrice, suggestedPrice, quantity);
+    
     if (!storeExist) {
       throw new AppError("Loja não existe", 400);
     }

@@ -105,10 +105,10 @@ export function Stock() {
                         <FlatList
                             data={allStock}
                             keyExtractor={(item) => item.id}
-                            style={Platform.OS === 'ios' ? { marginBottom: 345, marginTop: 10 } : { marginBottom: 320, marginTop: 10 }}
+                            style={Platform.OS === 'ios' ? { marginBottom: 345, marginTop: 10 } : { marginBottom: 40, marginTop: 10 }}
                             renderItem={({ item }) => {
                                 const productData = item.customProduct || item.product;
-
+                           
                                 return (
                                     <>
                                         <StockItem

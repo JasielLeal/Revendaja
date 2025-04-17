@@ -39,6 +39,7 @@ export function OurPlans() {
             setClientSecret(response.data.client_secret);
             openPaymentSheet(response.data.client_secret, planName, priceId,); // Chamar diretamente após obter o clientSecret
         } catch (error) {
+            console.log("Erro completo:", JSON.stringify(error, null, 2));
             Alert.alert("Erro", "Não foi possível iniciar o pagamento.");
         }
     }

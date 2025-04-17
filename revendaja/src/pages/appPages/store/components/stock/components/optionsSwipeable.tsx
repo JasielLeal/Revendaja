@@ -60,7 +60,6 @@ export function OptionsSwipeable({ id, discount, productId }: OptionsSwipeablePr
 
         const discountValue = Number(formatPrice.toFixed(2).replace(/\./g, ""))
 
-        const productId = String(id);
         await AddPromotionInProductFn({ productId, discountValue });
     }
 

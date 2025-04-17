@@ -36,7 +36,6 @@ export function Home() {
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>()
 
     const { unreadCount } = useContext(NotificationsContext);
-    console.log(unreadCount)
     return (
         <>
             <View className="bg-[#121212] h-screen w-full">

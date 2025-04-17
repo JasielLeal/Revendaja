@@ -10,6 +10,7 @@ import { DetailsProduct } from '../components/detailsProduct';  // Importando o 
 import { RootStackParamList } from '@/types/navigation';
 import { Platform } from 'react-native';
 import { useSuccess } from '@/context/successContext';
+import { ContinousBaseGesture } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 
 
 export function AddProductToStock() {
@@ -67,8 +68,6 @@ export function AddProductToStock() {
 
     const allProducts = data?.pages.flatMap((page) => page.data.items) || [];
 
-    
-
     return (
         <View className="bg-bg flex-1 w-full px-5">
             <View className='flex flex-row justify-between mt-16'>
@@ -88,9 +87,6 @@ export function AddProductToStock() {
                     onChangeText={(text) => setSearchTerm(text)}
                 />
             </View>
-
-         
-
             <FlatList
                 data={allProducts}
                 keyExtractor={(item) => item.id}
@@ -174,8 +170,6 @@ export function AddProductToStock() {
                     }
                 }}
             />
-
-            
 
             <DetailsProduct
                 open={detailsVisible}

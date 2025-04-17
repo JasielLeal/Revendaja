@@ -27,10 +27,6 @@ const CustomModal: React.FC<CustomModalProps> = ({
     };
     ;
 
-    useEffect(() => {
-        console.log("Estado recebido no CustomModal:", visible, title, confirmText);
-    }, [visible]);
-
     return (
         <Modal
             visible={visible}
