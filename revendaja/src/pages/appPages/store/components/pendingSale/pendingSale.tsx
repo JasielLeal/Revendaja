@@ -12,7 +12,6 @@ export function PedingSale() {
 
     const pageSize = 10;
 
-
     const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending } = useInfiniteQuery({
         queryKey: ["GetSalesPendingByStore"],
         queryFn: ({ pageParam = 0 }) => {

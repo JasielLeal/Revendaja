@@ -1,112 +1,85 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
-import { ReactNode, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { View, Text, useWindowDimensions } from "react-native";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import AuthContext from "@/context/authContext";
-import { Button } from "@/components/buttton";
-import CreateStoreModal from "./components/createStoreModal";
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FindStoreNameByUser } from "./services/FindStoreNameByUser";
-import { RootStackParamList } from "@/types/navigation";
+import { Button } from "@/components/buttton";
+import CreateStoreModal from "./components/createStoreModal";
+import { Overview } from "./components/overview/overview";
+import { Stock } from "./components/stock/stock";
+import { PedingSale } from "./components/pendingSale/pendingSale";
+import { Report } from "./components/report/report";
 
-type StoreProps = {
-    children: ReactNode;
-};
-
-export function Store({ children }: StoreProps) {
-
-    
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-    const route = useRoute<RouteProp<RootStackParamList>>();
+export function Store() {
+    const layout = useWindowDimensions();
     const { user } = useContext(AuthContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const isActive = (routeName: string) => {
-        const screen = route.params?.screen || "Overview";
-        return screen === routeName;
-    };
-    
     const { data: subdomain } = useQuery({
         queryKey: ["FindStoreNameByUser"],
-        queryFn: FindStoreNameByUser
-    })
+        queryFn: FindStoreNameByUser,
+    });
+
+    const [index, setIndex] = useState(0);
+    const [routes] = useState([
+        { key: "overview", title: "Overview" },
+        { key: "stock", title: "Estoque" },
+        { key: "report", title: "Relatório" },
+        { key: "pendingsale", title: "Pendentes" },
+    ]);
+
+    const renderScene = SceneMap({
+        overview: Overview,
+        stock: Stock,
+        report: Report,
+        pendingsale: PedingSale,
+    });
+
+    if (!user?.userHasStore) {
+        return (
+            <View className="bg-bg h-screen w-full flex justify-center px-5">
+                <Text className="text-textForenground text-center -mt-40">
+                    Você ainda não tem uma loja :(
+                </Text>
+                <Button name="Criar Loja" onPress={() => setIsModalOpen(true)} />
+                <CreateStoreModal open={isModalOpen} />
+            </View>
+        );
+    }
 
     return (
-        <View className="bg-bg h-screen w-full">
-            <View>
-                <Text className="text-white font-medium mt-16 text-lg text-center">
-                    Minha Loja
-                </Text>
-            </View>
-            {user?.userHasStore ? (
-                <>
-                    <Text className="text-primaryPrimary text-sm text-center mb-5 px-5">
-                        {
-                            subdomain ?
-                                `${subdomain.data}.revendaja.com`
-                                :
-                                ''
-                        }
-                    </Text>
-                    <View className="flex flex-row items-center justify-between px-5">
-                        <TouchableOpacity onPress={() => navigation.navigate('appRoutes', {
-                            screen: 'Store',
-                            params: {
-                                screen: 'Overview'
-                            }
-                        })}>
-                            <Text className={`text-sm ${isActive("Overview") ? "border-b-2 border-primaryPrimary" : ""} text-white`}>
-                                Overview
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('appRoutes', {
-                            screen: 'Store',
-                            params: {
-                                screen: 'Stock'
-                            }
-                        })}>
-                            <Text className={`text-sm ${isActive("Stock") ? "border-b-2 border-primaryPrimary" : ""} text-white`}>
-                                Estoque
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('appRoutes', {
-                            screen: 'Store',
-                            params: {
-                                screen: 'Report'
-                            }
-                        })}>
-                            <Text className={`text-sm ${isActive("Report") ? "border-b-2 border-primaryPrimary" : ""} text-white`}>
-                                Relatório
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('appRoutes', {
-                            screen: 'Store',
-                            params: {
-                                screen: 'PedingSale'
-                            }
-                        })}>
-                            <Text className={`text-sm ${isActive("PedingSale") ? "border-b-2 border-primaryPrimary" : ""} text-white`}>
-                                Pendentes
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+        <View className="bg-bg flex-1 w-full pt-16">
+            <Text className="text-white font-medium text-lg text-center">Minha Loja</Text>
+            <Text className="text-primaryPrimary text-sm text-center mb-5 px-5">
+                {subdomain ? `${subdomain.data}.revendaja.com` : ""}
+            </Text>
 
-                    {children}
-                </>
-            ) : (
-                <>
-                    <View className="h-screen w-full flex justify-center px-5">
-                        <Text className="text-textForenground text-center -mt-40">
-                            Você ainda não tem uma loja :(
-                        </Text>
-                        <Button name="Criar Loja" onPress={() => setIsModalOpen(true)} />
-                    </View>
-                    <CreateStoreModal
-                        open={isModalOpen} // Exibe animação ao criar loja
+            <TabView
+                navigationState={{ index, routes }}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                initialLayout={{ width: layout.width }}
+                style={{ backgroundColor: "#1E1E2F"}}
+                renderTabBar={props => (
+                    <TabBar
+                        {...props}
+                        indicatorStyle={{ backgroundColor: "#FF7100", height: 2 }}
+                        activeColor="white"
+                        inactiveColor="#bbb"
+                        contentContainerStyle={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                        pressColor="transparent"
+                        style={{
+                            backgroundColor: "#121212",
+                            borderBottomWidth: 0,
+                            elevation: 0,
+                        }}
                     />
-                </>
-            )
-            }
-        </View >
+                )}
+            />
+        </View>
     );
 }

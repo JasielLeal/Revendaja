@@ -120,12 +120,12 @@ export function OurPlans() {
             <Text className="text-white font-medium mt-10">Seu plano</Text>
             <View className="bg-forenground p-4 rounded-xl mt-5">
                 <View className="flex flex-row items-center">
-                    <Text className="text-white text-xl">{user?.plan} -</Text>
+                    <Text className="text-white text-lg">{user?.plan} -</Text>
                     <Text className="text-primaryPrimary"> Atualmente</Text>
                 </View>
 
                 <View className="flex flex-row gap-2 items-center">
-                    <Text className="text-white font-medium text-2xl">{user?.plan === "Free" ? "Gratuito" : user?.plan === "Starter" ? "R$ 29,99" : "R$ 49,99"}</Text>
+                    <Text className="text-white font-medium text-lg">{user?.plan === "Free" ? "Gratuito" : user?.plan === "Starter" ? "R$ 29,99" : "R$ 49,99"}</Text>
                     <Text className="text-textForenground"> {user?.plan === "Free" ? "" : "/ Mês"}</Text>
                 </View>
 
@@ -148,11 +148,11 @@ export function OurPlans() {
             {/* Lista de Planos */}
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: "row", gap: 16 }}>
                 {plans.map((plan) => (
-                    <View key={plan.name} className="bg-forenground p-4 rounded-xl shadow-lg mt-5 w-[300] h-[350] mb-10">
+                    <View key={plan.name} className="bg-forenground p-4 rounded-xl shadow-lg mt-5 w-[300] mb-10">
                         <Text className="text-primaryPrimary text-xl font-semibold">{plan.name}</Text>
                         <View className="flex flex-row gap-2 items-center">
                             <Text className="text-white font-medium text-2xl">R$ {plan.price}</Text>
-                            <Text className="text-textForenground text-lg">/ mês</Text>
+                            <Text className="text-textForenground text-sm">/ mês</Text>
                         </View>
                         <Text className="text-textForenground mt-3 text-sm">
                             {plan.description}
@@ -163,24 +163,24 @@ export function OurPlans() {
                             {plan.customProducts && (
                                 <View className="flex flex-row items-center gap-2">
                                     <Icon name="checkmark" size={25} color="#FF7100" />
-                                    <Text className="text-white">{plan.customProducts} Produtos personalizados</Text>
+                                    <Text className="text-white text-sm">{plan.customProducts} Produtos personalizados</Text>
                                 </View>
                             )}
                             {plan.stock && (
                                 <View className="flex flex-row items-center gap-2">
                                     <Icon name="checkmark" size={25} color="#FF7100" />
-                                    <Text className="text-white">{plan.stock} Produtos no estoque</Text>
+                                    <Text className="text-white text-sm">{plan.stock} Produtos no estoque</Text>
                                 </View>
                             )}
                             {plan.tickets && (
                                 <View className="flex flex-row items-center gap-2">
                                     <Icon name="checkmark" size={25} color="#FF7100" />
-                                    <Text className="text-white">{plan.tickets} boletos</Text>
+                                    <Text className="text-white text-sm">{plan.tickets} boletos</Text>
                                 </View>
                             )}
-                            <View className="flex flex-row items-center gap-2 mb-10">
+                            <View className="flex flex-row items-center gap-2 mb-4">
                                 <Icon name="checkmark" size={25} color="#FF7100" />
-                                <Text className="text-white">Sem limite de vendas</Text>
+                                <Text className="text-white text-sm">Sem limite de vendas</Text>
                             </View>
 
                             {/* Botão de Pagamento */}
