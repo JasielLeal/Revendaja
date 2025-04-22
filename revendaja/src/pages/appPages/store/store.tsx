@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { View, Text, useWindowDimensions } from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import AuthContext from "@/context/authContext";
 import { useQuery } from "@tanstack/react-query";
 import { FindStoreNameByUser } from "./services/FindStoreNameByUser";
@@ -11,29 +12,15 @@ import { Stock } from "./components/stock/stock";
 import { PedingSale } from "./components/pendingSale/pendingSale";
 import { Report } from "./components/report/report";
 
+const Tab = createMaterialTopTabNavigator();
+
 export function Store() {
-    const layout = useWindowDimensions();
     const { user } = useContext(AuthContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { data: subdomain } = useQuery({
         queryKey: ["FindStoreNameByUser"],
         queryFn: FindStoreNameByUser,
-    });
-
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        { key: "overview", title: "Overview" },
-        { key: "stock", title: "Estoque" },
-        { key: "report", title: "Relatório" },
-        { key: "pendingsale", title: "Pendentes" },
-    ]);
-
-    const renderScene = SceneMap({
-        overview: Overview,
-        stock: Stock,
-        report: Report,
-        pendingsale: PedingSale,
     });
 
     if (!user?.userHasStore) {
@@ -55,31 +42,29 @@ export function Store() {
                 {subdomain ? `${subdomain.data}.revendaja.com` : ""}
             </Text>
 
-            <TabView
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                initialLayout={{ width: layout.width }}
-                style={{ backgroundColor: "#1E1E2F"}}
-                renderTabBar={props => (
-                    <TabBar
-                        {...props}
-                        indicatorStyle={{ backgroundColor: "#FF7100", height: 2 }}
-                        activeColor="white"
-                        inactiveColor="#bbb"
-                        contentContainerStyle={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                        pressColor="transparent"
-                        style={{
-                            backgroundColor: "#121212",
-                            borderBottomWidth: 0,
-                            elevation: 0,
-                        }}
-                    />
-                )}
-            />
+            <Tab.Navigator
+                screenOptions={{
+                    tabBarLabelStyle: {
+                        fontSize: 10,
+                        fontWeight: "600",
+                        textTransform: "none",
+                    },
+                    tabBarStyle: {
+                        backgroundColor: "#121212",
+                    },
+                    tabBarIndicatorStyle: {
+                        backgroundColor: "#FF7100",
+                        height: 2,
+                    },
+                    tabBarActiveTintColor: "#FF7100",
+                    tabBarInactiveTintColor: "#ffffff",
+                }}
+            >
+                <Tab.Screen name="Overview" component={Overview} />
+                <Tab.Screen name="Estoque" component={Stock} />
+                <Tab.Screen name="Relatório" component={Report} />
+                <Tab.Screen name="Pendentes" component={PedingSale} />
+            </Tab.Navigator>
         </View>
     );
 }

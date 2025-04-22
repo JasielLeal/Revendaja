@@ -24,5 +24,5 @@ export type RootStackParamList = {
   AddCustomProduct: undefined;
   MyPlan: undefined;
   Notifications: undefined;
-  // Adicione outras rotas aqui se necessário
+  paymentConfirmed: undefined; // Adicione outras rotas aqui se necessário
 };
