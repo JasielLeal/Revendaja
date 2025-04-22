@@ -16,6 +16,7 @@ export function Profile() {
 
     const { user, logoutFc } = useContext(AuthContext)
 
+
     const [openModal, setOpenModal] = useState(false)
 
     async function handleConfirm() {
