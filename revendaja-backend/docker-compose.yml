@@ -9,3 +9,9 @@ services:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=revendaja 
+
+  toxiproxy:
+    image: shopify/toxiproxy
+    ports:
+      - "8474:8474"   # API do Toxiproxy
+      - "8666:8666"   # Porta para proxy do banco
