@@ -24,6 +24,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Store } from "@/pages/appPages/store/store";
 import { MyPlan } from "@/pages/appPages/profile/components/myPlan/MyPlan";
 import { Notifications } from "@/pages/appPages/notifications/notifications";
+import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -215,7 +216,7 @@ export default function AppRoutes() {
             <Stack.Screen name="AddCustomProduct" component={AddCustomProductToStock} options={{ headerShown: false }} />
             <Stack.Screen name="MyPlan" component={MyPlan} options={{ headerShown: false }} />
             <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
-
+            <Stack.Screen name="updateCard" component={UpdateCard} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

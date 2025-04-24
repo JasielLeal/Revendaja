@@ -89,7 +89,20 @@ export function MyPlan() {
 
                         {data && (
                             <>
-                                <Text className="text-white font-medium my-7">Detalhes do pagamento</Text>
+                                <View className="flex flex-row items-center justify-between">
+                                    <Text className="text-white font-medium my-7 text-sm">Detalhes do pagamento</Text>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            navigate.navigate("updateCard", {
+                                                customerId: data.customerId,
+                                                subscriptionId: data.subscriptionId,
+                                            });
+                                        }}
+                                    >
+                                        <Text className="text-primaryPrimary my-7 text-xs">Atualizar cartão</Text>
+                                    </TouchableOpacity>
+                                </View>
+
 
                                 <View className="bg-forenground rounded-lg p-4">
                                     <View className="flex flex-row items-center gap-3">
@@ -137,7 +150,7 @@ export function MyPlan() {
                                 </View>
                             </>
                         )}
-                    </View>
+                    </View >
 
                     <CustomModal
                         visible={openModal}
