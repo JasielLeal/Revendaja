@@ -5,6 +5,9 @@ import { CreatePaymentIntentUseCase } from "./CreateCheckoutSession/CreatePaymen
 import { SubscriptionDetailsUseCase } from "./SubscriptionDetails/SubscriptionDetailsUseCase";
 import { CreateSubscriptionUseCase } from "./CreateSubscription/CreateSubscriptionUseCase";
 import { CancelSubscriptionAtEndPeriodUseCase } from "./CancelSubscriptionAtEndPeriod/CancelSubscriptionAtEndPeriodUseCase";
+import { ReactiveSubscriptionUseCase } from "./ReactiveSubscription/ReactiveSubscriptionUseCase";
+import { CreateSetupIntentUseCase } from "./CreateSetupIntent/CreateSetupIntentUseCase";
+import { UpdateSubscriptionPaymentMethodUseCase } from "./UpdateSubscriptionPaymentMethod/UpdateSubscriptionPaymentMethodUseCase";
 
 export class StripeController {
   async FecthPublishableKey(
@@ -102,6 +105,67 @@ export class StripeController {
       const subscription = await cancelSubscription.execute(subscriptionId);
 
       return response.status(200).send(subscription);
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).send({ error: error.message });
+      }
+
+      return response.status(500).send({ error: error.message });
+    }
+  }
+
+  async ReactiveSubscription(
+    request: Request,
+    response: Response
+  ): Promise<any> {
+    try {
+      const { subscriptionId } = request.body;
+
+      const reactiveSubscription = new ReactiveSubscriptionUseCase();
+      await reactiveSubscription.execute(subscriptionId);
+
+      return response.status(200).send("Subscription reactivated successfully");
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).send({ error: error.message });
+      }
+
+      return response.status(500).send({ error: error.message });
+    }
+  }
+
+  async CreateSetupIntent(request: Request, response: Response): Promise<any> {
+    try {
+      const customerId = request.user.stripeCustomerId;
+      const createSetupIntentUseCase = new CreateSetupIntentUseCase();
+      const setupIntent = await createSetupIntentUseCase.execute(customerId);
+
+      return response.status(200).send(setupIntent.client_secret);
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).send({ error: error.message });
+      }
+
+      return response.status(500).send({ error: error.message });
+    }
+  }
+
+  async UpdatePaymentMethod(
+    request: Request,
+    response: Response
+  ): Promise<any> {
+    try {
+      const { paymentMethodId } = request.body;
+      const customerId = request.user.stripeCustomerId;
+
+      const updateSubscriptionPaymentMethodUseCase =
+        new UpdateSubscriptionPaymentMethodUseCase();
+      await updateSubscriptionPaymentMethodUseCase.execute(
+        customerId,
+        paymentMethodId
+      );
+
+      return response.status(200).send("Payment method updated successfully");
     } catch (error) {
       if (error instanceof AppError) {
         return response.status(error.statusCode).send({ error: error.message });

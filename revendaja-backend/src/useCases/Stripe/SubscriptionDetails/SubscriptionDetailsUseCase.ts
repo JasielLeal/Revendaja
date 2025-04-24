@@ -25,6 +25,7 @@ export class SubscriptionDetailsUseCase {
     const nextPaymentDate = new Date(subscription.current_period_end * 1000);
     
     const subscriptionDetails = {
+      subscriptionId: subscription.id,
       last4: paymentMethod.card.last4,
       brand: paymentMethod.card.brand,
       nextPaymentDate: nextPaymentDate.toISOString(),

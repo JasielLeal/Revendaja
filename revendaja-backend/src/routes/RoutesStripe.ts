@@ -31,3 +31,21 @@ RoutesStripe.put(
   authenticated,
   stripeConstroller.CancelSubscriptionAtEndPeriod
 );
+
+RoutesStripe.post(
+  "/ReactiveSubscription",
+  authenticated,
+  stripeConstroller.ReactiveSubscription
+);
+
+RoutesStripe.post(
+  "/CreateSetupIntent",
+  authenticated,
+  stripeConstroller.CreateSetupIntent
+);
+
+RoutesStripe.post(
+  "/UpdateSubscriptionPaymentMethod",
+  authenticated,
+  stripeConstroller.UpdatePaymentMethod
+);

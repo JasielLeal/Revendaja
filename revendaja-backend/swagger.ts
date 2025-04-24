@@ -27,7 +27,7 @@ const swaggerDefinition = {
 
 const options: swaggerJSDoc.Options = {
   swaggerDefinition,
-  apis: ['./src/docs/user/*.ts', './src/docs/product/*.ts'], // ajusta pro caminho das suas rotas
+  apis: ['./src/docs/user/*.ts', './src/docs/product/*.ts', './src/docs/stripe/*.ts'], // ajusta pro caminho das suas rotas
 };
 
 const swaggerSpec = swaggerJSDoc(options);
