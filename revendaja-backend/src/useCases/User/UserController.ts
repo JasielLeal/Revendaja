@@ -18,6 +18,8 @@ export class UserController {
     try {
       const { email, name, password, role, secondName }: CreateUserDTO = request.body;
 
+      
+
       const prismaUserRepository = new PrismaUserRepository();
       const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
 
@@ -60,7 +62,7 @@ export class UserController {
   async Authenticate(request: Request, response: Response): Promise<any> {
     try {
       const { email, password }: AuthenticateDTO = request.body;
-
+      console.log(email, password)  
       const prismaUserRepository = new PrismaUserRepository();
       const authenticateUseCase = new AuthenticateUseCase(prismaUserRepository);
 
