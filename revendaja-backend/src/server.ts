@@ -41,7 +41,6 @@ io.on("connection", (socket) => {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-
 // Iniciando o servidor
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
