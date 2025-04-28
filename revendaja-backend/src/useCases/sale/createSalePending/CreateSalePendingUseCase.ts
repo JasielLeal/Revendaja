@@ -100,6 +100,7 @@ const sendPushNotification = async (expoPushToken: string, message: string) => {
     title: "Nova venda realizada",
     body: message,
     data: { someData: "additional data" },
+    scopeKey: "@szreactioon/revendaja",
     experienceId: "@szreactioon/revendaja"
   };
 
