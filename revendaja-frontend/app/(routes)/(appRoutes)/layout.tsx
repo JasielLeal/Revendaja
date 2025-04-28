@@ -20,6 +20,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
        router.push("/")
    }
 
+   
     return (
         <div className="grid grid-cols-12">
             <div className="bg-[#09090b] h-screen px-5 border-r border-[#27272a] col-span-2 ">
