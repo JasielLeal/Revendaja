@@ -29,5 +29,6 @@ export type RootStackParamList = {
     customerId: string;
     subscriptionId: string;
   };
+  CreateStore: undefined;
   // Adicione outras rotas aqui se necessário
 };

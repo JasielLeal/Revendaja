@@ -25,6 +25,7 @@ import { Store } from "@/pages/appPages/store/store";
 import { MyPlan } from "@/pages/appPages/profile/components/myPlan/MyPlan";
 import { Notifications } from "@/pages/appPages/notifications/notifications";
 import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
+import { CreateStore } from "@/pages/appPages/store/components/createStore/CreateStore";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -217,6 +218,7 @@ export default function AppRoutes() {
             <Stack.Screen name="MyPlan" component={MyPlan} options={{ headerShown: false }} />
             <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
             <Stack.Screen name="updateCard" component={UpdateCard} options={{ headerShown: false }} />
+            <Stack.Screen name="CreateStore" component={CreateStore} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

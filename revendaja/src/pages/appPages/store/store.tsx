@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { View, Text } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import AuthContext from "@/context/authContext";
 import { useQuery } from "@tanstack/react-query";
@@ -11,12 +11,14 @@ import { Overview } from "./components/overview/overview";
 import { Stock } from "./components/stock/stock";
 import { PedingSale } from "./components/pendingSale/pendingSale";
 import { Report } from "./components/report/report";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@/types/navigation";
 
 const Tab = createMaterialTopTabNavigator();
 
 export function Store() {
     const { user } = useContext(AuthContext);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigation<StackNavigationProp<RootStackParamList>>()
 
     const { data: subdomain } = useQuery({
         queryKey: ["FindStoreNameByUser"],
@@ -29,8 +31,7 @@ export function Store() {
                 <Text className="text-textForenground text-center -mt-40">
                     Você ainda não tem uma loja :(
                 </Text>
-                <Button name="Criar Loja" onPress={() => setIsModalOpen(true)} />
-                <CreateStoreModal open={isModalOpen} />
+                <Button name="Criar Loja" onPress={() => navigate.navigate("CreateStore")} />
             </View>
         );
     }

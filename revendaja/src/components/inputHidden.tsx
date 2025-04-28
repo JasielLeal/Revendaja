@@ -13,7 +13,7 @@ export function InputHidden({ placeholder, isPassword, onChangeText, onBlur, val
     <View
       className={
         Platform.OS == "ios" ?
-          "relative w-full flex flex-row bg-forenground rounded-xl items-center py-4 px-4 min-h-[48px]"
+          "relative w-full flex flex-row bg-forenground rounded-xl items-center py-4 px-4 min-h-[38px]"
           : 
           "relative w-full flex flex-row bg-forenground rounded-xl items-center py-[1px] px-[8px] min-h-[38px] "
 

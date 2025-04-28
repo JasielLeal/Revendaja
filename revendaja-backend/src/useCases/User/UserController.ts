@@ -62,7 +62,7 @@ export class UserController {
   async Authenticate(request: Request, response: Response): Promise<any> {
     try {
       const { email, password }: AuthenticateDTO = request.body;
-      console.log(email, password)  
+      
       const prismaUserRepository = new PrismaUserRepository();
       const authenticateUseCase = new AuthenticateUseCase(prismaUserRepository);
 

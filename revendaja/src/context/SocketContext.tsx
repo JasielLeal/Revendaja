@@ -1,4 +1,3 @@
-import { backend } from "@/api/backend";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import AuthContext from "./authContext";
@@ -17,7 +16,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const { user } = useContext(AuthContext)
   useEffect(() => {
     // Configure o socket
-    const socketConnection = io('http://192.168.100.153:9999', {
+    const socketConnection = io(process.env.EXPO_PUBLIC_BACKEND, {
       transports: ["websocket"], // Use somente WebSocket
     });
 

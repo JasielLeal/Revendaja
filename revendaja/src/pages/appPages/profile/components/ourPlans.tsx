@@ -30,7 +30,17 @@ export function OurPlans() {
             paymentSheetMutation.mutate({ clientSecret, planName, priceId });
         },
         onError: (error: any) => {
-            Alert.alert("Erro", "Não foi possível iniciar o pagamento.");
+            if (error.response) {
+                // Erro vindo da API
+                console.log("Status:", error.response.status);
+                console.log("Data:", error.response.data);
+            } else if (error.request) {
+                // Requisição foi feita mas não teve resposta
+                console.log("Request:", error.request);
+            } else {
+                // Algo deu errado na config da requisição
+                console.log("Erro genérico:", error.message);
+            }
         },
     });
 
