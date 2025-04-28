@@ -56,7 +56,8 @@ export const DomainProvider = ({ children }: DomainProviderProps) => {
             const cleanHost = host.startsWith('www.') ? host.slice(4) : host;
 
             const mainDomain = process.env.NEXT_PUBLIC_MAINDOMAIN // Sempre que for usar local ver se tá MAINLOCAL
-
+            console.log('mainDomain', mainDomain);
+            console.log('cleanHost', cleanHost);
             if (cleanHost === mainDomain) {
                 setIsMainDomain(true);
                 setSubdomain(null);
