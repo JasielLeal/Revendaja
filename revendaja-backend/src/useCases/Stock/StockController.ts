@@ -356,8 +356,7 @@ export class StockController {
         pageSize,
         subdomain,
         orderBy,
-        companyFilter,
-        categoryFilter,
+
       } = request.query;
 
       const prismaStoreRepository = new PrismaStoreRepository();

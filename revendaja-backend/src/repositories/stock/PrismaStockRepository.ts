@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { StockRepository } from "./StockRepository";
 import { Stock } from "@/entities/Stock";
-import { CustomProduct, Product } from "@prisma/client";
 import { AppError } from "@/lib/AppError";
+import Redis from "ioredis";
+import { redis } from "redis";
 
 export class PrismaStockRepository implements StockRepository {
   async addProductToStoreStock(
@@ -86,7 +87,6 @@ export class PrismaStockRepository implements StockRepository {
               contains: search,
               mode: "insensitive", // Torna a busca case-insensitive
             },
-            
           },
         },
         {
@@ -249,65 +249,70 @@ export class PrismaStockRepository implements StockRepository {
     };
   }
 
-  async findProductOrCustomProduct(
-    storeId: string,
-    productId: string
-  ): Promise<{
-    product: Partial<Product> | Partial<CustomProduct>;
-    discountValue?: number;
-    customPrice?: number;
-    suggestedPrice?: number;
-    quantity: number;
-    normalPrice?: number;
-  } | null> {
-    // Procurar primeiro pelo produto padrão (Product) no estoque
-    const stockProduct = await prisma.stock.findFirst({
+  async findProductOrCustomProduct(storeId: string, productId: string) {
+    const cacheKey = `store:${storeId}:product:${productId}`;
+
+    // 1. Verifica no cache
+    const cached = await redis.get(cacheKey);
+    if (cached) {
+      return JSON.parse(cached);
+    }
+
+    // Consulta ÚNICA com OR condicional
+    const stockItem = await prisma.stock.findFirst({
       where: {
-        storeId: storeId,
-        productId: productId,
+        storeId,
+        OR: [{ productId }, { customProductId: productId }],
       },
-      include: {
-        product: true,
+      select: {
+        // SELECT explícito > INCLUDE
+        quantity: true,
+        discountValue: true,
+        customPrice: true,
+        suggestedPrice: true,
+        normalPrice: true,
+        product: {
+          select: {
+            id: true,
+            name: true,
+            imgUrl: true,
+            brand: true,
+            company: true,
+            stock: true,
+            // APENAS campos necessários
+          },
+        },
+        customProduct: {
+          select: {
+            id: true,
+            name: true,
+            imgUrl: true,
+            brand: true,
+            company: true,
+            stock: true,
+            // APENAS campos necessários
+          },
+        },
       },
     });
 
-    if (stockProduct && stockProduct.product) {
-      const { createdAt, updatedAt, ...productData } = stockProduct.product;
-      return {
-        product: productData,
-        quantity: stockProduct.quantity,
-        discountValue: stockProduct.discountValue,
-        customPrice: stockProduct.customPrice,
-        suggestedPrice: stockProduct.suggestedPrice,
-        normalPrice: stockProduct.normalPrice,
-      };
-    }
+    if (!stockItem) return null;
 
-    // Se não encontrou um Product, procure um CustomProduct
-    const customStockProduct = await prisma.stock.findFirst({
-      where: {
-        storeId: storeId,
-        customProductId: productId,
-      },
-      include: {
-        customProduct: true,
-      },
-    });
+    const productData = stockItem.product;
 
-    if (customStockProduct && customStockProduct.customProduct) {
-      const { createdAt, updatedAt, ...productData } =
-        customStockProduct.customProduct;
-      return {
-        product: productData,
-        discountValue: customStockProduct.discountValue,
-        customPrice: customStockProduct.customPrice,
-        suggestedPrice: customStockProduct.suggestedPrice,
-        normalPrice: customStockProduct.normalPrice,
-        quantity: customStockProduct.quantity,
-      };
-    }
+    const result = {
+      product: productData,
+      quantity: stockItem.quantity,
+      discountValue: stockItem.discountValue,
+      customPrice: stockItem.customPrice,
+      suggestedPrice: stockItem.suggestedPrice,
+      normalPrice: stockItem.normalPrice,
+    };
 
-    return null;
+    // 3. Salva no cache com TTL de 10 minutos
+    await redis.set(cacheKey, JSON.stringify(result), "EX", 60 * 10);
+
+    return result;
   }
 
   async updateStockPrice(
@@ -719,13 +724,16 @@ export class PrismaStockRepository implements StockRepository {
     return customProducts;
   }
 
-  async updateStockItem(stockId: string, updateData: Partial<{ 
-    status: string; 
-    quantity: number; 
-    customPrice: number; 
-    normalPrice: number; 
-    suggestedPrice: number; 
-  }>) {
+  async updateStockItem(
+    stockId: string,
+    updateData: Partial<{
+      status: string;
+      quantity: number;
+      customPrice: number;
+      normalPrice: number;
+      suggestedPrice: number;
+    }>
+  ) {
     return await prisma.stock.update({
       where: { id: stockId },
       data: updateData,
