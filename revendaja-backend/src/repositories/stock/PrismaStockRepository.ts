@@ -663,6 +663,7 @@ export class PrismaStockRepository implements StockRepository {
     const cacheKey = `store:${storeId}:new-products`;
     const cachedProducts = await redis.get(cacheKey);
     if (cachedProducts) {
+      console.log("Tem cache")
       return JSON.parse(cachedProducts);
     }
 
