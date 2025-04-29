@@ -658,6 +658,14 @@ export class PrismaStockRepository implements StockRepository {
   }
 
   async findNewProducts(storeId: string) {
+
+    // Verifica se o produto já está no cache
+    const cacheKey = `store:${storeId}:new-products`;
+    const cachedProducts = await redis.get(cacheKey);
+    if (cachedProducts) {
+      return JSON.parse(cachedProducts);
+    }
+
     const products = await prisma.stock.findMany({
       where: {
         storeId,
@@ -673,6 +681,12 @@ export class PrismaStockRepository implements StockRepository {
         updatedAt: "desc",
       },
     });
+
+    await redis.setex(
+      cacheKey,
+      300, // 5 minutos de cache (ajuste conforme necessidade)
+      JSON.stringify(products)
+    )
 
     return products;
   }
