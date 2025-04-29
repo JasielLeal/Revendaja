@@ -279,7 +279,7 @@ export class PrismaStockRepository implements StockRepository {
             brand: true,
             company: true,
             stock: true,
-            normalPrice: true
+            normalPrice: true,
             // APENAS campos necessários
           },
         },
@@ -291,7 +291,7 @@ export class PrismaStockRepository implements StockRepository {
             brand: true,
             company: true,
             stock: true,
-            normalPrice: true
+            normalPrice: true,
             // APENAS campos necessários
           },
         },
@@ -553,6 +553,12 @@ export class PrismaStockRepository implements StockRepository {
     search: string,
     orderByOption: string
   ) {
+    // Normaliza a busca: remove acentos e coloca em lowercase
+    const normalizedSearch = search
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
     // Contar o total de itens no estoque da loja
 
     const totalItems = await prisma.stock.count({
@@ -562,17 +568,17 @@ export class PrismaStockRepository implements StockRepository {
           {
             product: {
               OR: [
-                { name: { contains: search, mode: "insensitive" } },
-                { category: { contains: search, mode: "insensitive" } },
-                { company: { contains: search, mode: "insensitive" } },
+                { name: { contains: normalizedSearch, mode: "insensitive" } },
+                { category: { contains: normalizedSearch, mode: "insensitive" } },
+                { company: { contains: normalizedSearch, mode: "insensitive" } },
               ],
             },
           },
           {
             customProduct: {
               OR: [
-                { name: { contains: search, mode: "insensitive" } },
-                { category: { contains: search, mode: "insensitive" } },
+                { name: { contains: normalizedSearch, mode: "insensitive" } },
+                { category: { contains: normalizedSearch, mode: "insensitive" } },
               ],
             },
           },
@@ -602,19 +608,19 @@ export class PrismaStockRepository implements StockRepository {
           {
             product: {
               OR: [
-                { name: { contains: search, mode: "insensitive" } },
-                { brand: { contains: search, mode: "insensitive" } },
-                { category: { contains: search, mode: "insensitive" } },
-                { company: { contains: search, mode: "insensitive" } },
+                { name: { contains: normalizedSearch, mode: "insensitive" } },
+                { brand: { contains: normalizedSearch, mode: "insensitive" } },
+                { category: { contains: normalizedSearch, mode: "insensitive" } },
+                { company: { contains: normalizedSearch, mode: "insensitive" } },
               ],
             },
           },
           {
             customProduct: {
               OR: [
-                { name: { contains: search, mode: "insensitive" } },
-                { brand: { contains: search, mode: "insensitive" } },
-                { category: { contains: search, mode: "insensitive" } },
+                { name: { contains: normalizedSearch, mode: "insensitive" } },
+                { brand: { contains: normalizedSearch, mode: "insensitive" } },
+                { category: { contains: normalizedSearch, mode: "insensitive" } },
               ],
             },
           },
@@ -664,7 +670,7 @@ export class PrismaStockRepository implements StockRepository {
     const cacheKey = `store:${storeId}:new-products`;
     const cachedProducts = await redis.get(cacheKey);
     if (cachedProducts) {
-      console.log("Tem cache")
+      console.log("Tem cache");
       return JSON.parse(cachedProducts);
     }
 
@@ -688,7 +694,7 @@ export class PrismaStockRepository implements StockRepository {
       cacheKey,
       300, // 5 minutos de cache (ajuste conforme necessidade)
       JSON.stringify(products)
-    )
+    );
 
     return products;
   }
