@@ -279,6 +279,7 @@ export class PrismaStockRepository implements StockRepository {
             brand: true,
             company: true,
             stock: true,
+            normalPrice: true
             // APENAS campos necessários
           },
         },
@@ -290,6 +291,7 @@ export class PrismaStockRepository implements StockRepository {
             brand: true,
             company: true,
             stock: true,
+            normalPrice: true
             // APENAS campos necessários
           },
         },
@@ -658,7 +660,6 @@ export class PrismaStockRepository implements StockRepository {
   }
 
   async findNewProducts(storeId: string) {
-
     // Verifica se o produto já está no cache
     const cacheKey = `store:${storeId}:new-products`;
     const cachedProducts = await redis.get(cacheKey);
