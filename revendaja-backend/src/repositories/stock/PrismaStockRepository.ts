@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { StockRepository } from "./StockRepository";
 import { Stock } from "@/entities/Stock";
 import { AppError } from "@/lib/AppError";
-import Redis from "ioredis";
 import { redis } from "redis";
+import { createHash } from "node:crypto";
 
 export class PrismaStockRepository implements StockRepository {
   async addProductToStoreStock(
@@ -559,6 +559,19 @@ export class PrismaStockRepository implements StockRepository {
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase();
 
+    // Gera uma chave única para o cache
+    const cacheKey = createHash("md5")
+      .update(
+        `${storeId}_${page}_${pageSize}_${normalizedSearch}_${orderByOption}`
+      )
+      .digest("hex");
+
+    // Verifica se a resposta está no cache
+    const cachedData = await redis.get(cacheKey);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
+
     // Contar o total de itens no estoque da loja
 
     const totalItems = await prisma.stock.count({
@@ -569,8 +582,12 @@ export class PrismaStockRepository implements StockRepository {
             product: {
               OR: [
                 { name: { contains: normalizedSearch, mode: "insensitive" } },
-                { category: { contains: normalizedSearch, mode: "insensitive" } },
-                { company: { contains: normalizedSearch, mode: "insensitive" } },
+                {
+                  category: { contains: normalizedSearch, mode: "insensitive" },
+                },
+                {
+                  company: { contains: normalizedSearch, mode: "insensitive" },
+                },
               ],
             },
           },
@@ -578,7 +595,9 @@ export class PrismaStockRepository implements StockRepository {
             customProduct: {
               OR: [
                 { name: { contains: normalizedSearch, mode: "insensitive" } },
-                { category: { contains: normalizedSearch, mode: "insensitive" } },
+                {
+                  category: { contains: normalizedSearch, mode: "insensitive" },
+                },
               ],
             },
           },
@@ -610,8 +629,12 @@ export class PrismaStockRepository implements StockRepository {
               OR: [
                 { name: { contains: normalizedSearch, mode: "insensitive" } },
                 { brand: { contains: normalizedSearch, mode: "insensitive" } },
-                { category: { contains: normalizedSearch, mode: "insensitive" } },
-                { company: { contains: normalizedSearch, mode: "insensitive" } },
+                {
+                  category: { contains: normalizedSearch, mode: "insensitive" },
+                },
+                {
+                  company: { contains: normalizedSearch, mode: "insensitive" },
+                },
               ],
             },
           },
@@ -620,7 +643,9 @@ export class PrismaStockRepository implements StockRepository {
               OR: [
                 { name: { contains: normalizedSearch, mode: "insensitive" } },
                 { brand: { contains: normalizedSearch, mode: "insensitive" } },
-                { category: { contains: normalizedSearch, mode: "insensitive" } },
+                {
+                  category: { contains: normalizedSearch, mode: "insensitive" },
+                },
               ],
             },
           },
@@ -635,12 +660,17 @@ export class PrismaStockRepository implements StockRepository {
       orderBy: orderBy,
     });
 
-    return {
+    const result = {
       totalItems,
       totalPages,
-      currentPage: page, // Retornando a página atual
+      currentPage: page,
       items: productsList,
     };
+
+    // Armazena o resultado no cache com TTL de 5 minutos
+    await redis.set(cacheKey, JSON.stringify(result), "EX", 300);
+
+    return result;
   }
 
   async findStockById(stockId: string, storeId: string) {
