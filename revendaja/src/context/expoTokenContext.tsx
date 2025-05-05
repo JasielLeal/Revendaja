@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
-import axios from "axios";
 import { backend } from "@/api/backend";
 import AuthContext from "./authContext";
 
@@ -17,11 +16,15 @@ const ExpoTokenContext = createContext<PushTokenContextType>({
 
 export const ExpoTokenProvider = ({ children }: { children: React.ReactNode }) => {
     const [pushToken, setPushToken] = useState<string | null>(null);
-
+    const { user } = useContext(AuthContext);
     const registerPushToken = async () => {
         try {
+            const currentToken = (await Notifications.getExpoPushTokenAsync({
+                projectId: 'f72c3ea6-e4d0-47b8-9ce5-ba720c38e40c',  
+            })).data;
 
-            const currentToken = (await Notifications.getExpoPushTokenAsync()).data;
+            console.log("backend-token", user?.expoToken );
+
             const savedToken = await AsyncStorage.getItem("pushToken");
 
             console.log(`currentToken ${currentToken}`);

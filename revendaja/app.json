@@ -2,21 +2,21 @@
   "expo": {
     "name": "Revendaja",
     "slug": "revendaja",
+    "owner": "szreactioon",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+
     "ios": {
       "supportsTablet": true,
       "newArchEnabled": true,
       "infoPlist": {
         "UIBackgroundModes": ["remote-notification"]
-      }
+      },
+      "bundleIdentifier": "com.szreactioon.revendaja"
     },
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain"
-    },
+
     "android": {
       "newArchEnabled": true,
       "package": "com.szreactioon.revendaja",
@@ -25,16 +25,28 @@
         "foregroundImage": "./assets/icon.png"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "extra": {
       "eas": {
-        "projectId": "f72c3ea6-e4d0-47b8-9ce5-ba720c38e40c"
+        "projectId": "f72c3ea6-e4d0-47b8-9ce5-ba720c38e40c" 
       }
     },
+
     "scheme": "revendaja",
+
     "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#FF0000",
+          "mode": "production"
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -46,6 +58,14 @@
           }
         }
       ]
-    ]
+    ],
+
+    "notification": {
+      "icon": "./assets/icon.png",
+      "color": "#FF0000",
+      "iosDisplayInForeground": true,
+      "androidMode": "default",
+      "androidCollapsedTitle": "Revendaja"
+    }
   }
 }

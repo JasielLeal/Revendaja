@@ -27,7 +27,7 @@ interface User {
   secondName: string;
   role: string;
   email: string;
-  token: string;
+  expoToken: string;
   image: string;
   status: string
   userHasStore: boolean;
