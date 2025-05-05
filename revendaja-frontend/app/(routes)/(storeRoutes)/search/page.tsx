@@ -101,7 +101,7 @@ export default function Search() {
                 {data?.pages.map((page) =>
                     page.items.map((productResults: productsProps) => {
                         const products = productResults.product || productResults.customProduct;
-                        
+
                         const discountPercentage = productResults.discountValue
                             ? calculatePercentage(
                                 Number(productResults.discountValue),
@@ -113,7 +113,7 @@ export default function Search() {
                             <div
                                 key={products.id}
                                 className="flex flex-col justify-between rounded-lg bg-input p-3"
-                                style={{ minWidth: "170px" }} 
+                                style={{ minWidth: "170px" }}
                                 onClick={() => router.push(`/p/${products.name}/${products.id}`)}
                             >
                                 {/* Imagem e Desconto */}

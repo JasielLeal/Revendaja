@@ -12,7 +12,7 @@ export function BestSellingProducts() {
     const { data: ProductsOnPromotion } = useQuery({
         queryKey: ['GetTheTopBestSellingProducts', storeData?.subdomain],
         queryFn: () => GetTheTopBestSellingProducts(storeData?.subdomain),
-        enabled: !!storeData?.subdomain, 
+        enabled: !!storeData?.subdomain,
     });
 
     type ProductProps = {
