@@ -178,8 +178,7 @@ export default function Home() {
                   <div>
                     <h3 className="text-2xl font-bold mb-4">Controle de Estoque Inteligente</h3>
                     <p className="text-gray-400 mb-6">
-                      Mantenha o controle total do seu estoque com alertas de produtos com baixa quantidade, datas de
-                      validade e muito mais.
+                      Mantenha o controle total do seu estoque, com adição de promoções que refletem diretamente no seu site e muito mais.
                     </p>
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2">
