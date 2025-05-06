@@ -289,7 +289,7 @@ export default function Home() {
                   <div>
                     <h3 className="text-2xl font-bold mb-4">Relatórios Detalhados</h3>
                     <p className="text-gray-400 mb-6">
-                      Acesse relatórios completos sobre suas vendas, produtos mais vendidos, clientes fiéis e muito
+                      Acesse relatórios completos sobre suas vendas, produtos mais vendidos e muito
                       mais.
                     </p>
                     <ul className="space-y-2">
