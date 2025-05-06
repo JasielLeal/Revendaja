@@ -39,7 +39,7 @@ export default function Home() {
           <Button
             className="hidden md:flex border-orange-500 text-white hover:bg-orange-500 hover:text-white rounded-xl px-10"
           >
-            Contato
+           Começar Agora
           </Button>
 
         </div>
