@@ -301,10 +301,6 @@ export default function Home() {
                         <CheckCircle className="h-5 w-5 text-green-500" />
                         <span>Análise de lucratividade</span>
                       </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                        <span>Histórico de clientes</span>
-                      </li>
                     </ul>
                   </div>
                   <div className="bg-gray-800 p-4 rounded-lg h-64 flex items-center justify-center">
@@ -657,7 +653,7 @@ export default function Home() {
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
-                  <span className="text-gray-400">contato@revendaja.com.br</span>
+                  <span className="text-gray-400">contato@revendaja.com</span>
                 </li>
               </ul>
             </div>
