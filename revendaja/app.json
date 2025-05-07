@@ -23,7 +23,8 @@
       "permissions": ["NOTIFICATIONS", "CAMERA"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png"
-      }
+      }, 
+      "googleServicesFile": "./google-services.json",
     },
 
     "web": {
