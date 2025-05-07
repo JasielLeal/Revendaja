@@ -301,10 +301,6 @@ export default function Home() {
                         <CheckCircle className="h-5 w-5 text-green-500" />
                         <span>Análise de lucratividade</span>
                       </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                        <span>Histórico de clientes</span>
-                      </li>
                     </ul>
                   </div>
                   <div className="bg-gray-800 p-4 rounded-lg h-64 flex items-center justify-center">
