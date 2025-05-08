@@ -38,7 +38,7 @@ export function Plans() {
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <CheckCircle className="h-5 w-5 text-green-500" />
-                                    <span>Relatórios básicos</span>
+                                    <span>Até 10 vendas por dia</span>
                                 </li>
                             </ul>
                         </CardContent>
