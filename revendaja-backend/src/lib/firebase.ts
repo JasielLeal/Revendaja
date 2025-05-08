@@ -7,6 +7,8 @@ const firebaseConfig: ServiceAccount = {
   privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
 };
 
+console.log("Firebase Config", firebaseConfig);
+
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(firebaseConfig),
