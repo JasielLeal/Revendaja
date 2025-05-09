@@ -119,7 +119,7 @@ const sendPushNotification = async (expoPushToken: string, message: string) => {
 
     console.log("[EXPO] Enviando notificação para:", expoPushToken);
     console.log(
-      "[EXPO] Resposta da API:",
+      "[EXPO] Resposta da API: ",
       JSON.stringify(response.data, null, 2)
     );
   } catch (error) {

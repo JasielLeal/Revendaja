@@ -7,11 +7,13 @@
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
       },
       "env": {
         "EXPO_PUBLIC_BACKEND_DEV": "https://api-revendaja.onrender.com"
-      }
+      }, 
+      "credentialsSource": "local"
+      
     },
     "preview": {
       "distribution": "internal",
