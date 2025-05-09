@@ -1,5 +1,5 @@
 import { AppError } from "@/lib/AppError";
-import admin from "@/lib/firebase";
+import admin, { firebaseConfig } from "@/lib/firebase";
 import { SaleRepository } from "@/repositories/sale/SaleRepository";
 import { StockRepository } from "@/repositories/stock/StockRepository";
 import { StoreRepository } from "@/repositories/store/StoreRepository";
@@ -153,8 +153,7 @@ const sendFireBaseNotification = async (
     token: expoPushToken,
   };
 
-  console.log("[FCM] Enviando notificação:", message);
-  console.log()
+  console.log("[FCM] privateKey", firebaseConfig);
 
   try {
     const response = await admin.messaging().send(message);
