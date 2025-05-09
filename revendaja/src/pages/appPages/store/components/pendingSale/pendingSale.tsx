@@ -68,7 +68,6 @@ export function PedingSale() {
         // Ouve o evento de atualização de vendas
         socket?.on("atualizarVendas", (novaVenda) => {
            
-
             // Invalida a consulta de vendas pendentes para atualizar a lista de vendas
             queryClient.invalidateQueries(["GetSalesPendingByStore"] as InvalidateQueryFilters);
         });
