@@ -21,12 +21,14 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="dark">
       <body className={inter.className}>
+
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <ClientProvider>
             {children}
           </ClientProvider>
         </ThemeProvider>
+
       </body>
-    </html>
+    </html >
   )
 }

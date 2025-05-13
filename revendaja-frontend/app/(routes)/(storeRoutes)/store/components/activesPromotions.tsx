@@ -50,12 +50,12 @@ export function ActivesPromotions() {
 
 
     return (
-        <div className="px-4">
+        <div className="px-4 bg-[#FEFEFE]">
             {
                 ProductsOnPromotion?.items?.length > 0 ?
 
                     <>
-                        <div className="flex items-center justify-between mb-4 mt-4 ">
+                        <div className="flex items-center justify-between mb-4 pt-4 bg-[#FEFEFE]">
                             <p className="text-text font-medium">Promoções</p>
 
                             <Link href={'/'} prefetch={true} className="text-subtext font-light text-sm">Ver todas</Link>

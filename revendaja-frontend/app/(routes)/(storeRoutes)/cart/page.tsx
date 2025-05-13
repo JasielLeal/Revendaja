@@ -6,13 +6,6 @@ import { formatCurrency } from "@/app/utils/FormatCurrency";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SalePendingSchema } from "./schemas/SalePendingSchema";
@@ -24,6 +17,7 @@ import { useDomain } from "@/app/context/DomainContext";
 import { IoTrash } from "react-icons/io5";
 import { phoneNumberMaskDynamic } from "@/app/utils/phoneNumberMaskDynamic";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
+import { CustomSelect } from "@/app/components/select";
 
 
 export default function Cart() {
@@ -37,7 +31,7 @@ export default function Cart() {
     }
 
     const { cart, addToCart, removeFromCart, updateUserInfo } = useCart();
-    const [transactionType, setTransactionType] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState('')
 
     const router = useRouter();
 
@@ -95,7 +89,7 @@ export default function Cart() {
             subdomain: storeData?.subdomain,
             customer: data.customer,
             numberPhone: data.numberPhone,
-            transactionType,
+            transactionType: paymentMethod,
             items,
         };
 
@@ -109,7 +103,7 @@ export default function Cart() {
     console.log(cart)
 
     return (
-        <div className="px-4 mt-5">
+        <div className="px-4 pt-5 h-screen bg-[#FEFEFE] ">
             <h1 className="font-semibold text-text">Meu carrinho</h1>
 
             {
@@ -148,7 +142,7 @@ export default function Cart() {
                                                     type="text"
                                                     value={item.quantity}
                                                     readOnly
-                                                    className="w-8 text-center border-t border-b bg-white h-8 rounded-md"
+                                                    className="w-8 text-center border-t border-b  h-8 rounded-md"
                                                 />
                                                 <button
                                                     onClick={() => handleIncrement(item)}
@@ -171,19 +165,18 @@ export default function Cart() {
 
                         <div className="flex items-center justify-between w-full">
                             <p className="font-semibold text-text">Valor total</p>
-                            <p>R$ {formatCurrency(String(totalCartValue))}</p>
+                            <p className="text-text">R$ {formatCurrency(String(totalCartValue))}</p>
                         </div>
-
 
                         <form onSubmit={handleSubmit(onSub)}>
                             <div className="mt-3">
                                 <p className="text-gray-600 font-medium text-sm mb-1">Seu nome</p>
-                                <Input placeholder="Insira seu nome" className="mb-3" {...register("customer")} />
+                                <Input placeholder="Insira seu nome" className="mb-3 text-gray-900 bg-white border border-gray-200 placeholder:text-gray-900" {...register("customer")} />
 
-                                <p className=" font-medium text-sm mb-1">Seu celular</p>
+                                <p className="text-text font-medium text-sm mb-1">Seu celular</p>
                                 <Input
                                     placeholder="Insira seu celular"
-                                    className="mb-3"
+                                    className="mb-3 bg-white border border-gray-200 placeholder:text-gray-900 text-gray-900"
                                     {...register("numberPhone", {
                                         onChange: (e) => {
                                             e.target.value = phoneNumberMaskDynamic(e.target.value);
@@ -193,16 +186,17 @@ export default function Cart() {
                                 />
 
                                 <p className="text-text font-medium text-sm mb-1">Metodo de pagamento</p>
-                                <Select onValueChange={(value) => setTransactionType(value)}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Selecione o metodo de pagamento" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Pix">Pix</SelectItem>
-                                        <SelectItem value="Cartão">Cartão</SelectItem>
-                                        <SelectItem value="Dinheiro">Dinheiro</SelectItem>
-                                    </SelectContent>
-                                </Select>
+
+                                <CustomSelect
+                                    placeholder="Selecione o método de pagamento"
+                                    value={paymentMethod}
+                                    onValueChange={setPaymentMethod}
+                                    options={[
+                                        { label: 'Pix', value: 'Pix' },
+                                        { label: 'Cartão', value: 'Cartão' },
+                                        { label: 'Dinheiro', value: 'Dinheiro' },
+                                    ]}
+                                />
                             </div>
 
                             {

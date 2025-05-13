@@ -25,7 +25,7 @@ export default function Congratulations() {
     const cleanNumber = storeData?.numberPhone.replace(/[()\s-]/g, "");
 
     return (
-        <div className="flex flex-col items-center mt-5 px-4">
+        <div className="flex flex-col items-center pt-5 px-4 bg-[#FEFEFE] h-screen">
             <p className="text-green-600 bg-green-200 p-3 rounded-full">
                 <IoCheckmarkCircle size={50} />
             </p>

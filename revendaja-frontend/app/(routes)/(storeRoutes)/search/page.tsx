@@ -85,7 +85,7 @@ export default function Search() {
     //fazer pagina de produtos com desconto.
 
     return (
-        <div className="px-4 mt-2">
+        <div className="px-4 pt-2 bg-[#FEFEFE] h-screen">
             <p className="font-light text-text mb-4 text-sm">
                 Você buscou por <span className="font-bold">{query}</span>
             </p>

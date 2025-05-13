@@ -1,3 +1,5 @@
+'use client'
+
 import { useDomain } from "@/app/context/DomainContext";
 import { useQuery } from "@tanstack/react-query";
 import { GetTheTopBestSellingProducts } from "../services/GetTheTopBestSellingProducts";
@@ -24,7 +26,7 @@ export function BestSellingProducts() {
             normalPrice: string;
             customPrice: string;
             discountValue: string;
-            quantity: number; // Adicionei a propriedade quantity
+            quantity: number;
             product: {
                 id: number;
                 name: string;
@@ -44,20 +46,20 @@ export function BestSellingProducts() {
 
     const router = useRouter();
 
-    // Filtra os produtos que possuem quantidade maior que zero
     const filteredProducts = ProductsOnPromotion?.filter(
         (item: ProductProps) => item.stock.quantity > 0
     );
 
     return (
-        <div className="px-4 mb-10">
+        <section className="w-full px-4 mb-10">
             {filteredProducts?.length > 0 && (
                 <>
                     <div className="flex items-center justify-between mb-4 mt-10">
-                        <p className="text-text font-medium">Mais vendidos</p>
-                        <Link href={'/'} className="text-subtext font-light text-sm">Ver todos</Link>
+                        <p className="text-text font-medium text-lg">Mais vendidos</p>
+                        <Link href="/" className="text-subtext font-light text-sm">Ver todos</Link>
                     </div>
-                    <div className="flex overflow-x-scroll space-x-3 no-scrollbar">
+
+                    <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible no-scrollbar snap-x snap-mandatory scroll-smooth">
                         {filteredProducts.map((item: ProductProps) => {
                             const stock = item.stock;
                             const produto = stock.product || stock.customProduct;
@@ -69,9 +71,8 @@ export function BestSellingProducts() {
                             return (
                                 <div
                                     key={stock.id}
-                                    className="flex flex-col justify-between w-36 rounded-lg relative bg-input p-3"
-                                    style={{ minWidth: "170px" }}
                                     onClick={() => router.push(`/p/${produto.name}/${produto.id}`)}
+                                    className="flex flex-col justify-between w-[170px] md:w-full max-w-[200px] shrink-0 snap-start rounded-lg bg-input p-3 cursor-pointer hover:shadow-md transition-all duration-300"
                                 >
                                     <div className="relative">
                                         {discountPercentage !== null && (
@@ -79,11 +80,11 @@ export function BestSellingProducts() {
                                                 {discountPercentage.toFixed(0)}% OFF
                                             </div>
                                         )}
-                                        <div className="flex items-center w-full justify-center">
+                                        <div className="flex items-center justify-center w-full">
                                             <Image
                                                 src={produto.imgUrl || '/path/to/defaultImage.jpg'}
                                                 alt={produto.name}
-                                                className="mb-3 rounded-xl"
+                                                className="mb-3 rounded-xl object-cover"
                                                 width={170}
                                                 height={170}
                                                 priority
@@ -92,12 +93,12 @@ export function BestSellingProducts() {
                                     </div>
                                     <p className="text-xs text-gray-400">{produto.brand}</p>
                                     <p className="font-semibold mb-2 text-text text-sm line-clamp-2">{produto.name}</p>
-                                    <div className="flex items-center justify-between">
+                                    <div className="flex items-center justify-between mt-2">
                                         <div>
                                             <p className="line-through text-xs text-gray-500">
                                                 R$ {formatCurrency(String(stock.normalPrice))}
                                             </p>
-                                            <p className="font-semibold text-xl text-text">
+                                            <p className="font-semibold text-base text-text">
                                                 R$ {formatCurrency(String(stock.customPrice))}
                                             </p>
                                         </div>
@@ -108,6 +109,6 @@ export function BestSellingProducts() {
                     </div>
                 </>
             )}
-        </div>
+        </section>
     );
 }
