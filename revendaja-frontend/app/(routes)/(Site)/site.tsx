@@ -10,8 +10,7 @@ import { Plans } from "./components/plans";
 
 export function Site() {
     return (
-        <>
-
+        <div className="flex flex-col items-center justify-center w-full">
             <Home />
             <Hero />
             <Beneficios />
@@ -20,6 +19,6 @@ export function Site() {
             <Faq />
             <CTA />
             <Footer />
-        </>
+        </div>
     )
 }

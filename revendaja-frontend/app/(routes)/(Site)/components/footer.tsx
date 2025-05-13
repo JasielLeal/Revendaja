@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
     return (
 
-        <>
+        <div className="w-full">
             {/* Footer */}
             <footer id="contato" className="bg-gray-900 py-12 border-t border-gray-800">
                 <div className="container mx-auto px-4 md:px-6">
@@ -163,6 +163,6 @@ export function Footer() {
                     </div>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }
