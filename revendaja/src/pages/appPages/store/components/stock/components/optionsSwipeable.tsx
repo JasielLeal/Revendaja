@@ -8,32 +8,39 @@ import { AddPromotionInProduct } from "../services/AddPromotionInProduct";
 import { RemovePromotionInProduct } from "../services/RemovePromotionInProduct";
 import { QuantityInput } from "@/components/QuantityInput";
 import { InsertStockInProduct } from "../services/InsertStockInProduct";
+import { SoftDelete } from "../services/softDelete";
+import { UpdateStockItemQuantity } from "../services/UpdateStockItemQuantity";
 
 interface OptionsSwipeableProps {
     id: string;
     productId: string
     discount?: number;
+    quantity?: number;
 }
 
-export function OptionsSwipeable({ id, discount, productId }: OptionsSwipeableProps) {
+export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsSwipeableProps) {
 
     const [onDelete, setOnDelete] = useState(false)
     const [onPriceTag, setOnPriceTag] = useState(false);
     const [price, setPrice] = useState("");
     const [addStockInProduct, setAddStockInProduct] = useState(false);
-    const [quantity, setQuantity] = useState(1);
+    const [modalQuantity, setModalQuantity] = useState(quantity);
 
     const queryClient = useQueryClient();
 
-    const { mutateAsync: DeleteStockItemFn } = useMutation({
-        mutationFn: DeleteStockItem,
+    const { mutateAsync: SoftDeleteFn } = useMutation({
+        mutationFn: SoftDelete,
         onSuccess: () => {
             queryClient.invalidateQueries(['GetStock'] as InvalidateQueryFilters);
+        },
+        onError: (error) => {
+
+            console.log(JSON.stringify(error, null, 4));
         }
     })
 
     async function DeleteProduct() {
-        DeleteStockItemFn(productId)
+        SoftDeleteFn(productId)
     }
 
     const { mutateAsync: AddPromotionInProductFn } = useMutation({
@@ -71,21 +78,24 @@ export function OptionsSwipeable({ id, discount, productId }: OptionsSwipeablePr
         return `R$ ${formattedValue}`;
     }
 
-    const { mutateAsync: InsertStockInProductFn, isPending } = useMutation({
-        mutationFn: InsertStockInProduct,
+    const { mutateAsync: UpdateStockItemQuantityFn, isPending } = useMutation({
+        mutationFn: UpdateStockItemQuantity,
         onSuccess: () => {
             queryClient.invalidateQueries(['GetStock'] as InvalidateQueryFilters);
+        },
+        onError: (error) => {
+            console.log(JSON.stringify(error, null, 4));
         }
     })
 
+
     async function onAddStockInProduct() {
-        const data = { quantity, productId: id }
-        await InsertStockInProductFn(data);
+
+        const data = { quantity: modalQuantity, productId: id }
+        await UpdateStockItemQuantityFn(data)
     }
 
     return (
-
-
 
         isPending ?
 
@@ -163,14 +173,14 @@ export function OptionsSwipeable({ id, discount, productId }: OptionsSwipeablePr
                 <CustomModal
                     visible={addStockInProduct}
                     onClose={() => setAddStockInProduct(false)}
-                    title="Adicionar estoque"
+                    title="Edite seu estoque"
                     confirmText="Adicionar"
                     onConfirm={() => onAddStockInProduct()}>
                     <>
                         <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-xs`}>
-                            Adicione a quantidade de produtos que você deseja adicionar ao estoque
+                            Adicione a quantidade de produtos que você deseja adicionar ao estoque. Você pode aumentar ou diminuir a quantidade de produtos.
                         </Text>
-                        <QuantityInput onQuantityChange={setQuantity} initialQuantity={quantity} />
+                        <QuantityInput onQuantityChange={setModalQuantity} initialQuantity={modalQuantity} />
                     </>
                 </CustomModal>
             </View>

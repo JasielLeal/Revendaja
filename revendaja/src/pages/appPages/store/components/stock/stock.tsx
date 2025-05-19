@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Text, TouchableOpacity, View, FlatList, ActivityIndicator, Platform } from "react-native";
-import { Store } from "../../store";
 import { Button } from "@/components/buttton";
 import { Input } from "@/components/input";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -12,7 +11,6 @@ import { RootStackParamList } from "@/types/navigation";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { useSuccess } from "@/context/successContext";
 
 export function Stock() {
     const pageSize = 10;
