@@ -21,6 +21,7 @@ import { PrismaCustomProductRepository } from "@/repositories/customProduct/Pris
 import { DisabledProductUseCase } from "./disabledProduct/DisabledProductUseCase";
 import { AddQuantityToProductInStockUseCase } from "./addQuantityToProductInStock/AddQuantityToProductInStockUseCase";
 import { PrismaRoleLimitsRepository } from "@/repositories/roleLimits/PrismaRoleLimits";
+import { UpdatedStockItemQuantityUseCase } from "./updatedStockItemQuantity/updatedStockItemQuantityUseCase";
 
 export class StockController {
   async AddProductToStoreStock(
@@ -350,14 +351,7 @@ export class StockController {
 
   async SearchDinamic(request: Request, response: Response): Promise<any> {
     try {
-      const {
-        search,
-        page,
-        pageSize,
-        subdomain,
-        orderBy,
-
-      } = request.query;
+      const { search, page, pageSize, subdomain, orderBy } = request.query;
 
       const prismaStoreRepository = new PrismaStoreRepository();
       const prismaStockRepository = new PrismaStockRepository();
@@ -459,6 +453,35 @@ export class StockController {
       });
 
       return response.status(200).send(stockUpdated);
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).send({ error: error.message });
+      }
+
+      return response.status(500).send({ error: error.message });
+    }
+  }
+
+  async UpdateStockItemQuantity(
+    request: Request,
+    response: Response
+  ): Promise<any> {
+    try {
+      const { stockId, quantity } = request.body;
+      const userId = request.user.id;
+
+      const prismaStockRepository = new PrismaStockRepository();
+      const prismaStoreRepository = new PrismaStoreRepository();
+
+      const updatedStockItemQuantityUseCase =
+        new UpdatedStockItemQuantityUseCase(
+          prismaStockRepository,
+          prismaStoreRepository
+        );
+
+      await updatedStockItemQuantityUseCase.execute(stockId, quantity, userId);
+
+      return response.status(200).send("Stock item updated successfully");
     } catch (error) {
       if (error instanceof AppError) {
         return response.status(error.statusCode).send({ error: error.message });

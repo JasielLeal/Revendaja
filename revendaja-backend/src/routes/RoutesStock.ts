@@ -62,3 +62,9 @@ RoutesStock.put(
   authenticated,
   stockConstroller.AddQuantityToProductInStock
 );
+
+RoutesStock.put(
+  "/UpdateStockItemQuantity",
+  authenticated,
+  stockConstroller.UpdateStockItemQuantity
+);

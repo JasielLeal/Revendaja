@@ -791,4 +791,32 @@ export class PrismaStockRepository implements StockRepository {
       data: updateData,
     });
   }
+
+  async updatedStockItemQuantity(stockId: string, quantity: number) {
+    await prisma.stock.update({
+      where: { id: stockId },
+      data: {
+        quantity: quantity,
+      },
+    });
+  }
+
+  async findStockItemById(stockId: string, storeId: string) {
+    const stockItem = await prisma.stock.findFirst({
+      where: {
+        id: stockId,
+        storeId: storeId,
+      },
+      include: {
+        product: true,
+        customProduct: true,
+      },
+    });
+
+    if (!stockItem) {
+      throw new AppError("Item de estoque não encontrado.", 404);
+    }
+
+    return stockItem;
+  }
 }

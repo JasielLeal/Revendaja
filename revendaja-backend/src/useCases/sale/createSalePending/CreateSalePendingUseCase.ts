@@ -95,7 +95,6 @@ export class CreateSalePendingUseCase {
 }
 
 const sendPushNotification = async (expoPushToken: string, message: string) => {
-  console.log("[FCM] Enviando notificação:", message);
 
   const body = {
     to: expoPushToken,
