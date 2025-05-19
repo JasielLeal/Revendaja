@@ -24,7 +24,7 @@
     --input: 240 5.9% 90%;
     --ring: 25 95% 53%;
     --radius: 0.5rem;
-    
+
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 222 47% 11%;
@@ -74,4 +74,37 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+.auth-gradient {
+  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+}
+
+.primary-gradient {
+  background: linear-gradient(135deg, #6a35f2 0%, #ff4d8d 100%);
+}
+
+.auth-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-input {
+  @apply h-12 rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.auth-button {
+  @apply inline-flex h-12 items-center justify-center rounded-lg px-4 py-2 text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+}
+
+.auth-button-primary {
+  @apply auth-button primary-gradient text-white hover:opacity-90;
+}
+
+.auth-button-outline {
+  @apply auth-button border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+}
+
+.auth-link {
+  @apply text-sm font-medium text-primary underline-offset-4 hover:underline;
 }
