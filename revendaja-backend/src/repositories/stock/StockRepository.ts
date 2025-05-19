@@ -124,4 +124,7 @@ export interface StockRepository {
       suggestedPrice: number;
     }>
   );
+
+  updatedStockItemQuantity(stockId: string, quantity: number);
+  findStockItemById(stockId: string, storeId: string);
 }
