@@ -204,7 +204,7 @@ export function SaleInitiator() {
 
     return (
         <>
-            <View className='bg-bg w-full h-screen'>
+            <View className='bg-bg w-full flex-1'>
                 <View className="px-5 flex justify-between flex-1">
                     <View>
                         <Text className='text-white font-semibold text-center mt-16 text-lg'>Iniciar venda</Text>
@@ -295,7 +295,7 @@ export function SaleInitiator() {
                             <Text className='text-white font-medium text-base'>Valor total</Text>
                             <Text className='text-white font-medium text-base'>{calculateTotal()}</Text>
                         </View>
-                        <Button name="Finalizar Venda" onPress={handleCreateSale} style={{ marginBottom: tabBarHeight }} />
+                        <Button name="Finalizar Venda" onPress={handleCreateSale} style={{ marginBottom: tabBarHeight+10 }}  />
                     </View>
                     <CustomModal
                         visible={addPriceProductModal}

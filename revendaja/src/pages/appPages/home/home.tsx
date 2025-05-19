@@ -38,7 +38,7 @@ export function Home() {
     const { unreadCount } = useContext(NotificationsContext);
     return (
         <>
-            <View className="bg-[#121212] h-screen w-full">
+            <View className="bg-[#121212] flex-1 w-full">
                 <View className="pt-16 px-7 bg-primaryPrimary pb-5 rounded-b-3xl ">
                     <View className="flex flex-row justify-between items-center w-full">
                         <View className="flex flex-row items-center gap-2">

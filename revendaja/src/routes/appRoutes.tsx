@@ -20,12 +20,12 @@ import { OurPlans } from "@/pages/appPages/profile/components/ourPlans";
 import { PedingSale } from "@/pages/appPages/store/components/pendingSale/pendingSale";
 import { PedingSaleDetails } from "@/pages/appPages/store/components/pendingSale/components/PendingSaleDetails";
 import { AddCustomProductToStock } from "@/pages/appPages/store/components/stock/components/addCustomProductToStock";
-import { NavigationContainer } from '@react-navigation/native';
 import { Store } from "@/pages/appPages/store/store";
 import { MyPlan } from "@/pages/appPages/profile/components/myPlan/MyPlan";
 import { Notifications } from "@/pages/appPages/notifications/notifications";
 import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
 import { CreateStore } from "@/pages/appPages/store/components/createStore/CreateStore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -34,169 +34,175 @@ const StorePages = createStackNavigator()
 function SubAppRoutes() {
 
     return (
-        <Tab.Navigator
-            initialRouteName="Home"
-            screenOptions={({ route }) => ({
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000'}} edges={['bottom']} >
+            <Tab.Navigator
+                initialRouteName="Home"
+                screenOptions={({ route }) => ({
+                    tabBarShowLabel: false, // 👈 ISSO REMOVE OS NOMES
+                    tabBarActiveTintColor: "#FF7100",
+                    tabBarStyle: {
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        elevation: 0,
+                        backgroundColor: '#171717',
+                        borderTopWidth: 0,
+                        height: 60
+                    }
+                })}
+            >
+                <Tab.Screen
+                    name="Home"
+                    component={Home}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color, size, focused }) => (
+                            <View
+                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                style={{
+                                    width: size + 20,
+                                    height: size + 20,
+                                    margin: focused ? -5 : 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: 15
+                                }}
+                            >
+                                <Icon
+                                    name={focused ? "home" : "home-outline"}
+                                    size={size}
+                                    color={focused ? '#fff' : color}
+                                />
+                            </View>
+                        ),
+                    }}
+                />
 
-                tabBarLabelStyle: {
-                    marginBottom: 10,
-                    color: "#fff"
-                },
-                tabBarActiveTintColor: "#FF7100",
-                tabBarStyle: {
-                    backgroundColor: '#202020',
-                    borderTopWidth: 1,
-                    borderColor: '#171717',
-                    elevation: 0,
-                    paddingBottom: 50,
-                    paddingTop: 10
-                }
-            })}
-        >
-            <Tab.Screen
-                name="Home"
-                component={Home}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <View
-                            className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
-                            style={{
-                                width: size + 20,
-                                height: size + 20,
-                                margin: focused ? -5 : 0,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Icon
-                                name={focused ? "home" : "home-outline"}
-                                size={size}
-                                color={focused ? '#fff' : color}
-                            />
-                        </View>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Extract"
-                component={Extract}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <View
-                            className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
-                            style={{
-                                width: size + 20,
-                                height: size + 20,
-                                margin: focused ? -5 : 0,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Icon
-                                name={focused ? "stats-chart" : "stats-chart-outline"}
-                                size={size}
-                                color={focused ? '#fff' : color}
-                            />
-                        </View>
-                    ),
-                }}
-            />
+                <Tab.Screen
+                    name="Extract"
+                    component={Extract}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color, size, focused }) => (
+                            <View
+                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                style={{
+                                    width: size + 20,
+                                    height: size + 20,
+                                    margin: focused ? -5 : 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: 15
+                                }}
+                            >
+                                <Icon
+                                    name={focused ? "stats-chart" : "stats-chart-outline"}
+                                    size={size}
+                                    color={focused ? '#fff' : color}
+                                />
+                            </View>
+                        ),
+                    }}
+                />
 
-            <Tab.Screen
-                name="saleInitiator"
-                component={SaleInitiator}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <View
-                            className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
-                            style={{
-                                width: size + 20,
-                                height: size + 20,
-                                margin: focused ? -5 : 0,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Icon
-                                name={focused ? "add" : "add-outline"}
-                                size={size}
-                                color={focused ? '#fff' : color}
-                            />
-                        </View>
-                    ),
-                }}
-            />
+                <Tab.Screen
+                    name="saleInitiator"
+                    component={SaleInitiator}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color, size, focused }) => (
+                            <View
+                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                style={{
+                                    width: size + 20,
+                                    height: size + 20,
+                                    margin: focused ? -5 : 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: 15
+                                }}
+                            >
+                                <Icon
+                                    name={focused ? "add" : "add-outline"}
+                                    size={size}
+                                    color={focused ? '#fff' : color}
+                                />
+                            </View>
+                        ),
+                    }}
+                />
 
-            <Tab.Screen
-                name="Store"
-                component={StoreRoutes}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <View
-                            className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
-                            style={{
-                                width: size + 20,
-                                height: size + 20,
-                                margin: focused ? -5 : 0,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Icon
-                                name={focused ? "bag-check" : "bag-check-outline"}
-                                size={size}
-                                color={focused ? '#fff' : color}
-                            />
-                        </View>
-                    ),
-                }}
-            />
+                <Tab.Screen
+                    name="Store"
+                    component={StoreRoutes}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color, size, focused }) => (
+                            <View
+                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                style={{
+                                    width: size + 20,
+                                    height: size + 20,
+                                    margin: focused ? -5 : 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: 15
+                                }}
+                            >
+                                <Icon
+                                    name={focused ? "bag-check" : "bag-check-outline"}
+                                    size={size}
+                                    color={focused ? '#fff' : color}
+                                />
+                            </View>
+                        ),
+                    }}
+                />
 
-            <Tab.Screen
-                name="Profile"
-                component={Profile}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <View
-                            className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
-                            style={{
-                                width: size + 20,
-                                height: size + 20,
-                                margin: focused ? -5 : 0,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Icon
-                                name={focused ? "shield-checkmark" : "shield-checkmark-outline"}
-                                size={size}
-                                color={focused ? '#fff' : color}
-                            />
-                        </View>
-                    ),
-                }}
-            />
-        </Tab.Navigator>
+                <Tab.Screen
+                    name="Profile"
+                    component={Profile}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color, size, focused }) => (
+                            <View
+                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                style={{
+                                    width: size + 20,
+                                    height: size + 20,
+                                    margin: focused ? -5 : 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: 15
+                                }}
+                            >
+                                <Icon
+                                    name={focused ? "shield-checkmark" : "shield-checkmark-outline"}
+                                    size={size}
+                                    color={focused ? '#fff' : color}
+                                />
+                            </View>
+                        ),
+                    }}
+                />
+            </Tab.Navigator>
+        </SafeAreaView>
     );
 }
 
 export function StoreRoutes() {
     return (
-        
-            <Store>
-                <StorePages.Navigator>
-                    <StorePages.Screen name="Overview" component={Overview} options={{ headerShown: false }} />
-                    <StorePages.Screen name="Stock" component={Stock} options={{ headerShown: false }} />
-                    <StorePages.Screen name="Report" component={Report} options={{ headerShown: false }} />
-                    <StorePages.Screen name="PedingSale" component={PedingSale} options={{ headerShown: false }} />
-                </StorePages.Navigator>
-            </Store>
-     
+
+        <Store>
+            <StorePages.Navigator>
+                <StorePages.Screen name="Overview" component={Overview} options={{ headerShown: false }} />
+                <StorePages.Screen name="Stock" component={Stock} options={{ headerShown: false }} />
+                <StorePages.Screen name="Report" component={Report} options={{ headerShown: false }} />
+                <StorePages.Screen name="PedingSale" component={PedingSale} options={{ headerShown: false }} />
+            </StorePages.Navigator>
+        </Store>
+
 
     )
 }

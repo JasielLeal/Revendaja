@@ -4,20 +4,21 @@ import { InvalidateQueryFilters, useMutation, useQueryClient } from '@tanstack/r
 import { format } from 'date-fns';
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
-import { DeleteSale } from './services/deleteSale';
 import { useState } from 'react';
 import CustomModal from '@/components/modal';
 import React from 'react';
+import { SoftDelete } from './services/softDelete';
 
 export function SaleDetails({ route }: any) {
     const { sale } = route.params;
+    console.log(sale)
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false)
 
     const queryClient = useQueryClient();
 
-    const { mutateAsync: DeleteSaleFn } = useMutation({
-        mutationFn: DeleteSale,
+    const { mutateAsync: SoftDeleteFn } = useMutation({
+        mutationFn: SoftDelete,
         onSuccess: () => {
             queryClient.invalidateQueries(['GetSales'] as InvalidateQueryFilters);
             queryClient.invalidateQueries(['CalculateMonthlyBalance'] as InvalidateQueryFilters);
@@ -32,7 +33,7 @@ export function SaleDetails({ route }: any) {
     })
 
     async function onSub() {
-        await DeleteSaleFn(sale.id)
+        await SoftDeleteFn(sale.id)
         setModalVisible(false)
     }
 
