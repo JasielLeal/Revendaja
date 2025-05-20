@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Input } from '@/components/input';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { GetGlobalProducts } from '../services/getGlobalProducts';  // Importar sua função de requisição
-import { DetailsProduct } from '../components/detailsProduct';  // Importando o componente de detalhes do produto
+import { GetGlobalProducts } from '../services/getGlobalProducts'; 
 import { RootStackParamList } from '@/types/navigation';
 import { Platform } from 'react-native';
-import { useSuccess } from '@/context/successContext';
-import { ContinousBaseGesture } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
-
 
 export function AddProductToStock() {
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -102,7 +98,7 @@ export function AddProductToStock() {
                             :
 
                             <>
-                                <TouchableOpacity className="mt-5 flex flex-row items-center gap-5" onPress={() => openDetails(item)}>
+                                <TouchableOpacity className="mt-5 flex flex-row items-center gap-5" onPress={() => navigate.navigate("DetailsProduct", item)}>
                                     <Image
                                         source={item.imgUrl ? { uri: item.imgUrl } : require("@/assets/kaiak.jpg")}
                                         className="w-[75px] h-[75px] rounded-xl"
@@ -169,12 +165,6 @@ export function AddProductToStock() {
                         return null;
                     }
                 }}
-            />
-
-            <DetailsProduct
-                open={detailsVisible}
-                onClose={closeDetails}
-                product={selectedProduct}  // Passa o produto para o DetailsProduct
             />
         </View>
     );
