@@ -18,10 +18,8 @@ export default function Search() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get('query');
-    // Ordenação dos produtos
-    const pageSize = 10; // Número de itens por página
+    const pageSize = 10; 
 
-    // Configuração do useInfiniteQuery
     const {
         data,
         fetchNextPage,
@@ -30,7 +28,7 @@ export default function Search() {
     } = useInfiniteQuery({
         queryKey: ['SearchDinamic', query, selectedOrder],
         queryFn: ({ pageParam = 0 }) =>
-            SearchDinamic({ search: query, page: pageParam + 1, pageSize, subdomain, orderBy: selectedOrder }),
+            SearchDinamic({ search: query, page: pageParam + 1, pageSize, subdomain,  orderBy: selectedOrder }),
         getNextPageParam: (lastPage, allPages) => {
             const currentPage = allPages.length;
 
@@ -40,7 +38,7 @@ export default function Search() {
                 return undefined; // Para a paginação quando a última página for atingida
             }
         }, // Define a próxima página com base na resposta do servidor
-        enabled: !!query,
+        enabled: !!query  && !!subdomain,
         initialPageParam: 0 // Só executa se "query" não estiver vazio
     });
 
@@ -85,7 +83,7 @@ export default function Search() {
     //fazer pagina de produtos com desconto.
 
     return (
-        <div className="px-4 pt-2 bg-[#FEFEFE] h-screen">
+        <div className="px-4 pt-2 bg-[#FEFEFE] flex-1">
             <p className="font-light text-text mb-4 text-sm">
                 Você buscou por <span className="font-bold">{query}</span>
             </p>
