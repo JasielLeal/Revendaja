@@ -26,6 +26,7 @@ import { Notifications } from "@/pages/appPages/notifications/notifications";
 import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
 import { CreateStore } from "@/pages/appPages/store/components/createStore/CreateStore";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DetailsProduct2 } from "@/pages/appPages/store/components/stock/components/detailsProduct";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -225,6 +226,7 @@ export default function AppRoutes() {
             <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
             <Stack.Screen name="updateCard" component={UpdateCard} options={{ headerShown: false }} />
             <Stack.Screen name="CreateStore" component={CreateStore} options={{ headerShown: false }} />
+            <Stack.Screen name="DetailsProduct" component={DetailsProduct2} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

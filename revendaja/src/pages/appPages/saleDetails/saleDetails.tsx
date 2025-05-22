@@ -8,17 +8,17 @@ import { useState } from 'react';
 import CustomModal from '@/components/modal';
 import React from 'react';
 import { SoftDelete } from './services/softDelete';
+import { DeleteSale } from './services/deleteSale';
 
 export function SaleDetails({ route }: any) {
     const { sale } = route.params;
-    console.log(sale)
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false)
 
     const queryClient = useQueryClient();
 
-    const { mutateAsync: SoftDeleteFn } = useMutation({
-        mutationFn: SoftDelete,
+    const { mutateAsync: DeleteSaleFn } = useMutation({
+        mutationFn: DeleteSale,
         onSuccess: () => {
             queryClient.invalidateQueries(['GetSales'] as InvalidateQueryFilters);
             queryClient.invalidateQueries(['CalculateMonthlyBalance'] as InvalidateQueryFilters);
@@ -33,7 +33,7 @@ export function SaleDetails({ route }: any) {
     })
 
     async function onSub() {
-        await SoftDeleteFn(sale.id)
+        await DeleteSaleFn(sale.id)
         setModalVisible(false)
     }
 

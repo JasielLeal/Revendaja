@@ -30,5 +30,6 @@ export type RootStackParamList = {
     subscriptionId: string;
   };
   CreateStore: undefined;
+  DetailsProduct: { product };
   // Adicione outras rotas aqui se necessário
 };
