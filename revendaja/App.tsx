@@ -33,15 +33,12 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (Platform.OS === "ios") {
-      Notifications.requestPermissionsAsync();
-    }
+    Notifications.requestPermissionsAsync();
   }, []);
 
   useEffect(() => {
     async function prepare() {
       try {
-        // Mantenha a splash screen visível enquanto carrega os recursos
         await SplashScreen.preventAutoHideAsync();
         await fetchPublishableKey();
       } catch (e) {

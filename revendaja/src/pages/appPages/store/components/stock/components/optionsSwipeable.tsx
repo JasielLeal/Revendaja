@@ -87,10 +87,7 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
             console.log(JSON.stringify(error, null, 4));
         }
     })
-
-
     async function onAddStockInProduct() {
-
         const data = { quantity: modalQuantity, productId: id }
         await UpdateStockItemQuantityFn(data)
     }

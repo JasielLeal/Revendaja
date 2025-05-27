@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// Ajuste caso seja necessário
+
 import { ActivityIndicator, Alert, View } from "react-native";
 import { Session } from "@/pages/authPages/login/services/Session";
 import { jwtDecode } from "jwt-decode";
@@ -11,7 +11,7 @@ import { RootStackParamList } from "@/types/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetPlan } from "@/pages/appPages/profile/services/GetPlan";
 
-interface AuthContextData {
+export interface AuthContextData {
   signed: boolean;
   user: User | null;
   singInFc(data: FieldValues): Promise<void>;
