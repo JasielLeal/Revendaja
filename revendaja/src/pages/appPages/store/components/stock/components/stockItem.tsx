@@ -23,7 +23,7 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
 
     return (
         <Swipeable renderRightActions={() => <OptionsSwipeable id={id} discount={discount} productId={productId} quantity={quantity}  />} overshootRight={false} rightThreshold={100}>
-            <View className="mt-5 flex flex-row items-center gap-5 bg-bg">
+            <View className="mt-5 flex flex-row items-center gap-5 bg-background">
                 <Image
                     source={imageUrl ? { uri: imageUrl } : require("@/assets/kaiak.jpg")}
                     className="w-[75px] h-[75px] rounded-xl"

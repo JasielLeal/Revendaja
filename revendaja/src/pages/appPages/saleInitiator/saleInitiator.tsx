@@ -204,7 +204,7 @@ export function SaleInitiator() {
 
     return (
         <>
-            <View className='bg-bg w-full flex-1'>
+            <View className='bg-background w-full flex-1'>
                 <View className="px-5 flex justify-between flex-1">
                     <View>
                         <Text className='text-white font-semibold text-center mt-16 text-lg'>Iniciar venda</Text>
@@ -308,7 +308,7 @@ export function SaleInitiator() {
                             Adicione o preço do produto informado para prosseguir com a venda.
                         </Text>
                         <TextInput
-                            className="bg-bg text-white p-3 rounded-xl mt-5"
+                            className="bg-background text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"

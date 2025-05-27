@@ -53,7 +53,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                         </TouchableOpacity>
                         {onConfirm && (
                             <TouchableOpacity
-                                className="flex-1 px-4 py-3 bg-primaryPrimary rounded-md"
+                                className="flex-1 px-4 py-3 bg-primary rounded-md"
                                 onPress={handleConfirm}
                             >
                                 <Text className={Platform.OS == "ios" ? "text-center text-white" : "text-center text-sm text-white"}>{confirmText}</Text>

@@ -18,7 +18,7 @@ const SaleItem = memo(({ sale, onPress }: SaleItemProps) => {
         <TouchableOpacity onPress={onPress}>
             <View className="flex flex-row mb-5 w-full justify-between items-center">
                 <View className="flex flex-row items-center">
-                    <Text className="border border-primary p-2 rounded-xl bg-primaryPrimary">
+                    <Text className="border border-primary p-2 rounded-xl bg-primary">
                         <Icon name='bag-check-outline' size={30} color={'#fff'} />
                     </Text>
                     <View className="ml-3">

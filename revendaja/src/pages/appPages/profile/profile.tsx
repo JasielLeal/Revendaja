@@ -46,7 +46,7 @@ export function Profile() {
 
     return (
         <>
-            <View className="flex-1 bg-bg px-5">
+            <View className="flex-1 bg-background px-5">
                 <View>
                     <View className='flex flex-row items-center justify-center mt-16 mb-5'>
                         <Text className='text-white font-semibold text-center'> Perfil</Text>

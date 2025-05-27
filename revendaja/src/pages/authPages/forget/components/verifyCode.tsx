@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 export function VerifyCode() {
     return (
         <>
-            <View className="bg-bg w-full h-screen px-5">
+            <View className="bg-background w-full h-screen px-5">
                 <View className="flex justify-center items-center h-screen">
                     <Image source={logo} alt="logo do site" className="w-[185px] h-[35px]" />
 
@@ -25,7 +25,7 @@ export function VerifyCode() {
                         keyboardType="number-pad"
                     />
 
-                    <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5 w-full">
+                    <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5 w-full">
                         <Text className="text-center font-medium text-white">
                             Entrar
                         </Text>

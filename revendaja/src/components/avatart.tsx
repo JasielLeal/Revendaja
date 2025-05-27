@@ -34,13 +34,13 @@ export function Avatar() {
                     {
                         Platform.OS == 'ios' ?
 
-                            <View className="bg-secondarySecondary p-4 rounded-full">
+                            <View className="bg-secondary p-4 rounded-full">
                                 <Text className="text-white">
                                     {initials}
                                 </Text>
                             </View>
                             :
-                            <View className="bg-secondarySecondary py-[16px] px-[18px] rounded-full">
+                            <View className="bg-secondary py-[16px] px-[18px] rounded-full">
                                 <Text className="text-white">
                                     {initials}
                                 </Text>

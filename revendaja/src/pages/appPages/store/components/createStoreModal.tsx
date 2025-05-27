@@ -70,7 +70,7 @@ export default function CreateStoreModal({ open }: CreateStoreModalProps) {
                 backgroundColor: "#fff",
             }}
         >
-            <BottomSheetView className="flex-1 px-5 bg-bg w-full">
+            <BottomSheetView className="flex-1 px-5 bg-background w-full">
                 <View className="w-full h-screen-safe">
                     <Text className="text-2xl font-medium text-white mb-5 text-center mt-10">
                         Crie sua loja virtual

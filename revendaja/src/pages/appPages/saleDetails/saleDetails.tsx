@@ -38,7 +38,7 @@ export function SaleDetails({ route }: any) {
     }
 
     return (
-        <View className='bg-bg w-full flex-1'>
+        <View className='bg-background w-full flex-1'>
             <View className='px-5 pt-16'>
                 <View className='flex flex-row justify-between'>
                     <TouchableOpacity onPress={() => navigation.goBack()}>

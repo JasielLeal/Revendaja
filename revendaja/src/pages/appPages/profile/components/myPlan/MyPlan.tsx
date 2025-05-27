@@ -71,7 +71,7 @@ export function MyPlan() {
 
                 <>
 
-                    <View className="flex-1 bg-bg px-5">
+                    <View className="flex-1 bg-background px-5">
                         <View className="flex flex-row items-center mt-16 mb-5 justify-between">
                             <TouchableOpacity onPress={() => navigate.goBack()}>
                                 <Icon name="chevron-back" color={"#fff"} size={20} />

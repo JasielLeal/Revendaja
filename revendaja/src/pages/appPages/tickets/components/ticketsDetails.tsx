@@ -39,7 +39,7 @@ export function TicketsDetails({ route }: any) {
 
     return (
         <>
-            <View className='bg-bg w-full h-screen'>
+            <View className='bg-background w-full h-screen'>
                 <View className='px-5 pt-16'>
                     <View>
                         <View className='flex flex-row justify-between'>

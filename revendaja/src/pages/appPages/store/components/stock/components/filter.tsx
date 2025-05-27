@@ -67,7 +67,7 @@ export function Filter({ open, onSelectOption, onClose }: FilterModalProps) {
                     {options.map(({ label, value }) => (
                         <TouchableOpacity
                             key={value}
-                            className={`py-3 px-4 rounded-lg ${selectedOption === value ? "bg-primaryPrimary" : "bg-bg"
+                            className={`py-3 px-4 rounded-lg ${selectedOption === value ? "bg-primary" : "bg-background"
                                 }`}
                             onPress={() => handleOptionSelect(value)}
                         >

@@ -29,7 +29,7 @@ export default function Select({ options, label, onSelect }: CustomSelectProps) 
       {/* Campo de Seleção */}
       <TouchableOpacity
         onPress={modalOpen}
-        className="bg-bg rounded-xl py-2 px-4 w-[150px]"
+        className="bg-background rounded-xl py-2 px-4 w-[150px]"
       >
         <Text className="text-white text-center text-sm">{selectedValue || label}</Text>
       </TouchableOpacity>

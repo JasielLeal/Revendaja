@@ -97,14 +97,14 @@ export function AddCustomProductToStock() {
     }
 
     if (isPending) {
-        return <View className="flex-1 bg-bg flex justify-center">
+        return <View className="flex-1 bg-background flex justify-center">
             <ActivityIndicator size="large" color={"#FF7100"} />
         </View>
     }
 
     return (
 
-        <View className="bg-bg flex-1 w-full px-5 justify-between" >
+        <View className="bg-background flex-1 w-full px-5 justify-between" >
             <View>
                 <View className='flex flex-row justify-between mt-16'>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -178,7 +178,7 @@ export function AddCustomProductToStock() {
                                 <Text className={Platform.OS == 'ios' ? "text-white font-medium mb-2 text-lg" : "text-white font-medium mb-2 mt-2 text-sm"}>
                                     Preço Original
                                 </Text>
-                                <TouchableOpacity className="bg-primaryPrimary px-[9] py-1 rounded-full">
+                                <TouchableOpacity className="bg-primary px-[9] py-1 rounded-full">
                                     <Text className="text-white text-sm">
                                         ?
                                     </Text>
@@ -206,7 +206,7 @@ export function AddCustomProductToStock() {
                                 <Text className={Platform.OS == 'ios' ? "text-white font-medium mb-2 text-lg" : "text-white font-medium mb-2 mt-2 text-sm"}>
                                     Preço Atual
                                 </Text>
-                                <TouchableOpacity className="bg-primaryPrimary px-[9] py-1 rounded-full">
+                                <TouchableOpacity className="bg-primary px-[9] py-1 rounded-full">
                                     <Text className="text-white text-sm">
                                         ?
                                     </Text>

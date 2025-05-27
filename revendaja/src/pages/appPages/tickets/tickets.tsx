@@ -68,7 +68,7 @@ export function Tickets() {
     }
 
     return (
-        <View className="bg-bg flex-1 w-full px-5">
+        <View className="bg-background flex-1 w-full px-5">
             <View>
                 <View className="flex flex-row items-center mt-16 mb-5 justify-between">
                     <TouchableOpacity onPress={() => navigate.goBack()}>
@@ -122,7 +122,7 @@ export function Tickets() {
                                         </View>
                                         <View className="mt-5 flex flex-row justify-between items-center relative">
                                             <Text
-                                                className="bg-bg p-2 rounded-xl text-white w-5/6"
+                                                className="bg-background p-2 rounded-xl text-white w-5/6"
                                                 numberOfLines={1}
                                                 ellipsizeMode="tail"
                                             >
@@ -168,7 +168,7 @@ export function Tickets() {
                                         </View>
                                         <View className="mt-5 flex flex-row justify-between items-center relative">
                                             <Text
-                                                className="bg-bg p-2 rounded-xl text-white w-5/6 text-sm"
+                                                className="bg-background p-2 rounded-xl text-white w-5/6 text-sm"
                                                 numberOfLines={1}
                                                 ellipsizeMode="tail"
                                             >

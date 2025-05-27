@@ -15,7 +15,6 @@ import { AddBankSlip } from "@/pages/appPages/tickets/components/addBankSlip";
 import { TicketsDetails } from "@/pages/appPages/tickets/components/ticketsDetails";
 import { Profile } from "@/pages/appPages/profile/profile";
 import { AddProductToStock } from "@/pages/appPages/store/components/stock/components/addProductToStock";
-import { DetailsProductStock } from "@/pages/appPages/store/components/stock/components/detailsProductStock";
 import { OurPlans } from "@/pages/appPages/profile/components/ourPlans";
 import { PedingSale } from "@/pages/appPages/store/components/pendingSale/pendingSale";
 import { PedingSaleDetails } from "@/pages/appPages/store/components/pendingSale/components/PendingSaleDetails";
@@ -60,7 +59,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -87,7 +86,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -114,7 +113,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -141,7 +140,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -168,7 +167,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -219,7 +218,6 @@ export default function AppRoutes() {
             <Stack.Screen name="AddBankSlip" component={AddBankSlip} options={{ headerShown: false }} />
             <Stack.Screen name="TicketsDetails" component={TicketsDetails} options={{ headerShown: false }} />
             <Stack.Screen name="AddProductToStock" component={AddProductToStock} options={{ headerShown: false }} />
-            <Stack.Screen name="DetailsProductStock" component={DetailsProductStock} options={{ headerShown: false }} />
             <Stack.Screen name="OurPlans" component={OurPlans} options={{ headerShown: false }} />
             <Stack.Screen name="AddCustomProduct" component={AddCustomProductToStock} options={{ headerShown: false }} />
             <Stack.Screen name="MyPlan" component={MyPlan} options={{ headerShown: false }} />

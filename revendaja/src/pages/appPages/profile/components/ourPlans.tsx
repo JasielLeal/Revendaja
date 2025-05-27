@@ -81,7 +81,7 @@ export function OurPlans() {
 
                 :
 
-                <View className="flex-1 bg-bg px-5">
+                <View className="flex-1 bg-background px-5">
                     {/* Header */}
                     <View className="flex flex-row justify-between pt-16" >
                         <TouchableOpacity onPress={() => navigation.goBack()}>

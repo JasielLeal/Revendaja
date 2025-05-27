@@ -23,7 +23,7 @@ export function UpdateCard() {
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     return (
-        <View className="bg-bg flex-1 px-5">
+        <View className="bg-background flex-1 px-5">
             <View className="flex flex-row items-center mt-16 mb-5 justify-between">
                 <TouchableOpacity onPress={() => navigate.goBack()}>
                     <Icon name="chevron-back" color={"#fff"} size={20} />
@@ -59,7 +59,7 @@ export function UpdateCard() {
             <TouchableOpacity
                 onPress={handleUpdateCard}
                 disabled={!cardComplete}
-                className={`rounded-xl py-4 mt-4 ${cardComplete ? 'bg-primaryPrimary' : 'bg-gray-400'}`}
+                className={`rounded-xl py-4 mt-4 ${cardComplete ? 'bg-primary' : 'bg-gray-400'}`}
             >
                 <Text className="text-center text-white font-semibold text-base">
                     Atualizar cartão

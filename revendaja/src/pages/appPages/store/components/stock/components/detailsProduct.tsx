@@ -116,7 +116,7 @@ export function DetailsProduct2() {
                     name="customPrice"
                     render={({ field: { onChange, value } }) => (
                         <TextInput
-                            className="bg-bg text-white p-3 rounded-xl mt-5"
+                            className="bg-background text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"
