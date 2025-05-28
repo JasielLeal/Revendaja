@@ -44,7 +44,7 @@ export function VerifyCode() {
 
     return (
 
-        <View className="bg-bg w-full flex-1 px-5">
+        <View className="bg-background w-full flex-1 px-5">
             <View className="flex justify-center items-center h-screen">
                 <Image source={logo} alt="logo do site" className="w-[150px] h-[35px]" />
 
@@ -73,7 +73,7 @@ export function VerifyCode() {
                     )}
                 />
 
-                <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5 w-full" onPress={handleSubmit(onSub)}>
+                <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5 w-full" onPress={handleSubmit(onSub)}>
                     <Text className="text-center font-medium text-white">
                         Enviar
                     </Text>
@@ -81,10 +81,10 @@ export function VerifyCode() {
 
                 <View>
                     <TouchableOpacity className="flex items-end my-5 justify-center flex-row gap-2">
-                        <Text className="text-center text-primaryPrimary font-medium">
+                        <Text className="text-center text-primary font-medium">
                             Enviar novamente o codigo
                         </Text>
-                        <Text className="text-center text-primaryPrimary font-medium">
+                        <Text className="text-center text-primary font-medium">
                             <Icon name="reload" size={15} />
                         </Text>
                     </TouchableOpacity>

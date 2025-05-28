@@ -169,8 +169,8 @@ export function PedingSaleDetails({ route }: any) {
 
     return (
       
-            <View className='bg-bg flex-1'>
-                <View className={Platform.OS === 'ios' ? `mb-7 px-5 pt-16 flex justify-between ` : `px-5 pt-16 flex justify-between flex-1 mb-${insets.bottom + 5} bg-bg`} >
+            <View className='bg-background flex-1'>
+                <View className={Platform.OS === 'ios' ? `mb-7 px-5 pt-16 flex justify-between ` : `px-5 pt-16 flex justify-between flex-1 mb-${insets.bottom + 5} bg-background`} >
                     <View>
                         <View className='flex flex-row justify-between'>
                             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -211,7 +211,7 @@ export function PedingSaleDetails({ route }: any) {
                                                 </Text>
                                             </View>
                                             <View className='flex flex-row items-center'>
-                                                <Text className="text-primaryPrimary font-semibold">Copiar</Text>
+                                                <Text className="text-primary font-semibold">Copiar</Text>
                                             </View>
                                         </View>
 
@@ -237,7 +237,7 @@ export function PedingSaleDetails({ route }: any) {
                                                 </Text>
                                             </View>
                                             <View className='flex flex-row items-center'>
-                                                <Text className="text-primaryPrimary font-semibold text-sm">Copiar</Text>
+                                                <Text className="text-primary font-semibold text-sm">Copiar</Text>
                                             </View>
                                         </View>
 
@@ -254,7 +254,7 @@ export function PedingSaleDetails({ route }: any) {
                                             <Text className="text-white font-semibold">Produtos</Text>
                                         </View>
                                         <View className='flex flex-row items-center'>
-                                            <Text className="text-primaryPrimary font-semibold">Copiar</Text>
+                                            <Text className="text-primary font-semibold">Copiar</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -265,7 +265,7 @@ export function PedingSaleDetails({ route }: any) {
                                             <Text className="text-white font-semibold text-sm">Produtos</Text>
                                         </View>
                                         <View className='flex flex-row items-center'>
-                                            <Text className="text-primaryPrimary font-semibold text-sm">Copiar</Text>
+                                            <Text className="text-primary font-semibold text-sm">Copiar</Text>
                                         </View>
                                     </View>
                                 </View>

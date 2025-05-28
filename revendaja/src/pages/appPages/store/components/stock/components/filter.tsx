@@ -60,14 +60,14 @@ export function Filter({ open, onSelectOption, onClose }: FilterModalProps) {
                         Filtros
                     </Text>
                     <TouchableOpacity onPress={handleClose}>
-                        <Text className="text-primaryPrimary">Fechar</Text>
+                        <Text className="text-primary">Fechar</Text>
                     </TouchableOpacity>
                 </View>
                 <View className="space-y-4 flex gap-3">
                     {options.map(({ label, value }) => (
                         <TouchableOpacity
                             key={value}
-                            className={`py-3 px-4 rounded-lg ${selectedOption === value ? "bg-primaryPrimary" : "bg-bg"
+                            className={`py-3 px-4 rounded-lg ${selectedOption === value ? "bg-primary" : "bg-background"
                                 }`}
                             onPress={() => handleOptionSelect(value)}
                         >

@@ -110,10 +110,10 @@ export function FinancialOverview() {
                 value={searchTerm} // Valor controlado pelo estado
                 onChangeText={(text) => setSearchTerm(text)}
             />
-            <View className="bg-forenground p-4 rounded-xl mt-5">
+            <View className="dark:bg-forenground bg-input p-4 rounded-xl mt-5">
                 <View className="flex flex-row items-center justify-between">
                     <View>
-                        <Text className="text-white text-sm">Saldo</Text>
+                        <Text className="dark:text-white text-sm">Saldo</Text>
                         <MonthAmount month={month} />
                     </View>
                     <Select
@@ -131,8 +131,8 @@ export function FinancialOverview() {
                 renderItem={({ item }) => (
                     <View key={item.id}>
                         <View className="flex flex-row items-center justify-between border-b border-b-[#ffffff38] pb-1 mt-5">
-                            <Text className=" text-sm capitalize text-white">{formatDate(item.day)}</Text>
-                            <Text className=" text-sm text-white font-semibold">Saldo do dia {formatCurrency(String(item.totalValue))}</Text>
+                            <Text className=" text-sm capitalize dark:text-white">{formatDate(item.day)}</Text>
+                            <Text className=" text-sm dark:text-white font-semibold">Saldo do dia {formatCurrency(String(item.totalValue))}</Text>
                         </View>
                         <View className="mt-5">
                             {item.sales.map((sale: any) => {

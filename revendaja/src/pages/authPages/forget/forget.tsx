@@ -42,7 +42,7 @@ export function Forget() {
 
     return (
         <>
-            <View className="bg-bg w-full flex-1 px-5 items-center justify-center">
+            <View className="bg-background w-full flex-1 px-5 items-center justify-center">
                 <Image source={logo} alt="logo do site" className="w-[150px] h-[35px]" />
                 <Text className="text-white mb-10">Por favor, insira seu e-mail registrado abaixo</Text>
                 <View className="w-full">
@@ -68,13 +68,13 @@ export function Forget() {
 
                     {
                         isPending ?
-                            <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)} disabled>
+                            <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)} disabled>
                                 <ActivityIndicator size={17} color={"#fff"} />
                             </TouchableOpacity>
 
                             :
 
-                            <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)}>
+                            <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)}>
                                 <Text className="text-center font-medium text-white">
                                     Enviar
                                 </Text>
@@ -88,7 +88,7 @@ export function Forget() {
                             Quer voltar ao login?
                         </Text>
                         <TouchableOpacity className="flex flex-row items-center gap-2" onPress={() => navigate.navigate('login')}>
-                            <Text className="text-end text-primaryPrimary font-medium">
+                            <Text className="text-end text-primary font-medium">
                                 Clique aqui
                             </Text>
                         </TouchableOpacity>

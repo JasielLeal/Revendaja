@@ -82,13 +82,13 @@ export function SelectPaymentMethod({
           <View className="w-full h-screen-safe">
             <View className="mb-10 flex gap-3">
               <TouchableOpacity onPress={() => handleSelect("Pix")}>
-                <Text className="text-white mb-2 bg-bg p-4 rounded-xl">Pix</Text>
+                <Text className="text-white mb-2 bg-background p-4 rounded-xl">Pix</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleSelect("Cartão")}>
-                <Text className="text-white mb-2 bg-bg p-4 rounded-xl">Cartão</Text>
+                <Text className="text-white mb-2 bg-background p-4 rounded-xl">Cartão</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleSelect("Dinheiro")}>
-                <Text className="text-white mb-2 bg-bg p-4 rounded-xl">Dinheiro</Text>
+                <Text className="text-white mb-2 bg-background p-4 rounded-xl">Dinheiro</Text>
               </TouchableOpacity>
             </View>
           </View>

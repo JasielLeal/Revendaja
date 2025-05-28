@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@/types/navigation";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
+import { useColorScheme } from "nativewind";
 
 interface Sale {
     customer: string;
@@ -25,6 +26,7 @@ export function RecentSales() {
     const handlePress = (recent: Sale) => {
         navigate.navigate('SaleDetails', { sale: recent });
     }
+    const { colorScheme } = useColorScheme()
 
     return (
         <>
@@ -32,22 +34,22 @@ export function RecentSales() {
                 {
                     Platform.OS == 'ios' ?
                         <>
-                            <Text className="text-white font-medium ">
+                            <Text className="dark:text-white font-medium ">
                                 Vendas Recentes
                             </Text>
                             <TouchableOpacity onPress={() => navigate.navigate("Extract")}>
-                                <Text className="text-primaryPrimary font-medium">
+                                <Text className="text-primary font-medium">
                                     Ver todas
                                 </Text>
                             </TouchableOpacity>
                         </>
                         :
                         <>
-                            <Text className="text-white font-medium text-sm">
+                            <Text className="dark:text-white font-medium text-sm">
                                 Vendas Recentes
                             </Text>
                             <TouchableOpacity onPress={() => navigate.navigate("Extract")}>
-                                <Text className="text-primaryPrimary font-medium text-sm">
+                                <Text className="text-primary font-medium text-sm">
                                     Ver todas
                                 </Text>
                             </TouchableOpacity>
@@ -59,11 +61,11 @@ export function RecentSales() {
                     <TouchableOpacity key={index} className="mb-5" onPress={() => handlePress(sale)}>
                         <View className="flex flex-row justify-between items-start mb-4">
                             <View className="flex flex-row gap-4">
-                                <View className="bg-primaryPrimary p-3 rounded-xl">
+                                <View className="bg-primary p-3 rounded-xl">
                                     <Icon name="bag-check-outline" color={'#fff'} size={25} />
                                 </View>
                                 <View>
-                                    <Text className="text-white font-medium text-sm">
+                                    <Text className="dark:text-white font-medium text-sm">
                                         {sale.customer}
                                     </Text>
                                     <Text className="text-gray-400 text-sm">
@@ -72,10 +74,10 @@ export function RecentSales() {
                                 </View>
                             </View>
                             <View className="flex flex-row items-center gap-4">
-                                <Text className="text-white text-sm font-medium">
+                                <Text className="dark:text-white text-sm font-medium">
                                     R$ {formatCurrency(String(sale.totalPrice))}
                                 </Text>
-                                <Icon name="chevron-forward-outline" color={"#fff"} size={20} />
+                                <Icon name="chevron-forward-outline" color={colorScheme === "dark" ? "#fff" : ""} size={20} />
                             </View>
                         </View>
                     </TouchableOpacity>

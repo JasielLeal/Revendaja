@@ -27,7 +27,7 @@ export function Store() {
 
     if (!user?.userHasStore) {
         return (
-            <View className="bg-bg h-screen w-full flex justify-center px-5">
+            <View className="bg-background h-screen w-full flex justify-center px-5">
                 <Text className="text-textForenground text-center -mt-40">
                     Você ainda não tem uma loja :(
                 </Text>
@@ -37,9 +37,9 @@ export function Store() {
     }
 
     return (
-        <View className="bg-bg flex-1 w-full pt-16">
+        <View className="bg-background flex-1 w-full pt-16">
             <Text className="text-white font-medium text-lg text-center">Minha Loja</Text>
-            <Text className="text-primaryPrimary text-sm text-center mb-5 px-5">
+            <Text className="text-primary text-sm text-center mb-5 px-5">
                 {subdomain ? `${subdomain.data}.revendaja.com` : ""}
             </Text>
 

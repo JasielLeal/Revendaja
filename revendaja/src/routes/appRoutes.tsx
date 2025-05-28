@@ -15,7 +15,6 @@ import { AddBankSlip } from "@/pages/appPages/tickets/components/addBankSlip";
 import { TicketsDetails } from "@/pages/appPages/tickets/components/ticketsDetails";
 import { Profile } from "@/pages/appPages/profile/profile";
 import { AddProductToStock } from "@/pages/appPages/store/components/stock/components/addProductToStock";
-import { DetailsProductStock } from "@/pages/appPages/store/components/stock/components/detailsProductStock";
 import { OurPlans } from "@/pages/appPages/profile/components/ourPlans";
 import { PedingSale } from "@/pages/appPages/store/components/pendingSale/pendingSale";
 import { PedingSaleDetails } from "@/pages/appPages/store/components/pendingSale/components/PendingSaleDetails";
@@ -27,15 +26,20 @@ import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
 import { CreateStore } from "@/pages/appPages/store/components/createStore/CreateStore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DetailsProduct2 } from "@/pages/appPages/store/components/stock/components/detailsProduct";
+import { useColorScheme } from "nativewind";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
 const StorePages = createStackNavigator()
 
+
+
 function SubAppRoutes() {
 
+    const { colorScheme } = useColorScheme()
+
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#000'}} edges={['bottom']} >
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }} edges={['bottom']} >
             <Tab.Navigator
                 initialRouteName="Home"
                 screenOptions={({ route }) => ({
@@ -47,7 +51,7 @@ function SubAppRoutes() {
                         left: 0,
                         right: 0,
                         elevation: 0,
-                        backgroundColor: '#171717',
+                        backgroundColor: colorScheme === 'dark' ? '#171717' : '#fff',
                         borderTopWidth: 0,
                         height: 60
                     }
@@ -60,7 +64,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -87,7 +91,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -114,7 +118,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -141,7 +145,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -168,7 +172,7 @@ function SubAppRoutes() {
                         headerShown: false,
                         tabBarIcon: ({ color, size, focused }) => (
                             <View
-                                className={`items-center justify-center ${focused ? 'bg-primaryPrimary rounded-full' : ''}`}
+                                className={`items-center justify-center ${focused ? 'bg-primary rounded-full' : ''}`}
                                 style={{
                                     width: size + 20,
                                     height: size + 20,
@@ -219,7 +223,6 @@ export default function AppRoutes() {
             <Stack.Screen name="AddBankSlip" component={AddBankSlip} options={{ headerShown: false }} />
             <Stack.Screen name="TicketsDetails" component={TicketsDetails} options={{ headerShown: false }} />
             <Stack.Screen name="AddProductToStock" component={AddProductToStock} options={{ headerShown: false }} />
-            <Stack.Screen name="DetailsProductStock" component={DetailsProductStock} options={{ headerShown: false }} />
             <Stack.Screen name="OurPlans" component={OurPlans} options={{ headerShown: false }} />
             <Stack.Screen name="AddCustomProduct" component={AddCustomProductToStock} options={{ headerShown: false }} />
             <Stack.Screen name="MyPlan" component={MyPlan} options={{ headerShown: false }} />

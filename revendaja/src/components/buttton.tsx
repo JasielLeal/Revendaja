@@ -10,7 +10,7 @@ export function Button({ name, disabled, ...props }: ButtonProps) {
     return (
         <TouchableOpacity
             className={`${
-                disabled ? "bg-[#9b4702]" : "bg-primaryPrimary"
+                disabled ? "bg-[#9b4702]" : "bg-primary"
             } ${Platform.OS === "ios" ? "py-4 px-4" : "py-3 px-3"} rounded-xl mt-2`}
             disabled={disabled}
             {...props}

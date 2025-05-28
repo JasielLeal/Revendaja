@@ -1,6 +1,7 @@
 import { RootStackParamList } from '@/types/navigation';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,16 +15,16 @@ export function ForEveryDayLife() {
     ];
 
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>()
-
+    const { colorScheme} = useColorScheme()
     return (
         <View className='flex flex-row justify-between my-7 px-5'>
             {items.map((item, index) => (
                     <TouchableOpacity key={item.id} onPress={() => navigate.navigate(`${item.navigate}`)}>
                         <View className='flex items-center'>
-                            <View className='bg-[#303030] p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-2'>
-                                <Icon name={item.name} size={20} color={"#fff"} />
+                            <View className='dark:bg-forenground bg-forengroundLight p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-2'>
+                                <Icon name={item.name} size={20} color={colorScheme === "dark" ? "#fff" : ""} />
                             </View>
-                            <Text className='text-white font-medium text-sm'>
+                            <Text className='dark:text-white font-medium text-sm'>
                                 {item.label}
                             </Text>
                         </View>

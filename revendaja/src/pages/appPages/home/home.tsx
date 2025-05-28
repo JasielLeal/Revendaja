@@ -13,8 +13,8 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/types/navigation";
 import { Avatar } from "@/components/avatart";
-import { useSuccess } from "@/context/successContext";
-import { NotificationsContext } from "@/context/notificationsContext";
+import { ThemeToggle } from "./components/toggleTheme";
+import { useColorScheme } from "nativewind";
 
 export function Home() {
 
@@ -35,11 +35,10 @@ export function Home() {
 
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>()
 
-    const { unreadCount } = useContext(NotificationsContext);
     return (
         <>
-            <View className="bg-[#121212] flex-1 w-full">
-                <View className="pt-16 px-7 bg-primaryPrimary pb-5 rounded-b-3xl ">
+            <View className="dark:bg-background bg-backgroundLight flex-1 w-full">
+                <View className="pt-16 px-7 bg-primary pb-5 rounded-b-3xl">
                     <View className="flex flex-row justify-between items-center w-full">
                         <View className="flex flex-row items-center gap-2">
                             <Avatar />
@@ -52,17 +51,7 @@ export function Home() {
                                 </Text>
                             </View>
                         </View>
-                        <TouchableOpacity
-                            className="flex flex-row items-center gap-5"
-                            onPress={() => navigate.navigate("Notifications")}
-                        >
-                            <View className="relative">
-                                <Icon name="notifications" size={25} color={'#fff'} />
-                                <Text className="absolute -top-3 -right-3 bg-secondarySecondary text-white text-lg rounded-full w-[26] h-[26] text-center">
-                                    {unreadCount}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                        <ThemeToggle />
                     </View>
                     <View className="mt-10">
                         {
@@ -124,13 +113,13 @@ export function Home() {
                     </View>
                     {
                         Platform.OS == 'ios' ?
-                            <TouchableOpacity className="mt-5 bg-secondarySecondary w-[200px] p-2 rounded-full">
+                            <TouchableOpacity className="mt-5 bg-secondary w-[200px] p-2 rounded-full">
                                 <Text className="text-center text-white font-medium" onPress={() => navigate.navigate("Extract")}>
                                     Ver Extrato
                                 </Text>
                             </TouchableOpacity>
                             :
-                            <TouchableOpacity className="mt-5 bg-secondarySecondary w-[180px] p-2 rounded-full" onPress={() => navigate.navigate("Extract")}>
+                            <TouchableOpacity className="mt-5 bg-secondary w-[180px] p-2 rounded-full" onPress={() => navigate.navigate("Extract")}>
                                 <Text className="text-center text-white font-medium text-sm">
                                     Ver Extrato
                                 </Text>

@@ -48,7 +48,7 @@ export function CreateUser() {
 
     return (
 
-        <View className="bg-bg w-full flex-1 px-5 items-center justify-center">
+        <View className="bg-background w-full flex-1 px-5 items-center justify-center">
             <Image source={logo} alt="logo do site" className="w-[150px] h-[35px]" />
             <Text className="text-white mb-5">Por favor, forneça as informações solicitadas abaixo</Text>
             <View className="w-full">
@@ -163,13 +163,13 @@ export function CreateUser() {
                                     className="flex-row items-center"
                                 >
                                     <View
-                                        className={`w-5 h-5 rounded-md border-2 ${value ? "bg-primaryPrimary border-primaryPrimary" : "border-gray-500"
+                                        className={`w-5 h-5 rounded-md border-2 ${value ? "bg-primary border-primaryPrimary" : "border-gray-500"
                                             }`}
                                     />
                                     <Text className="ml-3 text-white">
                                         Eu li e aceito os{" "}
                                         <Text
-                                            className="text-primaryPrimary underline"
+                                            className="text-primary underline"
                                             onPress={() => navigate.navigate("login")}
                                         >
                                             Termos e Condições
@@ -186,13 +186,13 @@ export function CreateUser() {
 
                 {
                     isPending ?
-                        <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)} disabled>
+                        <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)} disabled>
                             <ActivityIndicator size={17} color={"#fff"} />
                         </TouchableOpacity>
 
                         :
 
-                        <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)}>
+                        <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5" onPress={handleSubmit(onSub)}>
                             <Text className="text-center font-medium text-white">
                                 Enviar
                             </Text>
@@ -206,7 +206,7 @@ export function CreateUser() {
                         <Text className=" text-white">
                             Quer voltar ao login?
                         </Text>
-                        <Text className="text-end text-primaryPrimary font-medium">
+                        <Text className="text-end text-primary font-medium">
                             Clique aqui
                         </Text>
                     </TouchableOpacity>

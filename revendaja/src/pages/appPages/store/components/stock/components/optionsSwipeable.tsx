@@ -87,10 +87,7 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
             console.log(JSON.stringify(error, null, 4));
         }
     })
-
-
     async function onAddStockInProduct() {
-
         const data = { quantity: modalQuantity, productId: id }
         await UpdateStockItemQuantityFn(data)
     }
@@ -148,7 +145,7 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
                             <Text className="text-white">O produto possui um desconto de R$ {formatCurrency(String(discount))}</Text>
                             :
                             <TextInput
-                                className="bg-bg text-white p-3 rounded-xl mt-5"
+                                className="bg-background text-white p-3 rounded-xl mt-5"
                                 placeholder="Digite o valor"
                                 placeholderTextColor="#7D7D7D"
                                 keyboardType="numeric"

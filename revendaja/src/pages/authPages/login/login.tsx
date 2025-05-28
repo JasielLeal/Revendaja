@@ -85,14 +85,14 @@ export function Login() {
                             />
 
                             <View>
-                                <TouchableOpacity className="flex items-end my-5 " onPress={() => navigate.navigate('forgetpassword')}>
-                                    <Text className="text-end text-primaryPrimary font-medium">
+                                <TouchableOpacity className="flex items-end my-5 " onPress={() => navigate.navigate('forgetpassword' as never)}>
+                                    <Text className="text-end text-primary font-medium">
                                         Esqueceu a senha?
                                     </Text>
                                 </TouchableOpacity>
                             </View>
 
-                            <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-2" onPress={handleSubmit(handleLogin)}>
+                            <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-2" onPress={handleSubmit(handleLogin)}>
                                 <Text className="text-center font-medium text-white">
                                     Entrar
                                 </Text>
@@ -102,8 +102,8 @@ export function Login() {
                                 <Text className="text-white">
                                     Não tem conta?
                                 </Text>
-                                <TouchableOpacity className="flex items-end " onPress={() => navigate.navigate("createUser")}>
-                                    <Text className="text-end text-primaryPrimary font-medium">
+                                <TouchableOpacity className="flex items-end " onPress={() => navigate.navigate("createUser" as never)}>
+                                    <Text className="text-end text-primary font-medium">
                                         Criar gratuitamente
                                     </Text>
                                 </TouchableOpacity>

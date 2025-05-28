@@ -22,11 +22,11 @@ export function MonthAmount({ month }: MonthAmountProps) {
             <View>
                 {
                     Platform.OS == 'ios' ?
-                        <Text className="text-white font-semibold text-xl">
+                        <Text className="dark:text-white font-semibold text-xl">
                             R$ {formatCurrency(String(monthAmount))}
                         </Text>
                         :
-                        <Text className="text-white font-semibold text-sm">
+                        <Text className="dark:text-white font-semibold text-sm">
                             R$ {formatCurrency(String(monthAmount))}
                         </Text>
                 }

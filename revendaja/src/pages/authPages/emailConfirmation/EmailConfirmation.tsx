@@ -54,7 +54,7 @@ export function EmailConfirmation() {
 
     return (
         <>
-            <View className="bg-bg w-full h-screen px-5 flex-1">
+            <View className="bg-background w-full h-screen px-5 flex-1">
                 <View className="flex justify-center items-center h-screen">
                     <Image source={logo} alt="logo do site" className="w-[150px] h-[35px] " />
 
@@ -83,7 +83,7 @@ export function EmailConfirmation() {
 
 
 
-                    <TouchableOpacity className="bg-primaryPrimary py-3 px-3 rounded-xl mt-5 w-full" onPress={handleSubmit(onSub)}>
+                    <TouchableOpacity className="bg-primary py-3 px-3 rounded-xl mt-5 w-full" onPress={handleSubmit(onSub)}>
                         <Text className="text-center font-medium text-white">
                             Entrar
                         </Text>

@@ -105,7 +105,7 @@ export function DetailsProduct2() {
                     <Text className="font-medium mt-5 text-white">
                         De: R$ {(Number(product.normalPrice) / 100).toFixed(2).replace('.', ',')}
                     </Text>
-                    <Text className="font-medium text-lg text-primaryPrimary">
+                    <Text className="font-medium text-lg text-primary">
                         Sugerido: R$ {(Number(product.suggestedPrice) / 100).toFixed(2).replace('.', ',')}
                     </Text>
                 </View>
@@ -116,7 +116,7 @@ export function DetailsProduct2() {
                     name="customPrice"
                     render={({ field: { onChange, value } }) => (
                         <TextInput
-                            className="bg-bg text-white p-3 rounded-xl mt-5"
+                            className="bg-background text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"

@@ -7,7 +7,6 @@
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-
     "ios": {
       "supportsTablet": true,
       "newArchEnabled": true,
@@ -16,57 +15,46 @@
       },
       "bundleIdentifier": "com.szreactioon.revendaja"
     },
-
     "android": {
       "newArchEnabled": true,
       "package": "com.szreactioon.revendaja",
       "permissions": ["NOTIFICATIONS", "CAMERA"],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png"
-      }, 
+        "foregroundImage": "./assets/frame.png"
+      },
       "googleServicesFile": "./google-services.json"
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "extra": {
       "eas": {
-        "projectId": "f72c3ea6-e4d0-47b8-9ce5-ba720c38e40c" 
+        "projectId": "f72c3ea6-e4d0-47b8-9ce5-ba720c38e40c"
       }
     },
-
     "scheme": "revendaja",
-
     "plugins": [
       [
         "expo-notifications",
         {
-          "icon": "./assets/icon.png",
-          "color": "#FF0000",
-          "mode": "production"
+          "icon": "./assets/r.png",
+          "color": "#ff7100",
+          "defaultChannel": "default",
+          "enableBackgroundRemoteNotifications": false
         }
       ],
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#232323",
-          "image": "./assets/splash.png",
+          "backgroundColor": "#ff7100",
+          "image": "./assets/r.png",
+          "imageWidth": 200,
           "dark": {
-            "image": "./assets/splash.png",
-            "backgroundColor": "#000000"
+            "image": "./assets/r.png",
+            "backgroundColor": "#ff7100"
           }
         }
-      ],
-    ],
-
-    "notification": {
-      "icon": "./assets/icon.png",
-      "color": "#FF0000",
-      "iosDisplayInForeground": true,
-      "androidMode": "default",
-      "androidCollapsedTitle": "Revendaja"
-    }
+      ]
+    ]
   }
 }

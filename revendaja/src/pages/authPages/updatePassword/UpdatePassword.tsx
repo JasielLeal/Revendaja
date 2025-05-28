@@ -53,14 +53,14 @@ export function UpdatePassword() {
             {
                 isSuccess ?
 
-                    <View className="bg-bg w-full flex-1 px-5">
+                    <View className="bg-background w-full flex-1 px-5">
                         <View className="flex justify-center items-center h-screen">
                             <Image source={logo} alt="logo do site" className="w-[150px] h-[35px]" />
                             <Text className="text-white mt-3 font-medium">
                                 Parabéns! A senha foi alterada com sucesso.
                             </Text>
                             <TouchableOpacity onPress={() => navigate.navigate("login")}>
-                                <Text className="text-primaryPrimary mt-3">
+                                <Text className="text-primary mt-3">
                                     Voltar para o login
                                 </Text>
                             </TouchableOpacity>
@@ -68,7 +68,7 @@ export function UpdatePassword() {
                     </View>
 
                     :
-                    <View className="bg-bg w-full flex-1 px-5">
+                    <View className="bg-background w-full flex-1 px-5">
                         <View className="flex justify-center items-center h-screen">
                             <Image source={logo} alt="logo do site" className="w-[150px] h-[35px]" />
                             <Text className="text-white text-sm font-normal my-5">

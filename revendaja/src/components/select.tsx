@@ -29,9 +29,9 @@ export default function Select({ options, label, onSelect }: CustomSelectProps) 
       {/* Campo de Seleção */}
       <TouchableOpacity
         onPress={modalOpen}
-        className="bg-bg rounded-xl py-2 px-4 w-[150px]"
+        className="dark:bg-background bg-backgroundLight rounded-xl py-2 px-4 w-[150px]"
       >
-        <Text className="text-white text-center text-sm">{selectedValue || label}</Text>
+        <Text className="dark:text-white text-center text-sm">{selectedValue || label}</Text>
       </TouchableOpacity>
 
       {/* Modal de Opções */}
@@ -41,7 +41,7 @@ export default function Select({ options, label, onSelect }: CustomSelectProps) 
             className="flex-1 justify-center items-center bg-black opacity-50 "
             onPress={modalClose}
           />
-          <View className="absolute top-60 right-10 bg-forenground rounded-xl w-80">
+          <View className="absolute top-60 right-10 dark:bg-forenground bg-forengroundLight rounded-xl w-80">
             <FlatList
               data={options}
               keyExtractor={(item) => item.value}
@@ -50,7 +50,7 @@ export default function Select({ options, label, onSelect }: CustomSelectProps) 
                   className="p-4"
                   onPress={() => handleSelect(item.value, item.label)}  // Passa o valor numérico e a label
                 >
-                  <Text className="text-textForenground">{item.label}</Text>
+                  <Text className="dark:text-textForenground">{item.label}</Text>
                 </TouchableOpacity>
               )}
             />

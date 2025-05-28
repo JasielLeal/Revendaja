@@ -25,7 +25,7 @@ export function ScannerScreen({ onScan }: ScannerProps) {
         return (
 
             <View className="flex flex-row items-center">
-                <TouchableOpacity onPress={requestPermission} className={Platform.OS === 'ios' ? "bg-primaryPrimary p-2 rounded-xl" : "bg-primaryPrimary p-3 rounded-xl"}>
+                <TouchableOpacity onPress={requestPermission} className={Platform.OS === 'ios' ? "bg-primary p-2 rounded-xl" : "bg-primary p-3 rounded-xl"}>
                     <Icon name="scan" size={25} />
                 </TouchableOpacity>
             </View>
@@ -67,7 +67,7 @@ export function ScannerScreen({ onScan }: ScannerProps) {
                 </Modal>
             ) : (
                 <View className="flex flex-row items-center">
-                    <TouchableOpacity onPress={() => setIsCameraVisible(true)} className={Platform.OS === 'ios' ? "bg-primaryPrimary p-2 rounded-xl" : "bg-primaryPrimary p-3 rounded-xl"}>
+                    <TouchableOpacity onPress={() => setIsCameraVisible(true)} className={Platform.OS === 'ios' ? "bg-primary p-2 rounded-xl" : "bg-primary p-3 rounded-xl"}>
                         <Icon name="scan" size={25} />
                     </TouchableOpacity>
                 </View>
