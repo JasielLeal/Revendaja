@@ -22,6 +22,7 @@ import { InsertProductToStock } from "./services/insertProductToStock";
 import Toast from "react-native-toast-message";
 import { CustomToast } from "@/components/CustomToast";
 import { te } from "date-fns/locale";
+import { QuantityInput } from "@/components/QuantityInput";
 
 export function SaleInitiator() {
     const tabBarHeight = useBottomTabBarHeight();
@@ -47,6 +48,7 @@ export function SaleInitiator() {
     const [barcode, setBarcode] = useState('')
     const suggestedPrice = '0'
     const normalPrice = '0'
+    const [quantity, setQuantity] = useState(1);
 
     const { mutateAsync: fetchProductByBarcode } = useMutation({
         mutationFn: FindProductsByBarcode,
@@ -111,7 +113,7 @@ export function SaleInitiator() {
             setBarcodeInput('');
         },
         onError: (error) => {
-            
+
             if (axios.isAxiosError(error)) {
                 const status = error.response?.status;
                 setStatusCode(Number(status))
@@ -197,8 +199,8 @@ export function SaleInitiator() {
         }, 500);
     }
 
-    async function handleAddPrice(barcode: string, value: string, suggestedPrice: string, normalPrice: string) {
-        InsertProductToStockFn({ barcode, customPrice: value, quantity: 1, normalPrice, suggestedPrice })
+    async function handleAddPrice(barcode: string, value: string, suggestedPrice: string, normalPrice: string, quantity: number) {
+        InsertProductToStockFn({ barcode, customPrice: value, quantity, normalPrice, suggestedPrice })
         setAddPriceProductModal(false)
     }
 
@@ -258,7 +260,7 @@ export function SaleInitiator() {
                                                             R$ {formatCurrency(item?.price)}
                                                         </Text>
                                                     </View>
-                                                    <Text className="text-primaryPrimary">
+                                                    <Text className="text-primary">
                                                         Quantidade: {String(item?.quantity)}
                                                     </Text>
                                                 </View>
@@ -277,7 +279,7 @@ export function SaleInitiator() {
                                                             R$ {formatCurrency(item.price)}
                                                         </Text>
                                                     </View>
-                                                    <Text className="text-primaryPrimary text-sm">
+                                                    <Text className="text-primary text-sm">
                                                         Quantidade: {String(item.quantity)}
                                                     </Text>
                                                 </View>
@@ -295,18 +297,19 @@ export function SaleInitiator() {
                             <Text className='text-white font-medium text-base'>Valor total</Text>
                             <Text className='text-white font-medium text-base'>{calculateTotal()}</Text>
                         </View>
-                        <Button name="Finalizar Venda" onPress={handleCreateSale} style={{ marginBottom: tabBarHeight+10 }}  />
+                        <Button name="Finalizar Venda" onPress={handleCreateSale} style={{ marginBottom: tabBarHeight + 10 }} />
                     </View>
                     <CustomModal
                         visible={addPriceProductModal}
                         onClose={() => setAddPriceProductModal(false)}
                         title="Adicionar preço ao produto"
-                        onConfirm={() => handleAddPrice(barcode, value, suggestedPrice, normalPrice)}
+                        onConfirm={() => handleAddPrice(barcode, value, suggestedPrice, normalPrice, quantity)}
                         confirmText="Adicionar"
                     >
                         <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-sm`}>
                             Adicione o preço do produto informado para prosseguir com a venda.
                         </Text>
+
                         <TextInput
                             className="bg-background text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
@@ -320,6 +323,9 @@ export function SaleInitiator() {
                             returnKeyType="done"
                             onSubmitEditing={Keyboard.dismiss}
                         />
+
+                        <QuantityInput onQuantityChange={setQuantity} initialQuantity={quantity} />
+
                     </CustomModal>
                     <CustomModal
                         visible={customModal}

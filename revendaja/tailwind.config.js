@@ -21,7 +21,8 @@ module.exports = {
         backgroundLight: "#f4f5f7",
         forenground: '#202020',
         forengroundLight: '#fbfbfb',
-        textForenground: '#ADADAD'
+        textForenground: '#ADADAD',
+        input: '#DFDFDF'
       },
       fontFamily: {
         heading: undefined,

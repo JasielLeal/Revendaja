@@ -169,7 +169,7 @@ export function CreateUser() {
                                     <Text className="ml-3 text-white">
                                         Eu li e aceito os{" "}
                                         <Text
-                                            className="text-primaryPrimary underline"
+                                            className="text-primary underline"
                                             onPress={() => navigate.navigate("login")}
                                         >
                                             Termos e Condições
@@ -206,7 +206,7 @@ export function CreateUser() {
                         <Text className=" text-white">
                             Quer voltar ao login?
                         </Text>
-                        <Text className="text-end text-primaryPrimary font-medium">
+                        <Text className="text-end text-primary font-medium">
                             Clique aqui
                         </Text>
                     </TouchableOpacity>

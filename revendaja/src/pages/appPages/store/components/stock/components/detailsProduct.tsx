@@ -105,7 +105,7 @@ export function DetailsProduct2() {
                     <Text className="font-medium mt-5 text-white">
                         De: R$ {(Number(product.normalPrice) / 100).toFixed(2).replace('.', ',')}
                     </Text>
-                    <Text className="font-medium text-lg text-primaryPrimary">
+                    <Text className="font-medium text-lg text-primary">
                         Sugerido: R$ {(Number(product.suggestedPrice) / 100).toFixed(2).replace('.', ',')}
                     </Text>
                 </View>

@@ -82,7 +82,7 @@ export function MyPlan() {
 
                         <View className="bg-forenground p-4 rounded-lg">
                             <View className="flex flex-row items-center gap-1">
-                                <Text className="text-primaryPrimary text-xl font-medium">{planName}</Text>
+                                <Text className="text-primary text-xl font-medium">{planName}</Text>
                                 <Text className="text-white text-sm">/ Atual</Text>
                             </View>
                         </View>
@@ -99,7 +99,7 @@ export function MyPlan() {
                                             });
                                         }}
                                     >
-                                        <Text className="text-primaryPrimary my-7 text-xs">Atualizar cartão</Text>
+                                        <Text className="text-primary my-7 text-xs">Atualizar cartão</Text>
                                     </TouchableOpacity>
                                 </View>
 
@@ -143,7 +143,7 @@ export function MyPlan() {
                                             setOpenModal(true);
                                         }
                                     }} className="flex flex-row items-center gap-3 mt-5">
-                                        <Text className={data.cancel_at ? "text-primaryPrimary mt-5" : "text-red-500 mt-5"}>
+                                        <Text className={data.cancel_at ? "text-primary mt-5" : "text-red-500 mt-5"}>
                                             {data.cancel_at ? "Reativar Assinatura" : "Cancelar Assinatura"}
                                         </Text>
                                     </TouchableOpacity>

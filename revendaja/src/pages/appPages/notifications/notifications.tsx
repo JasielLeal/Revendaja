@@ -40,7 +40,7 @@ export function Notifications() {
                                 <View>
                                     <Text className="text-textForenground">{item.body}</Text>
                                 </View>
-                                {!item.isRead && <Text className="text-primaryPrimary mt-2">• Não Lida</Text>}
+                                {!item.isRead && <Text className="text-primary mt-2">• Não Lida</Text>}
                             </View>
                         )}
                     />

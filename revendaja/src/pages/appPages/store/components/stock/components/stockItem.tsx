@@ -52,7 +52,7 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
                                     quantity <= 0 ?
                                         <Text className="text-sm text-red-500">Sem estoque</Text>
                                         :
-                                        <Text className="text-primaryPrimary text-sm">
+                                        <Text className="text-primary text-sm">
                                             {quantity}x em Estoque
                                         </Text>
                                 }
@@ -79,7 +79,7 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
                                     quantity <= 0 ?
                                         <Text className="text-sm text-red-500">Sem estoque</Text>
                                         :
-                                        <Text className="text-primaryPrimary text-sm">
+                                        <Text className="text-primary text-sm">
                                             {quantity}x em Estoque
                                         </Text>
                                 }

@@ -63,7 +63,7 @@ export function Profile() {
                                         {user?.secondName}
                                     </Text>
                                 </View>
-                                <Text className="text-primaryPrimary">
+                                <Text className="text-primary">
                                     {user?.plan}
                                 </Text>
                             </View>

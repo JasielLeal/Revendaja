@@ -88,7 +88,7 @@ export function Forget() {
                             Quer voltar ao login?
                         </Text>
                         <TouchableOpacity className="flex flex-row items-center gap-2" onPress={() => navigate.navigate('login')}>
-                            <Text className="text-end text-primaryPrimary font-medium">
+                            <Text className="text-end text-primary font-medium">
                                 Clique aqui
                             </Text>
                         </TouchableOpacity>

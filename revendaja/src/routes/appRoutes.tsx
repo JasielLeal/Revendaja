@@ -26,15 +26,20 @@ import { UpdateCard } from "@/pages/appPages/profile/components/updateCard";
 import { CreateStore } from "@/pages/appPages/store/components/createStore/CreateStore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DetailsProduct2 } from "@/pages/appPages/store/components/stock/components/detailsProduct";
+import { useColorScheme } from "nativewind";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
 const StorePages = createStackNavigator()
 
+
+
 function SubAppRoutes() {
 
+    const { colorScheme } = useColorScheme()
+
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#000'}} edges={['bottom']} >
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }} edges={['bottom']} >
             <Tab.Navigator
                 initialRouteName="Home"
                 screenOptions={({ route }) => ({
@@ -46,7 +51,7 @@ function SubAppRoutes() {
                         left: 0,
                         right: 0,
                         elevation: 0,
-                        backgroundColor: '#171717',
+                        backgroundColor: colorScheme === 'dark' ? '#171717' : '#fff',
                         borderTopWidth: 0,
                         height: 60
                     }

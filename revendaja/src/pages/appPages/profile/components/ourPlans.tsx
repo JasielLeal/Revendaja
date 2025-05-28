@@ -98,7 +98,7 @@ export function OurPlans() {
                     <View className="bg-forenground p-4 rounded-xl mt-5">
                         <View className="flex flex-row items-center">
                             <Text className="text-white text-lg">{user?.plan} -</Text>
-                            <Text className="text-primaryPrimary"> Atualmente</Text>
+                            <Text className="text-primary"> Atualmente</Text>
                         </View>
 
                         <View className="flex flex-row gap-2 items-center">
@@ -126,7 +126,7 @@ export function OurPlans() {
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: "row", gap: 16 }}>
                         {plans.map((plan) => (
                             <View key={plan.name} className="bg-forenground p-4 rounded-xl shadow-lg mt-5 w-[300] mb-10">
-                                <Text className="text-primaryPrimary text-xl font-semibold">{plan.name}</Text>
+                                <Text className="text-primary text-xl font-semibold">{plan.name}</Text>
                                 <View className="flex flex-row gap-2 items-center">
                                     <Text className="text-white font-medium text-2xl">R$ {plan.price}</Text>
                                     <Text className="text-textForenground text-sm">/ mês</Text>

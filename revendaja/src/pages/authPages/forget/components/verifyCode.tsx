@@ -33,10 +33,10 @@ export function VerifyCode() {
 
                     <View>
                         <TouchableOpacity className="flex items-end my-5 justify-center flex-row gap-2">
-                            <Text className="text-center text-primaryPrimary font-medium">
+                            <Text className="text-center text-primary font-medium">
                                 Enviar novamente o codigo
                             </Text>
-                            <Text className="text-center text-primaryPrimary font-medium">
+                            <Text className="text-center text-primary font-medium">
                                 <Icon name="reload" size={15}/>
                             </Text>
                         </TouchableOpacity>

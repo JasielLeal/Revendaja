@@ -22,7 +22,7 @@ const SaleItem = memo(({ sale, onPress }: SaleItemProps) => {
                         <Icon name='bag-check-outline' size={30} color={'#fff'} />
                     </Text>
                     <View className="ml-3">
-                        <Text className="text-white font-medium">
+                        <Text className="dark:text-white font-medium">
                             {sale.customer}
                         </Text>
                         <Text className="text-textForenground">
@@ -32,7 +32,7 @@ const SaleItem = memo(({ sale, onPress }: SaleItemProps) => {
                     </View>
                 </View>
                 <View className='flex flex-row items-center'>
-                    <Text className="text-white tex-text">
+                    <Text className="dark:text-white tex-text">
                         R$ {formatCurrency(String(sale.totalPrice))}
                     </Text>
                     <Icon name='chevron-forward' size={20} color={'#FF7100'} />

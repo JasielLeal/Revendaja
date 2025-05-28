@@ -38,7 +38,7 @@ export function RecentSales() {
                                 Vendas Recentes
                             </Text>
                             <TouchableOpacity onPress={() => navigate.navigate("Extract")}>
-                                <Text className="text-primaryPrimary font-medium">
+                                <Text className="text-primary font-medium">
                                     Ver todas
                                 </Text>
                             </TouchableOpacity>

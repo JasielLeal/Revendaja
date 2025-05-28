@@ -39,7 +39,7 @@ export function Store() {
     return (
         <View className="bg-background flex-1 w-full pt-16">
             <Text className="text-white font-medium text-lg text-center">Minha Loja</Text>
-            <Text className="text-primaryPrimary text-sm text-center mb-5 px-5">
+            <Text className="text-primary text-sm text-center mb-5 px-5">
                 {subdomain ? `${subdomain.data}.revendaja.com` : ""}
             </Text>
 

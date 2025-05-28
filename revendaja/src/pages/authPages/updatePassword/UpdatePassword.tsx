@@ -60,7 +60,7 @@ export function UpdatePassword() {
                                 Parabéns! A senha foi alterada com sucesso.
                             </Text>
                             <TouchableOpacity onPress={() => navigate.navigate("login")}>
-                                <Text className="text-primaryPrimary mt-3">
+                                <Text className="text-primary mt-3">
                                     Voltar para o login
                                 </Text>
                             </TouchableOpacity>
