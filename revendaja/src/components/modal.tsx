@@ -35,12 +35,12 @@ const CustomModal: React.FC<CustomModalProps> = ({
             onRequestClose={onClose}
         >
             <View className="flex-1 justify-center items-center bg-black/50 px-5">
-                <View className="bg-forenground rounded-lg p-5 w-11/12 max-w-md">
+                <View className="dark:bg-forenground bg-backgroundLight rounded-lg p-5 w-11/12 max-w-md">
                     <Text
                         className={Platform.OS == "ios" ?
-                            "text-lg font-bold text-white text-center"
+                            "text-lg font-bold dark:text-white text-center"
                             :
-                            "text-sm font-bold text-white text-center"}>
+                            "text-sm font-bold dark:text-white text-center"}>
                         {title}
                     </Text>
                     <View className="my-2">{children}</View>
@@ -56,7 +56,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                                 className="flex-1 px-4 py-3 bg-primary rounded-md"
                                 onPress={handleConfirm}
                             >
-                                <Text className={Platform.OS == "ios" ? "text-center text-white" : "text-center text-sm text-white"}>{confirmText}</Text>
+                                <Text className={Platform.OS == "ios" ? "text-center dark:text-white" : "text-center text-sm dark:text-white"}>{confirmText}</Text>
                             </TouchableOpacity>
                         )}
                     </View>

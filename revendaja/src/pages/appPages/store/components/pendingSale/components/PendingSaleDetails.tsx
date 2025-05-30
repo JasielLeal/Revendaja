@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import { DeleteSale } from "../services/DeleteSale";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useColorScheme } from "nativewind";
 
 
 export function PedingSaleDetails({ route }: any) {
@@ -164,152 +165,153 @@ export function PedingSaleDetails({ route }: any) {
             return;
 
         },
-
     })
 
+    const { colorScheme } = useColorScheme()
+
     return (
-      
-            <View className='bg-background flex-1'>
-                <View className={Platform.OS === 'ios' ? `mb-7 px-5 pt-16 flex justify-between ` : `px-5 pt-16 flex justify-between flex-1 mb-${insets.bottom + 5} bg-background`} >
-                    <View>
-                        <View className='flex flex-row justify-between'>
-                            <TouchableOpacity onPress={() => navigation.goBack()}>
-                                <Icon name='chevron-back' size={20} color={"#fff"} />
-                            </TouchableOpacity>
-                            <Text className='text-white font-semibold'>Informações da Venda</Text>
-                            <TouchableOpacity onPress={() => DeleteSaleFn()}>
-                                <Icon name='trash' size={20} color={"#dc2626"} />
-                            </TouchableOpacity>
-                        </View>
-                        <View className='flex flex-col justify-center items-center mt-10'>
-                            <Text className="bg-[#303030] p-5 rounded-full">
-                                <Icon name='alarm' size={20} color={"#FF7100"} />
-                            </Text>
-                            <Text className="mt-5 text-textForenground text-sm">{timeAgo(sale.createdAt)}</Text>
-                            <Text className='text-white font-medium text-xl'>R$ {formatCurrency(String(sale.totalPrice))}</Text>
-                            <Text className='text-textForenground '>{sale.customer}</Text>
-                            <Text className='text-xs bg-[#303030] font-medium py-1 mt-2 px-5 rounded-full text-white '>{sale.transactionType}</Text>
-                        </View>
 
-                        {
-                            Platform.OS === 'ios' ?
+        <View className='dark:bg-background bg-backgroundLight flex-1'>
+            <View className={Platform.OS === 'ios' ? `mb-7 px-5 pt-16 flex justify-between ` : `px-5 pt-16 flex justify-between flex-1 mb-${insets.bottom + 5} dark:bg-background`} >
+                <View>
+                    <View className='flex flex-row justify-between'>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Icon name='chevron-back' size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
+                        </TouchableOpacity>
+                        <Text className='dark:text-white font-semibold'>Informações da Venda</Text>
+                        <TouchableOpacity onPress={() => DeleteSaleFn()}>
+                            <Icon name='trash' size={20} color={"#dc2626"} />
+                        </TouchableOpacity>
+                    </View>
+                    <View className='flex flex-col justify-center items-center mt-10'>
+                        <Text className="bg-forenground p-5 rounded-full">
+                            <Icon name='alarm' size={20} color={"#FF7100"} />
+                        </Text>
+                        <Text className="mt-5 text-textForenground text-sm">{timeAgo(sale.createdAt)}</Text>
+                        <Text className='dark:text-white font-medium text-xl'>R$ {formatCurrency(String(sale.totalPrice))}</Text>
+                        <Text className='text-textForenground '>{sale.customer}</Text>
+                        <Text className='text-xs bg-forenground font-medium py-1 mt-2 px-5 rounded-full text-white '>{sale.transactionType}</Text>
+                    </View>
 
-                                <View className="bg-forenground mt-10 rounded-xl p-4 w-full">
-                                    <Text className="text-white font-medium text-lg">
-                                        ID
-                                    </Text>
-                                    <Text className="text-textForenground">
-                                        {sale.id}
-                                    </Text>
+                    {
+                        Platform.OS === 'ios' ?
 
-                                    <View className="mt-5 flex gap-2 flex-row w-full">
-                                        <View className="flex flex-row items-center justify-between w-full rounded-xl">
-                                            <View >
-                                                <Text className="text-white font-semibold">Celular</Text>
-                                                <Text className="text-textForenground">
-                                                    {phoneNumberMaskDynamic(String(sale.numberPhone))}
-                                                </Text>
-                                            </View>
-                                            <View className='flex flex-row items-center'>
-                                                <Text className="text-primary font-semibold">Copiar</Text>
-                                            </View>
-                                        </View>
+                            <View className="dark:bg-forenground bg-input mt-10 rounded-xl p-4 w-full">
+                                <Text className="dark:text-white font-medium text-lg">
+                                    ID
+                                </Text>
+                                <Text className="text-textForenground">
+                                    {sale.id}
+                                </Text>
 
-                                    </View>
-                                </View>
-
-                                :
-
-                                <View className="bg-forenground mt-10 rounded-xl p-4 w-full">
-                                    <Text className="text-white font-medium text-sm">
-                                        ID
-                                    </Text>
-                                    <Text className="text-textForenground text-sm">
-                                        {sale.id}
-                                    </Text>
-
-                                    <View className="mt-5 flex gap-2 flex-row w-full">
-                                        <View className="flex flex-row items-center justify-between w-full rounded-xl">
-                                            <View >
-                                                <Text className="text-white font-semibold text-sm">Celular</Text>
-                                                <Text className="text-textForenground text-sm">
-                                                    {phoneNumberMaskDynamic(String(sale.numberPhone))}
-                                                </Text>
-                                            </View>
-                                            <View className='flex flex-row items-center'>
-                                                <Text className="text-primary font-semibold text-sm">Copiar</Text>
-                                            </View>
-                                        </View>
-
-                                    </View>
-                                </View>
-                        }
-
-                        {
-                            Platform.OS == 'ios' ?
-
-                                <View className='flex gap-2  mt-2'>
-                                    <View className="flex flex-row items-center justify-between w-full  p-3 rounded-xl">
-                                        <View className='flex flex-row items-center'>
-                                            <Text className="text-white font-semibold">Produtos</Text>
+                                <View className="mt-5 flex gap-2 flex-row w-full">
+                                    <View className="flex flex-row items-center justify-between w-full rounded-xl">
+                                        <View >
+                                            <Text className="dark:text-white font-semibold">Celular</Text>
+                                            <Text className="text-textForenground">
+                                                {phoneNumberMaskDynamic(String(sale.numberPhone))}
+                                            </Text>
                                         </View>
                                         <View className='flex flex-row items-center'>
                                             <Text className="text-primary font-semibold">Copiar</Text>
                                         </View>
                                     </View>
+
                                 </View>
-                                :
-                                <View className='flex gap-2  mt-2'>
-                                    <View className="flex flex-row items-center justify-between w-full  p-3 rounded-xl">
-                                        <View className='flex flex-row items-center'>
-                                            <Text className="text-white font-semibold text-sm">Produtos</Text>
+                            </View>
+
+                            :
+
+                            <View className="dark:bg-forenground bg-input mt-10 rounded-xl p-4 w-full">
+                                <Text className="dark:text-white font-medium text-sm">
+                                    ID
+                                </Text>
+                                <Text className="text-textForenground text-sm">
+                                    {sale.id}
+                                </Text>
+
+                                <View className="mt-5 flex gap-2 flex-row w-full">
+                                    <View className="flex flex-row items-center justify-between w-full rounded-xl">
+                                        <View >
+                                            <Text className="dark:text-white font-semibold text-sm">Celular</Text>
+                                            <Text className="text-textForenground text-sm">
+                                                {phoneNumberMaskDynamic(String(sale.numberPhone))}
+                                            </Text>
                                         </View>
                                         <View className='flex flex-row items-center'>
                                             <Text className="text-primary font-semibold text-sm">Copiar</Text>
                                         </View>
                                     </View>
+
                                 </View>
-                        }
+                            </View>
+                    }
 
-                        {
-                            Platform.OS == 'ios' ?
+                    {
+                        Platform.OS == 'ios' ?
 
-                                sale?.saleItems.map((item) => (
-                                    <View className='flex gap-2 mb-2' key={item.id}>
-                                        <View className="flex flex-row items-center justify-between w-full bg-[#303030] p-3 rounded-xl">
-                                            <View className='flex flex-row items-center'>
-                                                <Text className='text-white mr-3 '>{item.quantity}</Text>
-                                                <Text className='text-white w-[200px] ' numberOfLines={1} ellipsizeMode="tail">
-                                                    {item?.stock?.product?.name}
-                                                </Text>
-                                            </View>
-                                            <Text className='text-white'>R$ {formatCurrency(String(item.price))}</Text>
-                                        </View>
+                            <View className='flex gap-2  mt-2'>
+                                <View className="flex flex-row items-center justify-between w-full  p-3 rounded-xl">
+                                    <View className='flex flex-row items-center'>
+                                        <Text className="dark:text-white font-semibold">Produtos</Text>
                                     </View>
-                                ))
-
-                                :
-
-                                sale?.saleItems.map((item) => (
-                                    <View className='flex gap-2 mb-2' key={item.id}>
-                                        <View className="flex flex-row items-center justify-between w-full bg-[#303030] p-3 rounded-xl">
-                                            <View className='flex flex-row items-center'>
-                                                <Text className='text-white mr-3 text-sm'>{item.quantity}</Text>
-                                                <Text className='text-white w-[200px] text-sm' numberOfLines={1} ellipsizeMode="tail">
-                                                    {item?.stock?.product?.name}
-                                                </Text>
-                                            </View>
-                                            <Text className='text-white text-sm'>R$ {formatCurrency(String(item.price))}</Text>
-                                        </View>
+                                    <View className='flex flex-row items-center'>
+                                        <Text className="text-primary font-semibold">Copiar</Text>
                                     </View>
-                                ))
-                        }
-                    </View>
-                    <View>
-                        <Button name="Confirmar venda" onPress={() => ApprovedSaleFn()} />
-                    </View>
+                                </View>
+                            </View>
+                            :
+                            <View className='flex gap-2  mt-2'>
+                                <View className="flex flex-row items-center justify-between w-full  p-3 rounded-xl">
+                                    <View className='flex flex-row items-center'>
+                                        <Text className="dark:text-white font-semibold text-sm">Produtos</Text>
+                                    </View>
+                                    <View className='flex flex-row items-center'>
+                                        <Text className="text-primary font-semibold text-sm">Copiar</Text>
+                                    </View>
+                                </View>
+                            </View>
+                    }
+
+                    {
+                        Platform.OS == 'ios' ?
+
+                            sale?.saleItems.map((item) => (
+                                <View className='flex gap-2 mb-2' key={item.id}>
+                                    <View className="flex flex-row items-center justify-between w-full dark:bg-forenground bg-input p-3 rounded-xl">
+                                        <View className='flex flex-row items-center'>
+                                            <Text className='dark:text-white mr-3 '>{item.quantity}</Text>
+                                            <Text className='dark:text-white w-[200px] ' numberOfLines={1} ellipsizeMode="tail">
+                                                {item?.stock?.product?.name}
+                                            </Text>
+                                        </View>
+                                        <Text className='dark:text-white'>R$ {formatCurrency(String(item.price))}</Text>
+                                    </View>
+                                </View>
+                            ))
+
+                            :
+
+                            sale?.saleItems.map((item) => (
+                                <View className='flex gap-2 mb-2' key={item.id}>
+                                    <View className="flex flex-row items-center justify-between w-full dark:bg-forenground bg-input p-3 rounded-xl">
+                                        <View className='flex flex-row items-center'>
+                                            <Text className='dark:text-white mr-3 text-sm'>{item.quantity}</Text>
+                                            <Text className='dark:text-white w-[200px] text-sm' numberOfLines={1} ellipsizeMode="tail">
+                                                {item?.stock?.product?.name}
+                                            </Text>
+                                        </View>
+                                        <Text className='dark:text-white text-sm'>R$ {formatCurrency(String(item.price))}</Text>
+                                    </View>
+                                </View>
+                            ))
+                    }
+                </View>
+                <View>
+                    <Button name="Confirmar venda" onPress={() => ApprovedSaleFn()} />
                 </View>
             </View>
-       
+        </View>
+
     )
 }

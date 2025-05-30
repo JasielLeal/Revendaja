@@ -138,9 +138,9 @@ export function PedingSale() {
     return (
         <>
 
-            <View className="px-5 flex-1 bg-background">
+            <View className="px-5 flex-1 dark:bg-background bg-backgroundLight">
                 <View className="flex flex-row items-center justify-between mt-7">
-                    <Text className="text-white text-xl font-semibold">Vendas Pendentes</Text>
+                    <Text className="dark:text-white text-xl font-semibold">Vendas Pendentes</Text>
                 </View>
                 {
                     allStock.length != 0 ?
@@ -157,15 +157,15 @@ export function PedingSale() {
                                         <TouchableOpacity className="mt-5 flex flex-row items-center justify-between" onPress={() => handlePress(item)}>
                                             <View className="flex items-center flex-row gap-5">
                                                 <View className="bg-forenground p-4 rounded-xl">
-                                                    <Text className="text-white">
+                                                    <Text className="dark:text-white">
                                                         <Icon name='alarm' size={20} color={"#FF7100"} />
                                                     </Text>
                                                 </View>
                                                 <View>
-                                                    <Text className="text-white">
+                                                    <Text className="dark:text-white">
                                                         {item.customer}
                                                     </Text>
-                                                    <Text className="text-white font-medium">
+                                                    <Text className="dark:text-white font-medium">
                                                         R$ {formatCurrency(String(item?.totalPrice))}
                                                     </Text>
                                                     <Text className="text-textForenground">
@@ -182,16 +182,16 @@ export function PedingSale() {
 
                                         <TouchableOpacity className="mt-5 flex flex-row items-center justify-between" onPress={() => handlePress(item)}>
                                             <View className="flex items-center flex-row gap-5">
-                                                <View className="bg-forenground p-4 rounded-xl">
-                                                    <Text className="text-white">
+                                                <View className="dark:bg-forenground bg-input p-4 rounded-xl">
+                                                    <Text className="dark:text-white">
                                                         <Icon name='alarm' size={20} color={"#FF7100"} />
                                                     </Text>
                                                 </View>
                                                 <View>
-                                                    <Text className="text-white text-xs">
+                                                    <Text className="dark:text-white text-xs">
                                                         {item.customer}
                                                     </Text>
-                                                    <Text className="text-white font-medium text-sm">
+                                                    <Text className="dark:text-white font-medium text-sm">
                                                         R$ {formatCurrency(String(item?.totalPrice))}
                                                     </Text>
                                                     <Text className="text-textForenground text-xs">

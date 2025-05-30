@@ -5,9 +5,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { Input } from '@/components/input';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { GetGlobalProducts } from '../services/getGlobalProducts'; 
+import { GetGlobalProducts } from '../services/getGlobalProducts';
 import { RootStackParamList } from '@/types/navigation';
 import { Platform } from 'react-native';
+import { useColorScheme } from 'nativewind';
 
 export function AddProductToStock() {
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -63,16 +64,16 @@ export function AddProductToStock() {
     });
 
     const allProducts = data?.pages.flatMap((page) => page.data.items) || [];
-
+    const { colorScheme } = useColorScheme()
     return (
-        <View className="bg-background flex-1 w-full px-5">
-            <View className='flex flex-row justify-between mt-16'>
+        <View className="dark:bg-background bg-backgroundLight flex-1 w-full px-5">
+            <View className='flex flex-row justify-between mt-16 items-center'>
                 <TouchableOpacity onPress={() => navigate.goBack()}>
-                    <Icon name='chevron-back' size={20} color={"#fff"} />
+                    <Icon name='chevron-back' size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
                 </TouchableOpacity>
-                <Text className='text-white font-semibold'>Adicionar produto</Text>
+                <Text className='dark:text-white font-semibold'>Adicionar produto</Text>
                 <TouchableOpacity className='text-white'>
-                    <Icon name='add' size={20} color={"#fff"} onPress={() => navigate.push("AddCustomProduct")} />
+                    <Icon name='add' size={20} color={colorScheme === "dark" ? "#fff" : "#000"} onPress={() => navigate.push("AddCustomProduct")} />
                 </TouchableOpacity>
             </View>
             <View className="my-5">
@@ -111,7 +112,7 @@ export function AddProductToStock() {
                                             style={{
                                                 fontSize: Platform.OS === 'ios' ? 16 : 12, // Ajusta o tamanho do texto para o nome do produto
                                                 fontWeight: '600',
-                                                color: 'white',
+                                                color: colorScheme === "dark" ? "#fff" : "#000",
                                             }}
                                         >
                                             {item.name}
@@ -129,7 +130,7 @@ export function AddProductToStock() {
                                                 style={{
                                                     fontSize: Platform.OS === 'ios' ? 14 : 12, // Ajusta o tamanho do texto para o preço normal
                                                     fontWeight: '600',
-                                                    color: 'white',
+                                                    color: colorScheme === "dark" ? "#fff" : "#000",
                                                 }}
                                             >
                                                 De: R$ {(Number(item.normalPrice) / 100).toFixed(2).replace('.', ',')}

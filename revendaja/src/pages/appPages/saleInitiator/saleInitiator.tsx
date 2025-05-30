@@ -23,6 +23,7 @@ import Toast from "react-native-toast-message";
 import { CustomToast } from "@/components/CustomToast";
 import { te } from "date-fns/locale";
 import { QuantityInput } from "@/components/QuantityInput";
+import { useColorScheme } from "nativewind";
 
 export function SaleInitiator() {
     const tabBarHeight = useBottomTabBarHeight();
@@ -49,6 +50,7 @@ export function SaleInitiator() {
     const suggestedPrice = '0'
     const normalPrice = '0'
     const [quantity, setQuantity] = useState(1);
+    const { colorScheme } = useColorScheme()
 
     const { mutateAsync: fetchProductByBarcode } = useMutation({
         mutationFn: FindProductsByBarcode,
@@ -206,10 +208,10 @@ export function SaleInitiator() {
 
     return (
         <>
-            <View className='bg-background w-full flex-1'>
+            <View className='dark:bg-background bg-backgroundLight w-full flex-1'>
                 <View className="px-5 flex justify-between flex-1">
                     <View>
-                        <Text className='text-white font-semibold text-center mt-16 text-lg'>Iniciar venda</Text>
+                        <Text className='dark:text-white font-semibold text-center mt-16 text-lg'>Iniciar venda</Text>
                         <View className="mt-5 mb-5">
                             <Input
                                 name="Nome do cliente"
@@ -221,12 +223,12 @@ export function SaleInitiator() {
 
                         <TouchableOpacity
                             onPress={() => setPaymentModalOpen(!paymentModalOpen)}
-                            className={Platform.OS === 'ios' ? `bg-forenground p-4 rounded-xl mb-5 flex flex-row justify-between items-center` : `bg-forenground p-3 rounded-xl mb-5 flex flex-row justify-between items-center`}
+                            className={Platform.OS === 'ios' ? `bg-forenground p-4 rounded-xl mb-5 flex flex-row justify-between items-center` : `dark:bg-forenground bg-input p-3 rounded-xl mb-5 flex flex-row justify-between items-center`}
                         >
-                            <Text className={Platform.OS === 'ios' ? ` text-textForenground` : `text-textForenground`}>
+                            <Text className={Platform.OS === 'ios' ? ` text-placeholder` : `text-placeholder`}>
                                 {paymentMethod ? paymentMethod : "Selecionar forma de pagamento"}
                             </Text>
-                            <Text className={Platform.OS === 'ios' ? ` text-textForenground` : `text-textForenground`}>
+                            <Text className={Platform.OS === 'ios' ? ` text-placeholder` : `text-placeholder`}>
                                 <Icon name="chevron-down" />
                             </Text>
                         </TouchableOpacity>
@@ -252,11 +254,11 @@ export function SaleInitiator() {
                                                     className="w-[60px] h-[60px] rounded-xl"
                                                 />
                                                 <View>
-                                                    <Text className="text-white font-semibold w-[200px]" numberOfLines={1} ellipsizeMode="tail">
+                                                    <Text className="dark:text-white font-semibold w-[200px]" numberOfLines={1} ellipsizeMode="tail">
                                                         {item.name}
                                                     </Text>
                                                     <View className="flex flex-row items-center gap-1">
-                                                        <Text className="text-white text-lg font-semibold">
+                                                        <Text className="dark:text-white text-lg font-semibold">
                                                             R$ {formatCurrency(item?.price)}
                                                         </Text>
                                                     </View>
@@ -271,11 +273,11 @@ export function SaleInitiator() {
                                                     className="w-[60px] h-[60px] rounded-xl"
                                                 />
                                                 <View>
-                                                    <Text className="text-white text-sm font-semibold w-[200px]" numberOfLines={1} ellipsizeMode="tail">
+                                                    <Text className="dark:text-white text-sm font-semibold w-[200px]" numberOfLines={1} ellipsizeMode="tail">
                                                         {item.name}
                                                     </Text>
                                                     <View className="flex flex-row items-center gap-1">
-                                                        <Text className="text-white text-sm font-semibold">
+                                                        <Text className="dark:text-white text-sm font-semibold">
                                                             R$ {formatCurrency(item.price)}
                                                         </Text>
                                                     </View>
@@ -294,8 +296,8 @@ export function SaleInitiator() {
                     </View>
                     <View className={Platform.OS === 'ios' ? `mb-5` : `mb-${insets.bottom || 10}`}>
                         <View className="flex flex-row mt-5 items-center justify-between mb-3">
-                            <Text className='text-white font-medium text-base'>Valor total</Text>
-                            <Text className='text-white font-medium text-base'>{calculateTotal()}</Text>
+                            <Text className='dark:text-white font-medium text-base'>Valor total</Text>
+                            <Text className='dark:text-white font-medium text-base'>{calculateTotal()}</Text>
                         </View>
                         <Button name="Finalizar Venda" onPress={handleCreateSale} style={{ marginBottom: tabBarHeight + 10 }} />
                     </View>
@@ -306,12 +308,12 @@ export function SaleInitiator() {
                         onConfirm={() => handleAddPrice(barcode, value, suggestedPrice, normalPrice, quantity)}
                         confirmText="Adicionar"
                     >
-                        <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-sm`}>
+                        <Text className={Platform.OS === 'ios' ? `dark:text-white text-center` : `dark:text-white text-center text-sm`}>
                             Adicione o preço do produto informado para prosseguir com a venda.
                         </Text>
 
                         <TextInput
-                            className="bg-background text-white p-3 rounded-xl mt-5"
+                            className="dark:bg-background bg-input dark:text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"
@@ -334,7 +336,7 @@ export function SaleInitiator() {
                         onConfirm={statusCode == 404 ? handleConfirm : handleConfirm}
                         confirmText={statusCode == 404 ? "Cadastrar" : "Ok"}
                     >
-                        <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-sm`}>
+                        <Text className={Platform.OS === 'ios' ? `dark:text-white text-center` : `dark:text-white text-center text-sm`}>
                             {
                                 statusCode == 404 ?
                                     "Por favor, verifique o código de barras informado e tente novamente."

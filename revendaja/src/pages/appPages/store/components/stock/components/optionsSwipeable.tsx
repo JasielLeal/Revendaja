@@ -138,14 +138,14 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
                         discount ?
                             ''
                             :
-                            <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-xs`}>Digite o valor de desconto do produto. Esse valor será refletido na sua loja. Não se preocupe você pode remover se quiser</Text>
+                            <Text className={Platform.OS === 'ios' ? `dark:text-white text-center` : `dark:text-white text-center text-xs`}>Digite o valor de desconto do produto. Esse valor será refletido na sua loja. Não se preocupe você pode remover se quiser</Text>
                     }
                     {
                         discount ?
-                            <Text className="text-white">O produto possui um desconto de R$ {formatCurrency(String(discount))}</Text>
+                            <Text className="dark:text-white">O produto possui um desconto de R$ {formatCurrency(String(discount))}</Text>
                             :
                             <TextInput
-                                className="bg-background text-white p-3 rounded-xl mt-5"
+                                className="dark:bg-background bg-input dark:text-white p-3 rounded-xl mt-5"
                                 placeholder="Digite o valor"
                                 placeholderTextColor="#7D7D7D"
                                 keyboardType="numeric"
@@ -164,7 +164,7 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
                     onConfirm={DeleteProduct}
                     confirmText="Confirmar"
                 >
-                    <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-xs`}>Essa ação não pode ser desfeita, você podera adicionar novamente esse item no seu estoque se quiser.</Text>
+                    <Text className={Platform.OS === 'ios' ? `dark:text-white text-center` : `dark:text-white text-center text-xs`}>Essa ação não pode ser desfeita, você podera adicionar novamente esse item no seu estoque se quiser.</Text>
                 </CustomModal>
 
                 <CustomModal
@@ -174,7 +174,7 @@ export function OptionsSwipeable({ id, discount, productId, quantity }: OptionsS
                     confirmText="Adicionar"
                     onConfirm={() => onAddStockInProduct()}>
                     <>
-                        <Text className={Platform.OS === 'ios' ? `text-white text-center` : `text-white text-center text-xs`}>
+                        <Text className={Platform.OS === 'ios' ? `dark:text-white text-center` : `dark:text-white text-center text-xs`}>
                             Adicione a quantidade de produtos que você deseja adicionar ao estoque. Você pode aumentar ou diminuir a quantidade de produtos.
                         </Text>
                         <QuantityInput onQuantityChange={setModalQuantity} initialQuantity={modalQuantity} />

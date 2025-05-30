@@ -31,7 +31,7 @@ export default function Select({ options, label, onSelect }: CustomSelectProps) 
   return (
     <View>
       {/* Campo de Seleção */}
-      <TouchableOpacity className="bg-forenground p-2 rounded-xl" onPress={modalOpen}>
+      <TouchableOpacity className="dark:bg-forenground bg-input p-2 rounded-xl" onPress={modalOpen}>
         <Icon name="filter" color={"#fff"} size={25} />
       </TouchableOpacity>
 

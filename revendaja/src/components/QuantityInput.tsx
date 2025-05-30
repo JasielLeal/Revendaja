@@ -37,7 +37,7 @@ export function QuantityInput({ onQuantityChange, initialQuantity = 1 }: Quantit
                 value={String(quantity)}
                 onChangeText={(text) => updateQuantity(Number(text) || 1)}
                 keyboardType="numeric"
-                className="text-center text-white justify-center flex items-center w-12 h-12 border border-gray-300 rounded-md"
+                className="text-center dark:text-white justify-center flex items-center w-12 h-12 border border-gray-300 rounded-md"
             />
 
             <TouchableOpacity

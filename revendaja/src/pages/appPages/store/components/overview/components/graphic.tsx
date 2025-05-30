@@ -5,14 +5,16 @@ import { Dimensions } from "react-native";
 import { View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 import { BestSellingCompany } from "../services/bestSellingCompany";
+import { useColorScheme } from "nativewind";
 
 export function Graphic() {
-
 
     const { data: bestSelling } = useQuery({
         queryKey: ["bestSellingCompany"],
         queryFn: BestSellingCompany,
     });
+
+    const { colorScheme } = useColorScheme()
 
     const colorPalette: Record<string, string> = {
         "Natura": "#4CAF50",
@@ -34,7 +36,7 @@ export function Graphic() {
                 name: item.name,
                 population: item.population,
                 color: colorPalette[item.name] || `#${Math.floor(Math.random() * 16777215).toString(16)}`, // Usa cor fixa ou gera uma aleatória
-                legendFontColor: "#fff",
+                legendFontColor: colorScheme === "dark" ? "#FFFFFF" : "#000000",
                 legendFontSize: 14,
             }))
         : [];
@@ -45,8 +47,8 @@ export function Graphic() {
         <>
             <>
                 <View className="mt-5 rounded-lg">
-                    <View className="bg-forenground rounded-t-lg p-4">
-                        <Text className="text-white text-lg font-semibold  ">Gráficos de vendas</Text>
+                    <View className="dark:bg-forenground bg-input rounded-t-lg p-4">
+                        <Text className="dark:text-white text-lg font-semibold">Gráficos de vendas</Text>
                         <Text className="text-textForenground">Distribuição de marcas mais vendidas</Text>
                     </View>
                     <PieChart
@@ -59,7 +61,7 @@ export function Graphic() {
                         }}
 
                         accessor="population"
-                        backgroundColor="#202020"
+                        backgroundColor={colorScheme === "dark" ? "#202020" : "#DFDFDF"}
                         paddingLeft="10"
                         center={[10, 0]}
                     />
@@ -70,8 +72,8 @@ export function Graphic() {
                 {
                     formattedData?.map((company: any) => (
 
-                        <View className={`p-4 bg-forenground mt-5 rounded-lg`} key={company?.id}>
-                            <Text className="text-white font-semibold">
+                        <View className="p-4 dark:bg-forenground bg-input mt-5 rounded-lg" key={company?.id}>
+                            <Text className="dark:text-white font-semibold">
                                 {company.population} - {company.name}
                             </Text>
                         </View>

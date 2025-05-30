@@ -13,6 +13,7 @@ import CustomModal from "@/components/modal";
 import { CancelSubscriptionAtPeriodEnd } from "./services/cancelSubscriptionAtPeriodEnd";
 import { LoadingOverlay } from "../loading";
 import { ReactiveSubscription } from "./services/reactiveSubscription";
+import { useColorScheme } from "nativewind";
 
 export function MyPlan() {
     const { data } = useQuery({
@@ -60,7 +61,7 @@ export function MyPlan() {
         "49.99": "Exclusive"
     };
     const planName = data?.amount ? planNames[data.amount] || "Unknown" : "Free";
-
+    const { colorScheme } = useColorScheme()
     return (
         <>
             {isPending || isLoading ?
@@ -71,26 +72,26 @@ export function MyPlan() {
 
                 <>
 
-                    <View className="flex-1 bg-background px-5">
+                    <View className="flex-1 dark:bg-background bg-backgroundLight px-5">
                         <View className="flex flex-row items-center mt-16 mb-5 justify-between">
                             <TouchableOpacity onPress={() => navigate.goBack()}>
-                                <Icon name="chevron-back" color={"#fff"} size={20} />
+                                <Icon name="chevron-back" color={colorScheme === "dark" ? "#fff" : "#000"} size={20} />
                             </TouchableOpacity>
-                            <Text className="text-white font-medium text-lg text-center">Minhas Assinaturas</Text>
+                            <Text className="dark:text-white font-medium text-lg text-center">Minhas Assinaturas</Text>
                             <View className="w-[25px]" />
                         </View>
 
-                        <View className="bg-forenground p-4 rounded-lg">
+                        <View className="dark:bg-forenground bg-input p-4 rounded-lg">
                             <View className="flex flex-row items-center gap-1">
                                 <Text className="text-primary text-xl font-medium">{planName}</Text>
-                                <Text className="text-white text-sm">/ Atual</Text>
+                                <Text className="dark:text-white text-sm">/ Atual</Text>
                             </View>
                         </View>
 
                         {data && (
                             <>
                                 <View className="flex flex-row items-center justify-between">
-                                    <Text className="text-white font-medium my-7 text-sm">Detalhes do pagamento</Text>
+                                    <Text className="dark:text-white font-medium my-7 text-sm">Detalhes do pagamento</Text>
                                     <TouchableOpacity
                                         onPress={() => {
                                             navigate.navigate("updateCard", {
@@ -104,13 +105,13 @@ export function MyPlan() {
                                 </View>
 
 
-                                <View className="bg-forenground rounded-lg p-4">
+                                <View className="dark:bg-forenground bg-input rounded-lg p-4">
                                     <View className="flex flex-row items-center gap-3">
-                                        <Text className="text-white font-medium">Cartão:</Text>
+                                        <Text className="dark:text-white font-medium">Cartão:</Text>
                                         <Text className="text-textForenground">**********{data.last4}</Text>
                                     </View>
                                     <View className="flex flex-row items-center gap-2 mt-5">
-                                        <Text className="text-white font-medium">
+                                        <Text className="dark:text-white font-medium">
                                             {data.cancel_at ? "Serviço ativo até:" : "Próxima cobrança:"}
                                         </Text>
                                         <Text className="text-textForenground capitalize">
@@ -118,7 +119,7 @@ export function MyPlan() {
                                         </Text>
                                     </View>
                                     <View className="flex flex-row items-center gap-2">
-                                        <Text className="text-white font-medium">
+                                        <Text className="dark:text-white font-medium">
                                             {
                                                 data.cancel_at ?
                                                     ""
@@ -159,7 +160,7 @@ export function MyPlan() {
                         onConfirm={() => CancelSubscriptionAtPeriodEndFn()}
                         confirmText="Confirmar"
                     >
-                        <Text className="text-white text-center">
+                        <Text className="dark:text-white text-center">
                             Você ainda poderá usar o serviço até o final do período de cobrança atual.
                         </Text>
                     </CustomModal>
@@ -171,7 +172,7 @@ export function MyPlan() {
                         onConfirm={() => ReactiveSubscriptionFn()}
                         confirmText="Confirmar"
                     >
-                        <Text className="text-white text-center">
+                        <Text className="dark:text-white text-center">
                             O dia da próxima cobrança será o mesmo do último pagamento.
                         </Text>
                     </CustomModal>
