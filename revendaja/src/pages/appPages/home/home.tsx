@@ -1,6 +1,6 @@
 import AuthContext from "@/context/authContext";
 import { useContext, useEffect, useState } from "react";
-import { Platform, Text, View } from "react-native";
+import { ActivityIndicator, Platform, Text, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from "react-native";
 import { ForEveryDayLife } from "./components/forEveryDayLife";
@@ -14,11 +14,21 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/types/navigation";
 import { Avatar } from "@/components/avatart";
 import { ThemeToggle } from "./components/toggleTheme";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "@/context/themeContext";
 
 export function Home() {
 
     const { user } = useContext(AuthContext)
+
+    const { isLoading } = useTheme();
+
+    if (isLoading) {
+        return (
+            <View className="flex-1 items-center justify-center bg-white dark:bg-black">
+                <ActivityIndicator size="large" color="#999" />
+            </View>
+        );
+    }
 
     const [hiddenMoney, setHiddenMoney] = useState(false)
 
