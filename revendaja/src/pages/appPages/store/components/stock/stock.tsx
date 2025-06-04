@@ -74,9 +74,9 @@ export function Stock() {
     return (
 
         <>
-            <View className="px-5 flex-1 bg-background">
+            <View className="px-5 flex-1 dark:bg-background bg-backgroundLight">
                 <View className="flex flex-row items-center justify-between mt-5">
-                    <Text className="text-white text-xl font-semibold">Estoque</Text>
+                    <Text className="dark:text-white text-xl font-semibold">Estoque</Text>
                     <Button name="Adicionar Produto" onPress={() => navigate.navigate("AddProductToStock")} />
                 </View>
 
@@ -89,7 +89,7 @@ export function Stock() {
                             onChangeText={(text) => setSearchTerm(text)}
                         />
                     </View>
-                    <TouchableOpacity className={Platform.OS == 'ios' ? "bg-forenground p-3 rounded-xl" : "bg-forenground p-2 rounded-xl"} onPress={openFilter}>
+                    <TouchableOpacity className={Platform.OS == 'ios' ? "dark:bg-forenground bg-input p-3 rounded-xl" : "dark:bg-forenground bg-input p-2 rounded-xl"} onPress={openFilter}>
                         <Icon name="filter" color={"#fff"} size={25} />
                     </TouchableOpacity>
                 </View>

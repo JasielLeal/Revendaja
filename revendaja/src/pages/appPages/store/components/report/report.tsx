@@ -40,9 +40,9 @@ export function Report() {
     return (
         <>
            
-                <View className="px-5 flex-1 bg-background">
+                <View className="px-5 flex-1 dark:bg-background bg-backgroundLight">
                     <View className="flex flex-row items-center justify-between mt-5">
-                        <Text className="text-white text-xl font-semibold">Despesas</Text>
+                        <Text className="dark:text-white text-xl font-semibold">Despesas</Text>
                         <Button name="Adicionar Despesa" />
                     </View>
                     <View className="mt-5 flex flex-row items-center justify-between w-full">

@@ -17,6 +17,7 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { toastConfig } from "@/utils/toastConfig";
 import { NotificationsProvider } from "@/context/notificationsContext";
+import { ThemeProvider } from "@/context/themeContext";
 
 export default function App() {
   const client = new QueryClient();
@@ -68,25 +69,27 @@ export default function App() {
     <GestureHandlerRootView onLayout={onLayoutRootView}>
       <StripeProvider publishableKey={publishableKey} urlScheme="revendaja" >
         <QueryClientProvider client={client}>
-      
-            <NavigationContainer>
-              <SuccessProvider>
-                <AuthProvider>
-                  <ExpoTokenProvider>
+
+          <NavigationContainer>
+            <SuccessProvider>
+              <AuthProvider>
+                <ExpoTokenProvider>
+                  <ThemeProvider>
                     <NotificationsProvider>
                       <SocketProvider>
-                        <StatusBar backgroundColor="#000" style="light" />
+                        <StatusBar style="auto" />
                         <Routes />
                         <Toast
                           config={toastConfig}
                         />
                       </SocketProvider>
                     </NotificationsProvider>
-                  </ExpoTokenProvider>
-                </AuthProvider>
-              </SuccessProvider>
-            </NavigationContainer>
-       
+                  </ThemeProvider>
+                </ExpoTokenProvider>
+              </AuthProvider>
+            </SuccessProvider>
+          </NavigationContainer>
+
         </QueryClientProvider>
       </StripeProvider>
     </GestureHandlerRootView>

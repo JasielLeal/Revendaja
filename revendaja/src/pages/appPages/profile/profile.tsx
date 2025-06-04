@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/types/navigation";
 import { Avatar } from "@/components/avatart";
+import { useColorScheme } from "nativewind";
 
 export function Profile() {
 
@@ -41,25 +42,27 @@ export function Profile() {
         { id: 2, name: "Assinaturas Disponíveis", icon: "star", link: 'OurPlans' },
         { id: 3, name: "Seus Dados", icon: "shield-checkmark", link: '/' },
         { id: 4, name: "Nossos Termos", icon: "reader", link: '/' },
-        { id: 5, name: "Editar Loja", icon: "pencil", link: '/'},
+        { id: 5, name: "Editar Loja", icon: "pencil", link: '/' },
     ]
+
+    const { colorScheme } = useColorScheme()
 
     return (
         <>
-            <View className="flex-1 bg-background px-5">
+            <View className="flex-1 dark:bg-background bg-backgroundLight px-5">
                 <View>
                     <View className='flex flex-row items-center justify-center mt-16 mb-5'>
-                        <Text className='text-white font-semibold text-center'> Perfil</Text>
+                        <Text className='dark:text-white font-semibold text-center'> Perfil</Text>
                     </View>
                     <View className="flex flex-row items-center gap-3  rounded-xl justify-between">
                         <View className="flex flex-row gap-3 items-center">
                             <Avatar />
                             <View>
                                 <View className="flex flex-row items-center gap-1">
-                                    <Text className="text-white font-medium">
+                                    <Text className="dark:text-white font-medium">
                                         {user?.name}
                                     </Text>
-                                    <Text className="text-white font-medium">
+                                    <Text className="dark:text-white font-medium">
                                         {user?.secondName}
                                     </Text>
                                 </View>
@@ -80,19 +83,19 @@ export function Profile() {
                 <View className="pt-5">
                     {
                         Links.map((link) => (
-                            <TouchableOpacity 
-                            key={link.id}
-                            className="flex flex-row items-center justify-between border-b pb-4 border-[#ffffff17] pt-4"
-                            onPress={()=> navigation.navigate(link.link)}
-                            
+                            <TouchableOpacity
+                                key={link.id}
+                                className="flex flex-row items-center justify-between border-b pb-4 dark:border-[#ffffff17] border-[#2c2c2c17] pt-4"
+                                onPress={() => navigation.navigate(link.link)}
+
                             >
                                 <View className="flex flex-row items-center gap-3 ">
-                                    <Icon name={link.icon} size={25} color={"#fff"} />
-                                    <Text className="text-white font-medium">
+                                    <Icon name={link.icon} size={25} color={colorScheme === "dark" ? "#fff" : "#000"} />
+                                    <Text className="dark:text-white font-medium">
                                         {link.name}
                                     </Text>
                                 </View>
-                                <Icon name="chevron-forward" size={20} color={"#fff"} />
+                                <Icon name="chevron-forward" size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
                             </TouchableOpacity>
                         ))
                     }

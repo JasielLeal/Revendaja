@@ -13,6 +13,7 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { QuantityInput } from "@/components/QuantityInput";
 import { Button } from "@/components/buttton";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useColorScheme } from "nativewind";
 
 type DetailsProductRouteProp = RouteProp<RootStackParamList, 'DetailsProduct'>;
 type RootStackParamList = {
@@ -68,6 +69,15 @@ export function DetailsProduct2() {
 
     async function onSubmit(data: any) {
 
+        if(data.customPrice === '') {
+            Toast.show({
+                type: 'error',
+                text1: 'Erro',
+                text2: 'Por favor, adicione seu valor de venda.',
+            })
+            return
+        }
+
         const customPrice = data.customPrice?.toString().replace(',', '')
         const newData = {
             ...data,
@@ -79,14 +89,16 @@ export function DetailsProduct2() {
         await InsertProductToStockFn(newData)
     }
 
+    const { colorScheme } = useColorScheme()
+
     return (
         <>
-            <SafeAreaView className="px-5 bg-forenground w-full flex-1">
+            <SafeAreaView className="px-5 dark:bg-forenground bg-backgroundLight w-full flex-1">
                 <View className='flex flex-row justify-between pt-5'>
                     <TouchableOpacity onPress={() => navigate.goBack()}>
-                        <Icon name='chevron-back' size={20} color={"#fff"} />
+                        <Icon name='chevron-back' size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
                     </TouchableOpacity>
-                    <Text className='text-white font-semibold'>Detalhes do Produto</Text>
+                    <Text className='dark:text-white font-semibold'>Detalhes do Produto</Text>
                     <TouchableOpacity>
                         <Icon name='' size={30} color={"#dc2626"} />
                     </TouchableOpacity>
@@ -100,9 +112,9 @@ export function DetailsProduct2() {
                 <View>
 
                     <Text className="text-textForenground mt-5">{product.company}</Text>
-                    <Text className="font-medium text-2xl text-white">{product.name}</Text>
+                    <Text className="font-medium text-2xl dark:text-white">{product.name}</Text>
 
-                    <Text className="font-medium mt-5 text-white">
+                    <Text className="font-medium mt-5 dark:text-white">
                         De: R$ {(Number(product.normalPrice) / 100).toFixed(2).replace('.', ',')}
                     </Text>
                     <Text className="font-medium text-lg text-primary">
@@ -116,7 +128,7 @@ export function DetailsProduct2() {
                     name="customPrice"
                     render={({ field: { onChange, value } }) => (
                         <TextInput
-                            className="bg-background text-white p-3 rounded-xl mt-5"
+                            className="dark:bg-background bg-input text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"

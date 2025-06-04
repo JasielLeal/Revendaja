@@ -9,6 +9,7 @@ import { PaymentConfirmedScreen } from "./paymentConfirmed";
 import { fetchPaymentIntent } from "../services/fetchPaymentIntent";
 import { openPaymentSheet } from "../services/openPaymentSheet";
 import { LoadingOverlay } from "./loading";
+import { useColorScheme } from "nativewind";
 
 export function OurPlans() {
     const navigation = useNavigation();
@@ -47,7 +48,7 @@ export function OurPlans() {
     const paymentSheetMutation = useMutation({
         mutationFn: openPaymentSheet,
         onSuccess: ({ planName }) => {
- 
+
             // Efeitos colaterais (ideal ficar aqui!)
             setPaymentConfirmed(true);
             queryClient.invalidateQueries({ queryKey: ["GetPlan"] });
@@ -59,13 +60,15 @@ export function OurPlans() {
                 return prevUser;
             });
 
-           
+
         },
         onError: (error: any) => {
             console.error("Erro ao processar pagamento:", error);
             Alert.alert("Erro", "Ocorreu um erro durante o processo de pagamento. Tente novamente.");
         },
     });
+
+    const { colorScheme } = useColorScheme()
 
     return (
 
@@ -81,28 +84,28 @@ export function OurPlans() {
 
                 :
 
-                <View className="flex-1 bg-background px-5">
+                <View className="flex-1 dark:bg-background bg-backgroundLight px-5">
                     {/* Header */}
                     <View className="flex flex-row justify-between pt-16" >
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Icon name="chevron-back" size={20} color={"#fff"} />
+                            <Icon name="chevron-back" size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
                         </TouchableOpacity>
-                        <Text className="text-white font-semibold text-xl">Nossos Planos</Text>
+                        <Text className="dark:text-white font-semibold text-xl">Nossos Planos</Text>
                         <TouchableOpacity>
                             <Icon name="help-circle" size={25} color={"#FF7100"} />
                         </TouchableOpacity>
                     </View>
 
                     {/* Plano Atual */}
-                    < Text className="text-white font-medium mt-10" > Seu plano</Text>
-                    <View className="bg-forenground p-4 rounded-xl mt-5">
+                    < Text className="dark:text-white font-medium mt-10" > Seu plano</Text>
+                    <View className="dark:bg-forenground bg-input p-4 rounded-xl mt-5">
                         <View className="flex flex-row items-center">
-                            <Text className="text-white text-lg">{user?.plan} -</Text>
+                            <Text className="dark:text-white text-lg">{user?.plan} -</Text>
                             <Text className="text-primary"> Atualmente</Text>
                         </View>
 
                         <View className="flex flex-row gap-2 items-center">
-                            <Text className="text-white font-medium text-lg">{user?.plan === "Free" ? "Gratuito" : user?.plan === "Starter" ? "R$ 29,99" : "R$ 49,99"}</Text>
+                            <Text className="dark:text-white font-medium text-lg">{user?.plan === "Free" ? "Gratuito" : user?.plan === "Starter" ? "R$ 29,99" : "R$ 49,99"}</Text>
                             <Text className="text-textForenground"> {user?.plan === "Free" ? "" : "/ Mês"}</Text>
                         </View>
 
@@ -120,15 +123,15 @@ export function OurPlans() {
 
                     {/* Título dos Planos */}
                     <Text className="text-textForenground mt-10 text-sm">Nossos planos</Text>
-                    <Text className="text-white font-medium text-base">Opções ideais para você</Text>
+                    <Text className="dark:text-white font-medium text-base">Opções ideais para você</Text>
 
                     {/* Lista de Planos */}
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: "row", gap: 16 }}>
                         {plans.map((plan) => (
-                            <View key={plan.name} className="bg-forenground p-4 rounded-xl shadow-lg mt-5 w-[300] mb-10">
+                            <View key={plan.name} className="dark:bg-forenground bg-input p-4 rounded-xl shadow-lg mt-5 w-[300] mb-10">
                                 <Text className="text-primary text-xl font-semibold">{plan.name}</Text>
                                 <View className="flex flex-row gap-2 items-center">
-                                    <Text className="text-white font-medium text-2xl">R$ {plan.price}</Text>
+                                    <Text className="dark:text-white font-medium text-2xl">R$ {plan.price}</Text>
                                     <Text className="text-textForenground text-sm">/ mês</Text>
                                 </View>
                                 <Text className="text-textForenground mt-3 text-sm">
@@ -140,24 +143,24 @@ export function OurPlans() {
                                     {plan.customProducts && (
                                         <View className="flex flex-row items-center gap-2">
                                             <Icon name="checkmark" size={25} color="#FF7100" />
-                                            <Text className="text-white text-sm">{plan.customProducts} Produtos personalizados</Text>
+                                            <Text className="dark:text-white text-sm">{plan.customProducts} Produtos personalizados</Text>
                                         </View>
                                     )}
                                     {plan.stock && (
                                         <View className="flex flex-row items-center gap-2">
                                             <Icon name="checkmark" size={25} color="#FF7100" />
-                                            <Text className="text-white text-sm">{plan.stock} Produtos no estoque</Text>
+                                            <Text className="dark:text-white text-sm">{plan.stock} Produtos no estoque</Text>
                                         </View>
                                     )}
                                     {plan.tickets && (
                                         <View className="flex flex-row items-center gap-2">
                                             <Icon name="checkmark" size={25} color="#FF7100" />
-                                            <Text className="text-white text-sm">{plan.tickets} boletos</Text>
+                                            <Text className="dark:text-white text-sm">{plan.tickets} boletos</Text>
                                         </View>
                                     )}
                                     <View className="flex flex-row items-center gap-2 mb-4">
                                         <Icon name="checkmark" size={25} color="#FF7100" />
-                                        <Text className="text-white text-sm">Sem limite de vendas</Text>
+                                        <Text className="dark:text-white text-sm">Sem limite de vendas</Text>
                                     </View>
 
                                     {/* Botão de Pagamento */}

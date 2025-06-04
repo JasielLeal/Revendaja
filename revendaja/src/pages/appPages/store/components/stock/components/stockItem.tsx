@@ -23,7 +23,7 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
 
     return (
         <Swipeable renderRightActions={() => <OptionsSwipeable id={id} discount={discount} productId={productId} quantity={quantity}  />} overshootRight={false} rightThreshold={100}>
-            <View className="mt-5 flex flex-row items-center gap-5 bg-background">
+            <View className="mt-5 flex flex-row items-center gap-5 dark:bg-background bg-backgroundLight">
                 <Image
                     source={imageUrl ? { uri: imageUrl } : require("@/assets/kaiak.jpg")}
                     className="w-[75px] h-[75px] rounded-xl"
@@ -32,11 +32,11 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
                     {
                         Platform.OS == 'ios' ?
                             <>
-                                <Text className="text-white font-semibold text-sm">
+                                <Text className="dark:text-white font-semibold text-sm">
                                     {name}
                                 </Text>
                                 <View className="flex flex-row items-center gap-1">
-                                    <Text className="text-white font-semibold">
+                                    <Text className="dark:text-white font-semibold">
                                         R$ {(Number(price) / 100).toFixed(2).replace('.', ',')}
                                     </Text>
                                     {
@@ -59,16 +59,16 @@ export function StockItem({ name, price, quantity, imageUrl, id, discount, produ
                             </>
                             :
                             <>
-                                <Text className="text-white font-semibold text-xs">
+                                <Text className="dark:text-white font-semibold text-xs">
                                     {name}
                                 </Text>
                                 <View className="flex flex-row items-center gap-1">
-                                    <Text className="text-white font-semibold text-sm">
+                                    <Text className="dark:text-white font-semibold text-sm">
                                         R$ {(Number(price) / 100).toFixed(2).replace('.', ',')}
                                     </Text>
                                     {
                                         discount ?
-                                            <Text className="text-textForenground text-sm">
+                                            <Text className="dark:text-textForenground text-sm">
                                                 - {discountPercentage.toFixed(2)}% de desconto
                                             </Text>
                                             :
