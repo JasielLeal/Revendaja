@@ -215,7 +215,12 @@ export function StoreRoutes() {
 
 export default function AppRoutes() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                animation: 'slide_from_right',
+                
+            }}
+        >
             <Stack.Screen name="appRoutes" component={SubAppRoutes} options={{ headerShown: false }} />
             <Stack.Screen name="SaleDetails" component={SaleDetails} options={{ headerShown: false }} />
             <Stack.Screen name="PedingSaleDetails" component={PedingSaleDetails} options={{ headerShown: false }} />

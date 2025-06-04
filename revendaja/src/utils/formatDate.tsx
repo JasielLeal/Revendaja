@@ -1,11 +1,7 @@
-import { addHours, format } from 'date-fns';
+import { format } from 'date-fns-tz';
 
 export function formatDate(dateString: string) {
-    const date = new Date(dateString);
-
-    // Adiciona 3 horas à data original
-    const adjustedDate = addHours(date, 3);
-
-    // Formata a data no formato desejado (dd/MM/yyyy)
-    return format(adjustedDate, 'dd/MM/yyyy');
+    return format(new Date(dateString), 'dd/MM/yyyy', {
+        timeZone: 'America/Sao_Paulo',
+    });
 }

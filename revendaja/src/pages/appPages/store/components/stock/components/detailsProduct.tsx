@@ -49,8 +49,12 @@ export function DetailsProduct2() {
             });
             navigate.goBack()
         },
-        onError: () => {
-            console.log('error');
+        onError: (error) => {
+           Toast.show({
+                type: 'error',
+                text1: 'Erro ao adicionar produto',
+                text2: 'Produto já existe no estoque',
+           })
         },
     });
 
@@ -68,10 +72,9 @@ export function DetailsProduct2() {
     });
 
     async function onSubmit(data: any) {
-
         if(data.customPrice === '') {
             Toast.show({
-                type: 'error',
+                type: 'info',
                 text1: 'Erro',
                 text2: 'Por favor, adicione seu valor de venda.',
             })
@@ -93,8 +96,8 @@ export function DetailsProduct2() {
 
     return (
         <>
-            <SafeAreaView className="px-5 dark:bg-forenground bg-backgroundLight w-full flex-1">
-                <View className='flex flex-row justify-between pt-5'>
+            <SafeAreaView className="px-5 dark:bg-background bg-backgroundLight w-full flex-1">
+                <View className='flex flex-row justify-between mt-10'>
                     <TouchableOpacity onPress={() => navigate.goBack()}>
                         <Icon name='chevron-back' size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />
                     </TouchableOpacity>
@@ -128,7 +131,7 @@ export function DetailsProduct2() {
                     name="customPrice"
                     render={({ field: { onChange, value } }) => (
                         <TextInput
-                            className="dark:bg-background bg-input text-white p-3 rounded-xl mt-5"
+                            className="dark:bg-forenground bg-input text-white p-3 rounded-xl mt-5"
                             placeholder="Adicione seu valor de venda"
                             placeholderTextColor="#7D7D7D"
                             keyboardType="numeric"
@@ -142,12 +145,6 @@ export function DetailsProduct2() {
                         />
                     )}
                 />
-
-                <Text className="text-textForenground text-sm mt-2 mb-5">
-                    {Platform.OS === 'ios'
-                        ? 'Obs: se não adicionar valor ao produto ele irá com o valor sugerido.'
-                        : 'Obs: se não adicionar valor ao produto ele irá com o valor sugerido.'}
-                </Text>
 
                 {/* Componente de Quantidade */}
                 <Controller

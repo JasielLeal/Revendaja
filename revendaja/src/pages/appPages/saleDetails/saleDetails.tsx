@@ -110,7 +110,7 @@ export function SaleDetails({ route }: any) {
                                 <Text className="dark:bg-forenground bg-forengroundLight p-5 rounded-full">
                                     <Icon name='checkmark' size={20} color={"#FF7100"} />
                                 </Text>
-                                <Text className='dark:text-white font-medium mt-5'>R$ {((sale.totalPrice))}</Text>
+                                <Text className='dark:text-white font-medium mt-5'>R$ {formatCurrency(sale.totalPrice)}</Text>
                                 <Text className='text-textForenground text-xs'>{sale.customer}</Text>
                                 <Text className='text-xs bg-[#303030] font-medium py-1 mt-2 px-5 rounded-full text-white '>{sale.transactionType}</Text>
                             </View>
@@ -153,7 +153,7 @@ export function SaleDetails({ route }: any) {
                                                 {product.stock.customProduct?.name || product.stock.product?.name}
                                             </Text>
                                         </View>
-                                        <Text className='dark:text-white text-xs'>R$ {(String(product?.price))}</Text>
+                                        <Text className='dark:text-white text-xs'>R$ {formatCurrency(String(product?.price))}</Text>
                                     </View>
                                 ))}
                             </View>

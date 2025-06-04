@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator, InteractionManager } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Input } from '@/components/input';
@@ -12,18 +12,6 @@ import { useColorScheme } from 'nativewind';
 
 export function AddProductToStock() {
     const navigate = useNavigation<StackNavigationProp<RootStackParamList>>();
-    const [detailsVisible, setDetailsVisible] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState<any>(null);  // Novo estado para armazenar o produto selecionado
-
-    function openDetails(product: any) {
-        setSelectedProduct(product);  // Armazena o produto clicado
-        setDetailsVisible(!detailsVisible);  // Abre o modal de detalhes
-    }
-
-    function closeDetails() {
-        setDetailsVisible(false);
-        setSelectedProduct(null);  // Reseta o produto quando o modal for fechado
-    }
 
     const pageSize = 10;
     const [searchTerm, setSearchTerm] = useState(""); // Valor digitado no input
@@ -65,6 +53,7 @@ export function AddProductToStock() {
 
     const allProducts = data?.pages.flatMap((page) => page.data.items) || [];
     const { colorScheme } = useColorScheme()
+
     return (
         <View className="dark:bg-background bg-backgroundLight flex-1 w-full px-5">
             <View className='flex flex-row justify-between mt-16 items-center'>
@@ -99,7 +88,11 @@ export function AddProductToStock() {
                             :
 
                             <>
-                                <TouchableOpacity className="mt-5 flex flex-row items-center gap-5" onPress={() => navigate.navigate("DetailsProduct", item)}>
+                                <TouchableOpacity className="mt-5 flex flex-row items-center gap-5" onPress={() => {
+                                    InteractionManager.runAfterInteractions(() => {
+                                        navigate.navigate("DetailsProduct", item);
+                                    });
+                                }}>
                                     <Image
                                         source={item.imgUrl ? { uri: item.imgUrl } : require("@/assets/kaiak.jpg")}
                                         className="w-[75px] h-[75px] rounded-xl"
