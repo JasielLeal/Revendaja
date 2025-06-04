@@ -38,12 +38,13 @@ export function Profile() {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
 
     const Links = [
-        { id: 1, name: "Gerenciar Minha Assinatura", icon: "card", link: 'MyPlan' },
-        { id: 2, name: "Assinaturas Disponíveis", icon: "star", link: 'OurPlans' },
-        { id: 3, name: "Seus Dados", icon: "shield-checkmark", link: '/' },
-        { id: 4, name: "Nossos Termos", icon: "reader", link: '/' },
-        { id: 5, name: "Editar Loja", icon: "pencil", link: '/' },
-    ]
+        { id: 1, name: "Minha Assinatura", icon: "card", link: 'MyPlan', description: "Gerencie ou altere sua assinatura." },
+        { id: 2, name: "Nossos Planos", icon: "star", link: 'OurPlans', description: "Confira os planos disponíveis para você." },
+        { id: 3, name: "Seus Dados", icon: "shield-checkmark", link: '/', description: "Atualize suas informações pessoais." },
+        { id: 4, name: "Nossos Termos", icon: "reader", link: '/', description: "Consulte os termos e políticas." },
+        { id: 5, name: "Loja", icon: "pencil", link: '/', description: "Gerencie os dados da sua loja." },
+    ];
+
 
     const { colorScheme } = useColorScheme()
 
@@ -89,10 +90,15 @@ export function Profile() {
                                 onPress={() => navigation.navigate(link.link)}
 
                             >
-                                <View className="flex flex-row items-center gap-3 ">
-                                    <Icon name={link.icon} size={25} color={colorScheme === "dark" ? "#fff" : "#000"} />
-                                    <Text className="dark:text-white font-medium">
-                                        {link.name}
+                                <View className="flex flex-col">
+                                    <View className="flex flex-row items-center gap-2">
+                                        <Icon name={link.icon} size={25} color={colorScheme === "dark" ? "#fff" : "#000"} />
+                                        <Text className="dark:text-white font-medium">
+                                            {link.name}
+                                        </Text>
+                                    </View>
+                                    <Text className="text-gray-500 text-xs">
+                                        {link.description}
                                     </Text>
                                 </View>
                                 <Icon name="chevron-forward" size={20} color={colorScheme === "dark" ? "#fff" : "#000"} />

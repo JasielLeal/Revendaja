@@ -1,7 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { FinancialOverview } from "./components/financialOverview";
 import React from "react";
-
 export function Extract() {
 
     return (
