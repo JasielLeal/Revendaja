@@ -127,4 +127,6 @@ export interface StockRepository {
 
   updatedStockItemQuantity(stockId: string, quantity: number);
   findStockItemById(stockId: string, storeId: string);
+
+  updateStockNewPrice(storeId: string, stockId: string, newPrice: number);
 }

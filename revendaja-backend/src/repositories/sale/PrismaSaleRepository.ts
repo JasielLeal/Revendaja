@@ -187,14 +187,41 @@ export class PrismaSaleRepository implements SaleRepository {
   }
 
   async deleteSale(storeId: string, saleId: string) {
-    await prisma.sale.delete({
-      where: {
-        storeId,
-        id: saleId,
+    // 1. Buscar os itens da venda
+    const saleItems = await prisma.saleItem.findMany({
+      where: { saleId },
+      select: {
+        stockId: true,
+        quantity: true,
       },
     });
 
-    return;
+    // 2. Repor as quantidades no estoque
+    for (const item of saleItems) {
+      if (item.stockId) {
+        await prisma.stock.update({
+          where: { id: item.stockId },
+          data: {
+            quantity: {
+              increment: item.quantity,
+            },
+          },
+        });
+      }
+    }
+
+    // 3. Deletar os itens da venda
+    await prisma.saleItem.deleteMany({
+      where: { saleId },
+    });
+
+    // 4. Deletar a venda
+    await prisma.sale.delete({
+      where: {
+        id: saleId,
+        storeId,
+      },
+    });
   }
 
   async getTheTopBestSellingProducts(storeId: string): Promise<any[]> {
@@ -364,50 +391,47 @@ export class PrismaSaleRepository implements SaleRepository {
       include: {
         saleItems: {
           include: {
-            sale:{
-              include:{
-                saleItems: true
-              }
+            sale: {
+              include: {
+                saleItems: true,
+              },
             },
-            stock:{
-              include:{
+            stock: {
+              include: {
                 customProduct: true,
-                product: true
-              }
-            }
+                product: true,
+              },
+            },
           },
         },
       },
     });
-  
-  
 
     const companySalesMap: Record<string, number> = {};
 
     sales.forEach((sale) => {
-      
       sale.saleItems.forEach((item) => {
-
         const product = item.stock?.product ?? item.stock?.customProduct;
-          
+
         const companyName = product?.company;
-        
+
         if (companyName) {
-          companySalesMap[companyName] = (companySalesMap[companyName] || 0) + item.quantity;
+          companySalesMap[companyName] =
+            (companySalesMap[companyName] || 0) + item.quantity;
         }
       });
-    })
-  
+    });
+
     return Object.entries(companySalesMap).map(([name, population]) => ({
       name,
       population,
-  }));
+    }));
   }
 
   async countSalesByDay(storeId: string): Promise<number> {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-  
+
     return await prisma.sale.count({
       where: {
         storeId,
@@ -417,5 +441,6 @@ export class PrismaSaleRepository implements SaleRepository {
       },
     });
   }
+
   
 }
