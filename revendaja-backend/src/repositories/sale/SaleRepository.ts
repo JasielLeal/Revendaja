@@ -26,5 +26,6 @@ export interface SaleRepository {
   findSaleById(id: string, storeId: string): Promise<Sale | null>;
   updatedStatus(saleId: string): Promise<void>;
   bestSellingCompany(storeId: string);
-  countSalesByDay(storeId: string): Promise<number>
+  countSalesByDay(storeId: string): Promise<number>;
+  
 }

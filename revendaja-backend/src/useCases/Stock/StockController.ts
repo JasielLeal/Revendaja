@@ -22,6 +22,7 @@ import { DisabledProductUseCase } from "./disabledProduct/DisabledProductUseCase
 import { AddQuantityToProductInStockUseCase } from "./addQuantityToProductInStock/AddQuantityToProductInStockUseCase";
 import { PrismaRoleLimitsRepository } from "@/repositories/roleLimits/PrismaRoleLimits";
 import { UpdatedStockItemQuantityUseCase } from "./updatedStockItemQuantity/updatedStockItemQuantityUseCase";
+import { UpdateStockNewPriceUseCase } from "./updateStockNewPrice/UpdateStockNewPriceUseCase";
 
 export class StockController {
   async AddProductToStoreStock(
@@ -482,6 +483,31 @@ export class StockController {
       await updatedStockItemQuantityUseCase.execute(stockId, quantity, userId);
 
       return response.status(200).send("Stock item updated successfully");
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).send({ error: error.message });
+      }
+
+      return response.status(500).send({ error: error.message });
+    }
+  }
+
+  async UpdateStockNewPrice(request: Request, response: Response): Promise<any> {
+    try {
+      const { stockId, newPrice } = request.body;
+      const userId = request.user.id;
+
+      const prismaStockRepository = new PrismaStockRepository();
+      const prismaStoreRepository = new PrismaStoreRepository();
+
+      const updatedStockNewPriceUseCase = new UpdateStockNewPriceUseCase(
+        prismaStoreRepository,
+        prismaStockRepository
+      );
+
+      await updatedStockNewPriceUseCase.execute(userId, stockId, newPrice);
+
+      return response.status(200).send("Stock price updated successfully");
     } catch (error) {
       if (error instanceof AppError) {
         return response.status(error.statusCode).send({ error: error.message });

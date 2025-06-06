@@ -819,4 +819,26 @@ export class PrismaStockRepository implements StockRepository {
 
     return stockItem;
   }
+
+  async updateStockNewPrice(storeId: string, stockId: string, newPrice: number) {
+    const stock = await prisma.stock.findFirst({
+      where: {
+        id: stockId,
+        storeId,
+      },
+    });
+
+    if (!stock) {
+      throw new Error("Produto não encontrado");
+    }
+
+    const updatedStock = await prisma.stock.update({
+      where: { id: stockId },
+      data: {
+        customPrice: newPrice, // ou customPrice, dependendo da sua regra
+      },
+    });
+
+    return updatedStock;
+  }
 }
